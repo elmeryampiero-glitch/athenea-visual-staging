@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="es" class="athenea-cosmos">
+<meta charset="utf-8">
+<meta name="athenea-origen" content="718c23ce0f85aa7065892a6bc4c3df8814bf15cd">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="athenea.webmanifest">
+<meta name="theme-color" content="#05060e">
+<style>/* AV-P3A1-LAUNCH-001: guardia de primer pintado — obsidiana antes de que exista cualquier hoja de estilo (valor compilado de --lanzamiento-fondo, cine.css) */html{background:#05060e}</style>
+<link rel="apple-touch-icon" href="../iconos/athenea-icono-192.png">
+<link rel="icon" type="image/png" href="../iconos/athenea-icono-192.png">
+<link rel="stylesheet" href="../athenea-theme.css"><!-- P1.1 AV-P0P1-EXEC-001: constitución visual única -->
+<link rel="stylesheet" href="../cine.css">
+<script src="../gramatica-sensorial.mjs"></script><!-- P3C AV-P3C-SENSORY-001: gramática sensorial — clásico en head: la anotación llega antes del primer fotograma --><!-- P3A AV-P3A-CINE-001: capa cinematográfica (continuidad entre escenas) -->
+<title>ATHENEA · Desarrollo del Proyecto</title>
+<meta name="athenea-alcance" content="interno">
+<!--
+  MIGRACIÓN DE PANELES (lote aprobado 2026-08-16): paneles «Evolución» y
+  «Valor entregado» del aplicativo v6.7, reconstruidos con el ADN premium.
+  Cifras vivas: datos-vivos.json (censo 01 AGO). Versión y misión:
+  app/LATEST.json (build 31 JUL). Observatorio: verificación del 30 JUL.
+  Identificadores sellados (CASO-nn) conforme a CAP-LEX-PRIV-001.
+-->
+<link rel="stylesheet" href="../fuentes/fuentes.css">
+<link rel="stylesheet" href="../adn-nucleo.css">
+<style>
+*{box-sizing:border-box}
+:root{ /* P1.3: los tokens los da athenea-theme.css; aquí solo el alias editorial */
+  --fuente-editorial:"Playfair Display",var(--fuente-lectura)}
+html,body{height:100%}
+html{background:var(--athenea-abismo)}
+body{margin:0;overflow-x:hidden}
+.pantalla::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(130% 85% at 50% -12%, rgba(40,46,104,.16), transparent 62%),
+    radial-gradient(80% 60% at 88% 26%, rgba(96,66,182,.09), transparent 66%),
+    radial-gradient(70% 55% at 8% 62%, rgba(34,48,120,.07), transparent 68%),
+    radial-gradient(160% 125% at 50% 52%, transparent 52%, rgba(1,2,6,.6) 100%)}
+.pantalla{min-height:100dvh;position:relative;
+  padding:max(10px,env(safe-area-inset-top)) 18px calc(88px + env(safe-area-inset-bottom));
+  max-width:430px;margin:0 auto}
+@media (min-width:768px){ .pantalla{max-width:520px} }
+.contenido{position:relative;z-index:1;display:flex;flex-direction:column;gap:14px}
+@media (prefers-reduced-motion: no-preference){
+  .entra{opacity:0;transform:translateY(8px);animation:entra .7s var(--curva-entrada) forwards}
+  .entra.e2{animation-delay:.08s}.entra.e3{animation-delay:.16s}
+  .entra.e4{animation-delay:.24s}.entra.e5{animation-delay:.32s}.entra.e6{animation-delay:.4s}
+  @keyframes entra{to{opacity:1;transform:none}}
+}
+.cabecera{display:flex;flex-direction:column;gap:4px;margin-top:4px}
+.volver{display:inline-flex;align-items:center;gap:6px;width:max-content;min-height:44px; /* P0.2 */
+  font:600 11px/1 "Inter",var(--fuente-interfaz);letter-spacing:.2em;
+  text-transform:uppercase;color:#8b90a8;text-decoration:none}
+.volver svg{width:11px;height:11px}
+.volver:active{color:var(--gold)}
+.cabecera h1{margin:2px 0 0;font:500 27px/1.15 var(--fuente-editorial);
+  color:#f2ead9;letter-spacing:.01em}
+.cabecera .corte{font:400 11px/1.5 "Inter",var(--fuente-interfaz);
+  letter-spacing:.22em;text-transform:uppercase;color:#8b90a8}
+.cinta-titulo{display:flex;align-items:center;gap:9px;
+  font:500 11px/1 "Inter",var(--fuente-interfaz);letter-spacing:.26em;
+  text-transform:uppercase;color:var(--gold);margin:4px 0 0}
+.cinta-titulo::after{content:"✦";flex:1;height:1em;display:flex;align-items:center;
+  color:color-mix(in srgb, var(--gold) 55%, transparent);
+  background:linear-gradient(90deg, color-mix(in srgb, var(--gold) 30%, transparent), transparent) left center/100% 1px no-repeat;
+  justify-content:flex-end;font-size:11px}
+.panel-joya{position:relative;border-radius:12px;padding:12px 13px;
+  background:linear-gradient(180deg, rgba(17,21,44,.62), rgba(8,10,24,.76));
+  border:1px solid color-mix(in srgb, var(--gold) 17%, transparent);
+  box-shadow:0 8px 26px rgba(0,0,0,.35), inset 0 1px 0 rgba(244,230,190,.05)}
+/* versión vigente */
+.version{display:flex;align-items:center;gap:13px}
+.version .numero{flex:none;text-align:center;padding:10px 12px;border-radius:10px;
+  background:radial-gradient(circle at 50% 28%, rgba(240,201,106,.13), rgba(8,10,22,.4) 74%);
+  border:1px solid rgba(238,200,110,.35)}
+.version .numero b{display:block;font:600 17px/1 "Cinzel",var(--fuente-editorial);
+  background:linear-gradient(175deg,#f7e7bb,#f0c96a 46%,#c69a3c 90%);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.version .numero small{display:block;margin-top:4px;font:600 11px/1 "Inter",var(--fuente-interfaz);
+  letter-spacing:.22em;text-transform:uppercase;color:#8b90a8}
+.version .mision{flex:1;font:400 11px/1.6 "Inter",var(--fuente-interfaz);color:#c9c4d4}
+.version .mision b{color:#f2ead9;font-weight:600}
+.version .mision small{display:block;margin-top:5px;font-size:11px;color:#8b90a8;line-height:1.55}
+.version .mision small b{color:#eec86e}
+/* cifras del cerebro */
+.cifras{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.cifra{text-align:center;padding:10px 4px;border-radius:10px;
+  background:linear-gradient(180deg, rgba(17,21,44,.55), rgba(8,10,24,.7));
+  border:1px solid rgba(244,230,190,.1)}
+.cifra b{display:block;font:600 14px/1 "Inter",var(--fuente-interfaz);color:#f4d68a;letter-spacing:.01em}
+.cifra small{display:block;margin-top:5px;font:600 11px/1.4 "Inter",var(--fuente-interfaz);
+  letter-spacing:.14em;text-transform:uppercase;color:#8b90a8}
+/* filas + chips (ADN del home) */
+.filas{display:flex;flex-direction:column}
+.fila{display:flex;align-items:flex-start;gap:10px;padding:9px 2px;
+  border-bottom:1px solid rgba(244,230,190,.06);
+  font:400 11px/1.5 "Inter",var(--fuente-interfaz);color:#c9c4d4;letter-spacing:.02em}
+.fila:last-child{border-bottom:0}
+.fila svg{width:15px;height:15px;stroke-width:1.3;color:#a89968;flex:none;margin-top:1px}
+.fila > span:first-of-type{flex:1}
+.fila b{color:#f2ead9;font-weight:600}
+.fila .fecha{flex:none;font:600 11px/1 "Inter",var(--fuente-interfaz);letter-spacing:.14em;
+  text-transform:uppercase;color:#a89968;margin-top:3px;width:44px}
+.chip{font:600 11px/1 "Inter",var(--fuente-interfaz);letter-spacing:.14em;
+  text-transform:uppercase;padding:4px 8px;border-radius:999px;flex:none;margin-top:2px}
+.chip.oro{color:#eec86e;border:1px solid rgba(238,200,110,.4);background:rgba(238,200,110,.07)}
+.chip.verde{color:#7fd6a8;border:1px solid rgba(127,214,168,.38);background:rgba(127,214,168,.07)}
+.chip.neutro{color:#8b90a8;border:1px solid rgba(139,144,168,.28);background:rgba(139,144,168,.06)}
+.nota-panel{margin-top:8px;padding-top:8px;border-top:1px solid rgba(244,230,190,.07);
+  font:400 11px/1.6 "Inter",var(--fuente-interfaz);color:#8b90a8}
+.sello-nota{font:400 11px/1.6 "Inter",var(--fuente-interfaz);letter-spacing:.06em;
+  color:#6d7288;text-align:center;padding:0 6px}
+/* navegación inferior (overrides del home) */
+.adn-nav{left:7px;right:7px;bottom:0;
+  border-radius:12px 12px 0 0;
+  padding:8px 10px calc(7px + env(safe-area-inset-bottom));
+  background:linear-gradient(180deg, rgba(12,14,30,.92), rgba(6,8,18,.96));
+  border:1px solid rgba(244,230,190,.09);border-bottom:0;
+  box-shadow:0 -10px 30px rgba(0,0,0,.4), inset 0 1px 0 rgba(244,230,190,.04);
+  backdrop-filter:blur(18px)}
+.adn-nav a{font:500 11px/1 "Inter",var(--fuente-interfaz);
+  letter-spacing:.18em;gap:6px;color:#8b90a8;align-self:end}
+.adn-nav svg{width:16px;height:16px;stroke-width:1.3}
+.adn-nav a.centro{transform:none;color:var(--gold);
+  font-size:11px;letter-spacing:.2em;gap:4px}
+.adn-nav a.centro .aro{width:48px;height:48px;border-width:1.2px;
+  margin-top:-10px;
+  background:radial-gradient(circle at 50% 32%,
+    color-mix(in srgb, var(--gold) 15%, #0d0f22), #080a16 78%);
+  box-shadow:0 0 16px rgba(240,201,106,.26),
+             0 5px 14px rgba(0,0,0,.5),
+             inset 0 0 10px rgba(240,201,106,.08)}
+.adn-nav a.centro svg{width:20px;height:20px}
+</style>
+
+<div class="pantalla adn-superficie">
+  <div class="contenido">
+
+    <header class="cabecera entra">
+      <a class="volver" href="piloto-home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5.5 L8.5 12 L15 18.5"/></svg>Home</a>
+      <h1>Desarrollo del Proyecto</h1>
+      <div class="corte">ATHENEA · Sistema cognitivo del estudio</div>
+    </header>
+
+    <section class="entra e2">
+      <div class="cinta-titulo">Versión vigente</div>
+      <div class="panel-joya version" style="margin-top:8px">
+        <div class="numero"><b>6.7.0</b><small>beta · 31 jul</small></div>
+        <div class="mision"><b>FASE 4.1 abierta</b> — segundo Capability Pack. Las siete
+        garantías están en pie y el sistema está preparado; CAP-002 aún no existe:
+        1 de 6 productos entregado.
+        <small><b>En ejecución:</b> BRAIN-002 — expediente piloto [B] CASO-01,
+        decidido por el Director el 24 jul.</small></div>
+      </div>
+    </section>
+
+    <section class="entra e3">
+      <div class="cinta-titulo">El cerebro en cifras</div>
+      <div class="cifras" style="margin-top:8px">
+        <div class="cifra"><b data-vivo="censo_total">3.306</b><small>Notas del corpus</small></div>
+        <div class="cifra"><b data-vivo="delta_n">+16</b><small data-vivo="delta_nuevas_sello">Nuevas · 01 ago</small></div>
+        <div class="cifra"><b data-vivo="conexiones_total">24.738</b><small>Conexiones</small></div>
+        <div class="cifra"><b data-vivo="grafo_aristas">1.081</b><small>Aristas del grafo</small></div>
+      </div>
+    </section>
+
+    <section class="entra e4">
+      <div class="cinta-titulo">Observatorio de fuentes</div>
+      <div class="panel-joya filas" style="margin-top:8px">
+        <div class="fila">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12 H20.5 M12 3.5 c2.6 2.4 2.6 14.6 0 17 M12 3.5 c-2.6 2.4 -2.6 14.6 0 17"/></svg>
+          <span><b>31 fuentes</b> en el censo jurídico</span>
+          <span class="chip neutro">30 jul</span>
+        </div>
+        <div class="fila">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 12.5 L10 17 L18.5 7.5"/></svg>
+          <span><b>4 conectadas</b> con extracción real — destacan Revistas especializadas (32 ítems)
+          y Bases documentales institucionales (590 ítems)</span>
+          <span class="chip verde">Vivas</span>
+        </div>
+        <div class="fila">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5 V12 L15 14.5"/></svg>
+          <span><b>13 alcanzables</b> sin extractor todavía · 4 inalcanzables · 2 no aplican</span>
+          <span class="chip neutro">En espera</span>
+        </div>
+        <div class="nota-panel">Una fuente se declara CONECTADA solo si una petición real
+        devolvió datos y el extractor obtuvo al menos un elemento. Lo que no se pudo
+        verificar se declara, no se estima.</div>
+      </div>
+    </section>
+
+    <section class="entra e5">
+      <div class="cinta-titulo">Plataformas</div>
+      <div class="panel-joya filas" style="margin-top:8px">
+        <div class="fila">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12 H20.5 M12 3.5 c2.6 2.4 2.6 14.6 0 17 M12 3.5 c-2.6 2.4 -2.6 14.6 0 17"/></svg>
+          <span><b>Web</b> — en producción, instalable como PWA</span>
+          <span class="chip verde">OK</span>
+        </div>
+        <div class="fila">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3.5" width="10" height="17" rx="2"/><path d="M10.5 18 H13.5"/></svg>
+          <span><b>Android</b> — APK único: app completa + fondo opcional</span>
+          <span class="chip verde">OK</span>
+        </div>
+        <div class="fila">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="11.5" rx="1.5"/><path d="M8 20 H16 M12 16.5 V20"/></svg>
+          <span><b>Desktop y laptop</b> — instalador único: app + fondo opcional</span>
+          <span class="chip verde">OK</span>
+        </div>
+        <div class="fila">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12" /><path d="M12 4 L19 17.5 H5 Z"/><circle cx="12" cy="13" r="2.2"/></svg>
+          <span><b>ADN visual nuevo</b> — esta app: núcleo vivo, áreas V2, paneles migrados</span>
+          <span class="chip oro">En revisión</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="entra e6">
+      <div class="cinta-titulo">Hitos recientes</div>
+      <div class="panel-joya filas" style="margin-top:8px">
+        <div class="fila"><span class="fecha">24 jul</span>
+          <span>Mesa de Decisión: expediente piloto elegido — <b>BRAIN-002</b> en ejecución</span></div>
+        <div class="fila"><span class="fecha">31 jul</span>
+          <span>Build <b>6.7.0-beta</b> publicado en todas las plataformas</span></div>
+        <div class="fila"><span class="fecha">01 ago</span>
+          <span>Censo del corpus: <b>3.306 notas</b> (+16) · 24.738 conexiones</span></div>
+        <div class="fila"><span class="fecha">14 ago</span>
+          <span>Reconstrucción visual del home: <b>núcleo vivo</b> + arte de áreas V2</span></div>
+        <div class="fila"><span class="fecha">15 ago</span>
+          <span>La app se vuelve <b>instalable</b> (manifiesto + íconos oficiales) y su navegación queda viva</span></div>
+        <div class="fila"><span class="fecha">16 ago</span>
+          <span>Home completo (Enfoque + Jornada) y <b>migración de paneles operativos</b></span></div>
+        <div class="fila"><span class="fecha">16 ago</span>
+          <span>El motor constitucional llega a <b>AC-56 certificado</b> (AC-57 en curso) y la app lo refleja</span></div>
+      </div>
+    </section>
+
+    <p class="sello-nota entra e6">Identificadores sellados (CASO-nn) conforme a la
+    frontera de datos públicos del estudio. Cifras vivas del <span data-vivo="censo_sello">censo del 01 ago</span>.<br>
+    <span data-cifras-estado></span></p>
+  </div>
+
+  <nav class="adn-nav" aria-label="Navegación principal">
+    <a href="piloto-agenda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="15" rx="2"/><path d="M3.5 10 H20.5"/><path d="M8 3.5 V7"/><path d="M16 3.5 V7"/></svg>Agenda</a>
+    <a href="piloto-regimen-operativo.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.8 H14.6 L18.6 7.8 V20.2 H7 Z"/><path d="M14.4 4 V8 H18.4"/><path d="M9.6 12 H16 M9.6 15 H16"/></svg>Dossiers</a>
+    <a class="centro" href="piloto-cerebro.html" aria-label="ATHENEA"><span class="aro"><svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12 L47 44 L13 44 Z"/><path d="M30 38 a7 7 0 1 1 7 -7 a4.5 4.5 0 1 0 -4.5 4.5 a2.5 2.5 0 1 1 -2.5 -2.5" stroke-width="2.4"/></svg></span>Athenea</a>
+    <a href="piloto-alertas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10 a6 6 0 0 1 12 0 c0 4 1.4 5.4 2 6.2 H4 c.6-.8 2-2.2 2-6.2 Z"/><path d="M10 19.5 a2 2 0 0 0 4 0"/></svg>Alertas</a>
+    <a href="piloto-buscar.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16 L20.5 20.5"/></svg>Buscar</a>
+  </nav>
+</div>
+<script>/* AV-P2B2-SW-001: registro del service worker versionado (transporte, no diseño) */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http"))
+  addEventListener("load", () => {
+    navigator.serviceWorker.register(new URL("../../../sw.js", location.href).pathname).catch(() => {});
+  });
+</script>
+<script type="module">/* AV-CIFRAS-VIVAS-001: las cifras se leen del libro mayor
+   publicado (datos-vivos.json) y declaran el estado de su fuente; sin red
+   queda lo horneado — la pantalla JAMAS se queda en blanco */
+import { llenar, vigilar } from "../cifras-vivas.mjs"; llenar(); vigilar();</script>
+</html>

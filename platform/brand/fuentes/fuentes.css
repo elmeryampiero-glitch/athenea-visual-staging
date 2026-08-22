@@ -1,0 +1,25 @@
+/* TIPOGRAFÍA OFICIAL ATHENEA — autoalojada, subconjunto latino.
+   Cinzel: la voz de mármol — títulos, wordmark, ceremonial (benchmark de marca).
+   Inter: la voz de trabajo — UI, etiquetas, lectura funcional.
+   Playfair Display: la voz editorial — citas y nombres de caso.
+   Ficheros woff2 variables junto a este css; se referencian en relativo. */
+@font-face{
+  font-family:"Cinzel";
+  src:url("cinzel-var.woff2") format("woff2");
+  font-weight:400 600;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:"Inter";
+  src:url("inter-var.woff2") format("woff2");
+  font-weight:400 600;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:"Playfair Display";
+  src:url("playfair-regular.woff2") format("woff2");
+  font-weight:400;font-style:normal;font-display:swap;
+}
+@font-face{
+  font-family:"Playfair Display";
+  src:url("playfair-italic.woff2") format("woff2");
+  font-weight:400;font-style:italic;font-display:swap;
+}

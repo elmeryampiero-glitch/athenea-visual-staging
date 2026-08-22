@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es" class="athenea-cosmos">
+<meta charset="utf-8">
+<meta name="athenea-origen" content="718c23ce0f85aa7065892a6bc4c3df8814bf15cd">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="athenea.webmanifest">
+<meta name="theme-color" content="#05060e">
+<style>/* AV-P3A1-LAUNCH-001: guardia de primer pintado — obsidiana antes de que exista cualquier hoja de estilo (valor compilado de --lanzamiento-fondo, cine.css) */html{background:#05060e}</style>
+<link rel="apple-touch-icon" href="../iconos/athenea-icono-192.png">
+<link rel="icon" type="image/png" href="../iconos/athenea-icono-192.png">
+<link rel="stylesheet" href="../athenea-theme.css"><!-- P1.1 AV-P0P1-EXEC-001: constitución visual única -->
+<link rel="stylesheet" href="../cine.css"><!-- P3A AV-P3A-CINE-001: capa cinematográfica (continuidad entre escenas) -->
+<script src="../gramatica-sensorial.mjs"></script><!-- P3C AV-P3C-SENSORY-001: gramática sensorial — clásico en head: la anotación llega antes del primer fotograma -->
+<title>ATHENEA · Dossier (piloto de conocimiento)</title>
+<!-- Estudio interno: piloto de propagación del ADN. No se publica sin revisión. -->
+<meta name="athenea-alcance" content="interno">
+<!--
+  PILOTO — SUPERFICIE DE CONOCIMIENTO · AV-P3D0-KNOWLEDGE-SURFACES-001.
+
+  La primera unidad de conocimiento individual de ATHENEA: un dossier
+  ABIERTO. No es «otra página web»: es ENFOCAR conocimiento — el velo se
+  levanta (REVELA), el expediente respira colgado del hilo del
+  crecimiento, y al cerrar se despide (DESPIDE) de vuelta a su origen.
+
+  TODO se hereda: constitución (theme), ADN (superficie/appbar/hilo/
+  brotes/chips), cosmos vivo (gobernado por la Render Policy),
+  cinematografía P3A, gramática P3C (esta superficie es un velo del mapa
+  central), interacción P3A2. Los datos son FIXTURE LAB SELLADO
+  (datos-lab.mjs) — jamás información real de clientes.
+-->
+<link rel="stylesheet" href="../fuentes/fuentes.css">
+<link rel="stylesheet" href="../adn-nucleo.css">
+<style>
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;overflow-x:hidden}
+.pantalla{min-height:100dvh;position:relative;
+  padding:max(10px,env(safe-area-inset-top)) 22px 60px;
+  max-width:430px;margin:0 auto}
+.contenido{position:relative;z-index:1;display:flex;flex-direction:column;gap:18px}
+/* cabecera de la unidad: el conocimiento preside, la periferia calla */
+.unidad h1{margin:10px 0 8px;font:var(--peso-normal) 23px/1.3 var(--fuente-editorial);
+  color:var(--athenea-marfil)}
+.unidad .exp{font-family:var(--fuente-dato);font-size:var(--texto-etiqueta);
+  letter-spacing:.12em;color:var(--athenea-atenuado)}
+.unidad .via{margin-top:7px;font-size:var(--texto-menor);color:var(--athenea-atenuado)}
+.resumen{font-size:var(--texto-menor);line-height:1.75;color:#c9c4d4;
+  border-top:1px solid rgba(244,230,190,.07);padding-top:13px}
+/* el hilo de la actuación: mismo lenguaje que su origen (Dossiers) */
+.actuaciones{position:relative;margin-top:4px;display:flex;flex-direction:column;gap:26px;
+  padding:10px 0 6px}
+.hito .fecha{font-family:var(--fuente-dato);font-size:var(--texto-etiqueta);
+  letter-spacing:.12em;color:var(--athenea-atenuado)}
+.hito p{margin:5px 0 0;font-size:var(--texto-menor);line-height:1.6;color:#c9c4d4}
+.cierre{margin-top:20px;text-align:center}
+.cierre .adn-accion{font:var(--peso-medio) var(--texto-menor)/1 var(--fuente-trabajo);letter-spacing:.06em}
+.vacio{padding:34px 6px;text-align:center;color:var(--athenea-atenuado);
+  font-size:var(--texto-menor);line-height:1.7}
+</style>
+
+<div class="pantalla adn-superficie">
+  <div class="adn-cielo"><canvas></canvas></div>
+  <div class="adn-aurora"></div>
+  <div class="adn-grano"></div>
+
+  <div class="contenido">
+    <header class="adn-appbar">
+      <a class="volver-dossier" id="volver" href="piloto-regimen-operativo.html" aria-label="Volver a Dossiers"
+         style="display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;color:var(--athenea-atenuado)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 L8 12 L14.5 18.5"/></svg>
+      </a>
+      <div class="titulo adn-versalita" style="color:var(--athenea-marfil)">Dossier</div>
+      <span style="min-width:44px" aria-hidden="true"></span>
+    </header>
+
+    <section class="unidad" id="unidad" aria-live="polite">
+      <div class="vacio">Enfocando el dossier…</div>
+    </section>
+  </div>
+</div>
+
+<script type="module">
+import { cosmosFondo } from "../cosmos-fondo.mjs";
+cosmosFondo(document.querySelector(".adn-cielo canvas"));
+
+/* la unidad viene del CONTRATO central (fixture LAB sellado) y sus
+   acciones del REGISTRO central — esta superficie presenta y acciona
+   conocimiento, no lo define. P3D-1: mismo renderer para TODA unidad;
+   los campos opcionales ausentes producen vacío honesto, jamás crash. */
+import { UNIDADES } from "../datos-lab.mjs";
+import { resolver } from "../acciones-conocimiento.mjs";
+const id = new URLSearchParams(location.search).get("dossier");
+const u = id && UNIDADES[id];
+const cont = document.getElementById("unidad");
+if (!u) {
+  /* honestidad P2B-2: si no existe, no se finge contenido */
+  cont.innerHTML = `<div class="vacio">Este dossier no está en el estudio.<br>
+    Vuelve a Dossiers para elegir una unidad.</div>`;
+} else {
+  document.title = "ATHENEA · " + u.id;
+  if (u.retorno) document.getElementById("volver").href = u.retorno;
+  cont.setAttribute("aria-label", u.accesibilidad || u.titulo || u.id);
+  const chip = u.estado && u.estadoRotulo
+    ? `<span class="adn-chip adn-chip--${u.estado}">${u.estadoRotulo}</span>` : "";
+  const meta = u.metadatos || {};
+  const contenido = u.contenido || {};
+  const hitos = (contenido.actuaciones || []).map(a => `
+    <article class="hito adn-brote adn-brote--${a.estado || "verde"}">
+      <div class="fecha">${a.fecha || ""}</div>
+      <p>${a.texto || ""}</p>
+    </article>`).join("");
+  /* acciones: SOLO lo que el registro habilita (ley de oro); lo demás
+     se pinta reservado honesto con el estilo central de P3D0.1 */
+  const botones = resolver(u).map(a => a.habilitada
+    ? `<a class="adn-accion" href="${a.href}" aria-label="${a.accesibilidad}">${a.rotulo}</a>`
+    : `<button class="adn-accion" type="button" disabled
+         title="${a.ayuda || "Se habilita en la siguiente fase"}" aria-label="${a.accesibilidad}">${a.rotulo}</button>`
+  ).join("\n      ");
+  cont.innerHTML = `
+    ${chip}
+    <h1>${u.titulo || u.id}</h1>
+    <div class="exp">${meta.expediente || u.id}${meta.responsable ? " · " + meta.responsable : ""}</div>
+    ${meta.via ? `<div class="via">${meta.via}</div>` : ""}
+    ${contenido.resumen ? `<p class="resumen">${contenido.resumen}</p>` : ""}
+    ${hitos ? `<div class="actuaciones"><div class="adn-hilo" aria-hidden="true"></div>${hitos}</div>`
+            : `<div class="vacio">Sin actuaciones registradas todavía.</div>`}
+    ${botones ? `<div class="cierre">${botones}</div>` : ""}`;
+}
+</script>
+<script>/* AV-P2B2-SW-001: registro del service worker versionado (transporte, no diseño) */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http"))
+  addEventListener("load", () => {
+    navigator.serviceWorker.register(new URL("../../../sw.js", location.href).pathname).catch(() => {});
+  });
+</script>
+</html>

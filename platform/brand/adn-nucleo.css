@@ -1,0 +1,399 @@
+/* ADN DEL NÚCLEO VIVO — régimen operativo. v2, tras rechazo humano del piloto.
+   ============================================================================
+   El primer piloto se leyó «sintético, barato, poco exclusivo, nada elegante»
+   y el veredicto era justo: píldora rellena de oro, cajas redondeadas con
+   borde visible, etiquetas enmarcadas — vocabulario de dashboard genérico.
+
+   La v2 cambia el lenguaje, no solo los valores. Principios:
+
+     · El lujo no encierra en cajas: separa con FILETES finos y con AIRE.
+     · El oro nunca se rellena: es filo, filete, versalita — cerco, no bloque.
+     · Los estados no llevan marco: un punto de luz y una versalita bastan.
+     · La ceremonia la pone la serif con cuerpo y el espacio alrededor,
+       no los adornos.
+     · Máximo UN foco dominante por pantalla; todo lo demás susurra.
+
+   Todos los valores salen de la capa de tokens (ATHENEA:CAPA); aquí no hay
+   ni un color literal. Se enlaza o se inyecta DESPUÉS de la capa. */
+
+
+/* ---------- las voces: Cinzel (mármol), Inter (trabajo), Playfair (editorial) */
+:root{
+  --fuente-marmol: "Cinzel", var(--fuente-lectura);
+  --fuente-editorial: "Playfair Display", var(--fuente-lectura);
+  --fuente-trabajo: "Inter", var(--fuente-interfaz);
+}
+.adn-superficie{ font-family: var(--fuente-trabajo) }
+
+/* ---------- superficie: obsidiana con profundidad, no negro plano ---------- */
+.adn-superficie{
+  background:
+    radial-gradient(130% 70% at 50% -14%,
+      color-mix(in srgb, var(--athenea-espacio) 60%, transparent), transparent 62%),
+    radial-gradient(90% 40% at 50% 0%,
+      color-mix(in srgb, var(--gold) 4%, transparent), transparent 70%),
+    var(--athenea-cosmos);
+  color: var(--athenea-marfil);
+}
+
+/* ---------- filete: la línea que sustituye a la caja ---------- */
+.adn-filete{
+  height: 1px; border: 0;
+  background: linear-gradient(90deg, transparent,
+    color-mix(in srgb, var(--gold) 38%, transparent), transparent);
+}
+.adn-filete--astro{ position: relative; overflow: visible; margin: var(--espacio-24) 0 }
+.adn-filete--astro::after{
+  content: "✦"; position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold); font-size: var(--texto-etiqueta);
+  background: var(--athenea-cosmos); padding: 0 var(--espacio-12);
+}
+
+/* ---------- entrada: el expediente como pieza editorial, no como tarjeta --- */
+.adn-entrada{
+  position: relative;
+  padding: var(--espacio-24) var(--espacio-4) var(--espacio-24) var(--espacio-16);
+  border-top: 1px solid color-mix(in srgb, var(--gold) 14%, transparent);
+}
+.adn-entrada:last-of-type{
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 14%, transparent);
+}
+/* la urgencia es un hilo de luz al margen, no una etiqueta gritona */
+.adn-entrada--urgente::before{
+  content: ""; position: absolute; left: 0; top: var(--espacio-16); bottom: var(--espacio-16);
+  width: 1px; background: linear-gradient(180deg, transparent, var(--rojo), transparent);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--rojo) 55%, transparent);
+}
+
+/* ---------- cristal: reservado a lo que de verdad flota (barras, avisos) --- */
+.adn-cristal{
+  background: color-mix(in srgb, var(--athenea-espacio) var(--athenea-cristal-opacidad), transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 14%, transparent);
+  border-radius: var(--radio-base);
+  backdrop-filter: blur(10px);
+}
+
+/* ---------- oro: autoridad — filo y letra, jamás bloque ---------- */
+.adn-accion{
+  display: inline-flex; align-items:center; justify-content:center;
+  min-height:44px; /* P0.2 AV-P0P1-EXEC-001: objetivo táctil */
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid color-mix(in srgb, var(--gold) 42%, transparent);
+  border-radius: var(--radio-menor);
+  padding: 9px var(--espacio-16);
+  font: var(--peso-medio) var(--texto-etiqueta)/1 var(--fuente-interfaz);
+  letter-spacing: var(--tracking-versalita); text-indent: 0;
+  text-transform: uppercase; white-space: nowrap;
+  cursor: pointer;
+  transition: border-color var(--tiempo-respuesta) var(--curva-entrada),
+              box-shadow var(--tiempo-respuesta) var(--curva-entrada);
+}
+.adn-accion:hover{
+  border-color: color-mix(in srgb, var(--gold) 75%, transparent);
+  box-shadow: var(--luz-tenue);
+}
+/* P3D-1: la acción puede ser ancla soberana (navegación MPA real) — misma
+   presencia que el botón, sin el subrayado de agente de usuario */
+a.adn-accion{ text-decoration: none }
+/* la acción silenciosa: solo letra y un subrayado fino que respira */
+.adn-accion--tacita{
+  border: 0; padding: 4px 0; border-radius: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+}
+.adn-accion--tacita:hover{ box-shadow: none;
+  border-color: var(--gold) }
+
+/* ---------- estados: un punto de luz y una versalita, sin marcos ---------- */
+.adn-estado{
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: var(--texto-etiqueta);
+  letter-spacing: var(--tracking-versalita);
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+.adn-estado::before{
+  content: ""; width: 5px; height: 5px; border-radius: 50%;
+  background: currentColor; box-shadow: var(--luz-estado);
+}
+.adn-estado--rojo{  color: color-mix(in srgb, var(--rojo) 80%, var(--athenea-marfil)) }
+.adn-estado--ambar{ color: var(--ambar) }
+.adn-estado--verde{ color: var(--verde) }
+
+/* ---------- violeta: SOLO semántico, y sin marco ---------- */
+.adn-doctrina{
+  color: color-mix(in srgb, var(--athenea-doctrina) 62%, var(--athenea-marfil));
+}
+.adn-conexiones{ color: color-mix(in srgb, var(--athenea-doctrina) 78%, var(--athenea-marfil)) }
+
+/* ---------- voz ---------- */
+.adn-titulo{
+  font-family: var(--fuente-marmol);
+  font-weight: var(--peso-normal);
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  color: var(--athenea-marfil);
+  text-wrap: balance;
+}
+/* el oro como materia: degradado de luz sobre la letra, con un halo tenue.
+   Es el efecto del benchmark de marca — la palabra brilla, no chilla. */
+.adn-titulo--aureo{
+  background: linear-gradient(178deg,
+    color-mix(in srgb, var(--athenea-marfil) 72%, var(--gold)) 8%,
+    var(--gold) 46%,
+    color-mix(in srgb, var(--gold) 55%, var(--athenea-cosmos)) 96%);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--gold) 32%, transparent));
+}
+.adn-editorial{
+  font-family: var(--fuente-editorial);
+  font-weight: var(--peso-normal);
+  letter-spacing: .01em;
+  color: var(--athenea-marfil);
+}
+.adn-versalita{
+  font-size: var(--texto-etiqueta);
+  letter-spacing: var(--tracking-versalita);
+  text-transform: uppercase;
+  color: var(--athenea-atenuado);
+}
+.adn-versalita--oro{ color: var(--gold) }
+.adn-dato{
+  font-family: var(--fuente-dato);
+  font-size: var(--texto-etiqueta);
+  letter-spacing: .14em;
+  color: color-mix(in srgb, var(--athenea-atenuado) 80%, var(--athenea-marfil));
+}
+
+/* ---------- microconstelación: el eco del núcleo ---------- */
+.adn-microconstelacion{
+  position: absolute; inset: 0;
+  pointer-events: none;
+  opacity: .55;
+}
+
+/* ---------- efectos de materia ---------- */
+/* aurora: el aliento de oro que baja del borde superior; respira muy lento */
+.adn-aurora{
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(72% 34% at 50% -6%,
+      color-mix(in srgb, var(--gold) 19%, transparent), transparent 72%),
+    radial-gradient(38% 16% at 50% -2%,
+      color-mix(in srgb, var(--athenea-marfil) 10%, transparent), transparent 75%);
+  animation: adn-aurora calc(var(--athenea-respiracion) * 2) var(--curva-organica) infinite;
+}
+@keyframes adn-aurora{ 0%,100%{opacity:.75} 50%{opacity:1} }
+
+/* grano: el tejido que separa una pantalla premium de un rectángulo plano */
+.adn-grano{
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="160" height="160" filter="url(%23g)" opacity="0.5"/></svg>');
+  background-size: 160px 160px;
+  opacity: .045;
+  mix-blend-mode: overlay;
+}
+
+/* filete vivo: la línea de oro recorrida por un brillo lentísimo */
+.adn-filete--vivo{
+  background: linear-gradient(90deg, transparent 12%,
+    color-mix(in srgb, var(--gold) 30%, transparent) 38%,
+    color-mix(in srgb, var(--athenea-marfil) 55%, var(--gold)) 50%,
+    color-mix(in srgb, var(--gold) 30%, transparent) 62%,
+    transparent 88%);
+  background-size: 220% 100%;
+  animation: adn-filete 14s var(--curva-continua) infinite;
+}
+@keyframes adn-filete{ 0%{background-position: 120% 0} 100%{background-position: -120% 0} }
+
+/* ---------- piezas de la lámina de pantallas (referencia 163260) ---------- */
+/* barra de aplicación: título versalita centrado entre dos gestos */
+.adn-appbar{
+  display:grid;grid-template-columns:44px 1fr 44px;align-items:center;
+  padding: 2px 4px;
+}
+.adn-appbar .titulo{ text-align:center; color: var(--athenea-marfil) }
+.adn-appbar button,.adn-appbar a{
+  background:none;border:0;color:var(--athenea-atenuado);cursor:pointer;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+}
+.adn-appbar svg{width:20px;height:20px}
+
+/* pestañas: la activa es oro con subrayado fino */
+.adn-tabs{ display:flex; gap: var(--espacio-24);
+  border-bottom:1px solid color-mix(in srgb, var(--athenea-marfil) 8%, transparent) }
+.adn-tabs a, .adn-tabs span{
+  padding: 10px 2px 12px; text-decoration:none;
+  font-size: var(--texto-etiqueta); letter-spacing: var(--tracking-versalita);
+  text-transform: uppercase; color: var(--athenea-atenuado);
+  border-bottom: 1px solid transparent; margin-bottom: -1px;
+}
+.adn-tabs a.on, .adn-tabs span.on{ color: var(--gold);
+  border-bottom-color: color-mix(in srgb, var(--gold) 70%, transparent) }
+
+/* búsqueda: cristal silencioso */
+a.adn-busqueda{color:inherit;text-decoration:none;min-height:44px} /* P0: blanco táctil del buscador-enlace */
+.adn-busqueda{
+  display:flex;align-items:center;gap:10px;
+  padding: 11px 14px; border-radius: var(--radio-base);
+  background: color-mix(in srgb, var(--athenea-espacio) 68%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 14%, transparent);
+  color: var(--athenea-atenuado); font-size: var(--texto-menor);
+}
+.adn-busqueda svg{width:15px;height:15px;flex:none}
+
+/* tarjeta operativa de la lámina: obsidiana cálida con filo de oro VISIBLE.
+   La lámina vive de esos filos finos — quitarlos convierte la joya en losa. */
+.adn-tarjeta{
+  background:
+    linear-gradient(160deg,
+      color-mix(in srgb, var(--gold) 4.5%, transparent), transparent 42%),
+    color-mix(in srgb, var(--athenea-espacio) 52%, var(--athenea-cosmos));
+  border: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  border-radius: var(--radio-mayor);
+  padding: var(--espacio-16);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--athenea-cosmos) 55%, transparent);
+}
+.adn-tarjeta--foco{ border-color: color-mix(in srgb, var(--gold) 46%, transparent);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--athenea-cosmos) 55%, transparent),
+              0 0 18px color-mix(in srgb, var(--gold) 10%, transparent) }
+
+/* chip diminuto de estado: contorno mudo, versalita — nunca relleno */
+.adn-chip{
+  display:inline-block; padding: 4px 11px;
+  border: 1px solid color-mix(in srgb, currentColor 58%, transparent);
+  border-radius: var(--radio-pastilla);
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--athenea-atenuado);
+  background: color-mix(in srgb, currentColor 6%, transparent);
+}
+.adn-chip--rojo{  color: color-mix(in srgb, var(--rojo) 82%, var(--athenea-marfil)) }
+.adn-chip--ambar{ color: var(--ambar) }
+.adn-chip--oro{   color: var(--gold) }
+.adn-chip--violeta{ color: color-mix(in srgb, var(--athenea-doctrina) 70%, var(--athenea-marfil)) }
+
+/* LA acción plena: la lámina admite UN solo botón de oro lleno por pantalla */
+.adn-accion--plena{
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--gold) 88%, var(--athenea-marfil)),
+    color-mix(in srgb, var(--gold) 78%, var(--athenea-cosmos)));
+  color: var(--athenea-cosmos);
+  border: 1px solid color-mix(in srgb, var(--gold) 70%, transparent);
+  border-radius: var(--radio-pastilla);
+  padding: 14px var(--espacio-32);
+  box-shadow: 0 8px 26px color-mix(in srgb, var(--gold) 22%, transparent);
+}
+.adn-accion--plena:hover{ box-shadow: var(--luz-tenue) }
+
+/* barra de navegación inferior de la lámina: 5 destinos, ATHENEA al centro */
+.adn-nav{
+  position:fixed; left:0; right:0; bottom:0; z-index:5;
+  display:grid; grid-template-columns:repeat(5,1fr); align-items:end;
+  padding: 8px max(10px, env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--athenea-cosmos) 86%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--gold) 20%, transparent);
+  backdrop-filter: blur(12px);
+}
+.adn-nav a{
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:5px;
+  text-decoration:none;color:var(--athenea-atenuado);
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:6px 0;
+  min-height:44px; /* P0.2 AV-P0P1-EXEC-001: objetivo táctil mínimo 44px */
+}
+.adn-nav svg{width:19px;height:19px}
+.adn-nav a.on{color:var(--gold)}
+.adn-nav a.centro{transform:translateY(-10px)}
+.adn-nav a.centro .aro{
+  width:46px;height:46px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid var(--gold);
+  background: radial-gradient(circle at 50% 38%,
+    color-mix(in srgb, var(--gold) 20%, var(--athenea-espacio)), var(--athenea-espacio) 74%);
+  box-shadow: var(--luz-tenue);
+  color: var(--gold);
+}
+.adn-nav a.centro svg{width:22px;height:22px}
+
+/* ---------- v6 · el cosmos guía: cielo, orbes y el hilo del crecimiento --- */
+/* el cielo entero detrás del contenido (canvas de cosmos-fondo.mjs) */
+.adn-cielo{ position: absolute; inset: 0; pointer-events: none }
+
+/* orbe: un área de derecho como estrella con nombre — no como ficha en caja */
+.adn-orbe{ position: absolute; transform: translate(-50%,-50%);
+  text-align: center; width: 92px }
+.adn-orbe .aro{
+  width: 44px; height: 44px; margin: 0 auto; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent);
+  background: radial-gradient(circle at 50% 36%,
+    color-mix(in srgb, var(--gold) 13%, var(--athenea-espacio)),
+    color-mix(in srgb, var(--athenea-espacio) 55%, var(--athenea-cosmos)) 74%);
+  color: var(--gold);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--gold) 14%, transparent);
+}
+.adn-orbe.d .aro{
+  border-color: color-mix(in srgb, var(--athenea-doctrina) 52%, transparent);
+  background: radial-gradient(circle at 50% 36%,
+    color-mix(in srgb, var(--athenea-doctrina) 15%, var(--athenea-espacio)),
+    color-mix(in srgb, var(--athenea-espacio) 55%, var(--athenea-cosmos)) 74%);
+  color: color-mix(in srgb, var(--athenea-doctrina) 72%, var(--athenea-marfil));
+  box-shadow: 0 0 16px color-mix(in srgb, var(--athenea-doctrina) 16%, transparent);
+}
+.adn-orbe--foco .aro{ border-color: color-mix(in srgb, var(--gold) 85%, transparent);
+  box-shadow: var(--luz-tenue) }
+.adn-orbe svg{ width: 18px; height: 18px }
+.adn-orbe b{ display: block; margin-top: 6px;
+  font: var(--peso-medio) 8.5px/1.35 var(--fuente-trabajo);
+  letter-spacing: .13em; text-transform: uppercase; color: var(--athenea-marfil) }
+.adn-orbe small{ display: block; margin-top: 2px; font-size: 11px;
+  letter-spacing: .08em; color: var(--athenea-atenuado) }
+/* la respiración de cada orbe, desincronizada por índice */
+@media not (prefers-reduced-motion: reduce){
+  .adn-orbe .aro{ animation: adn-orbe calc(var(--athenea-respiracion) + var(--fase, 0s) * 0)
+    var(--curva-organica) infinite; animation-delay: var(--fase, 0s) }
+  @keyframes adn-orbe{ 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-2.5px) } }
+}
+
+/* el hilo del crecimiento: la columna de luz de la que cuelgan los asuntos */
+.adn-hilo{ position: absolute; top: 0; bottom: 0; left: 13px; width: 1px;
+  background: linear-gradient(180deg, transparent,
+    color-mix(in srgb, var(--gold) 40%, transparent) 12%,
+    color-mix(in srgb, var(--gold) 40%, transparent) 88%, transparent) }
+.adn-brote{ position: relative; padding-left: 40px; --astro: var(--gold) }
+/* la ESTRELLA del asunto: brillo radial con núcleo de marfil y destello en
+   cruz — una estrella de verdad sobre el hilo, no un topo de interfaz */
+.adn-brote::before{
+  content: ""; position: absolute; left: 13px; top: 12px;
+  width: 44px; height: 44px; transform: translate(-50%,-50%);
+  background:
+    radial-gradient(circle,
+      color-mix(in srgb, var(--athenea-marfil) 92%, var(--astro)) 0 8%,
+      color-mix(in srgb, var(--astro) 85%, transparent) 16%,
+      color-mix(in srgb, var(--astro) 26%, transparent) 34%,
+      transparent 66%);
+  animation: adn-astro calc(var(--athenea-respiracion) * 1.3) var(--curva-organica) infinite;
+}
+.adn-brote::after{
+  content: ""; position: absolute; left: 13px; top: 12px;
+  width: 52px; height: 52px; transform: translate(-50%,-50%);
+  background:
+    linear-gradient(0deg,  transparent 47.5%, color-mix(in srgb, var(--athenea-marfil) 65%, transparent) 50%, transparent 52.5%),
+    linear-gradient(90deg, transparent 47.5%, color-mix(in srgb, var(--athenea-marfil) 65%, transparent) 50%, transparent 52.5%);
+  animation: adn-astro calc(var(--athenea-respiracion) * 1.3) var(--curva-organica) infinite;
+}
+@keyframes adn-astro{ 0%,100%{opacity:.72} 50%{opacity:1} }
+.adn-brote--rojo{  --astro: color-mix(in srgb, var(--rojo) 85%, var(--athenea-marfil)) }
+.adn-brote--ambar{ --astro: var(--ambar) }
+@media (prefers-reduced-motion: reduce){
+  .adn-brote::before, .adn-brote::after{ animation: none }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .adn-aurora, .adn-filete--vivo{ animation: none }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .adn-accion{ transition: none }
+}

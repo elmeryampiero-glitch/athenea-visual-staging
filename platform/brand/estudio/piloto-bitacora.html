@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es" class="athenea-cosmos">
+<meta charset="utf-8">
+<meta name="athenea-origen" content="718c23ce0f85aa7065892a6bc4c3df8814bf15cd">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="athenea.webmanifest">
+<meta name="theme-color" content="#05060e">
+<style>/* AV-P3A1-LAUNCH-001: guardia de primer pintado — obsidiana antes de que exista cualquier hoja de estilo (valor compilado de --lanzamiento-fondo, cine.css) */html{background:#05060e}</style>
+<link rel="apple-touch-icon" href="../iconos/athenea-icono-192.png">
+<link rel="icon" type="image/png" href="../iconos/athenea-icono-192.png">
+<link rel="stylesheet" href="../athenea-theme.css"><!-- P1.1 AV-P0P1-EXEC-001: constitución visual única -->
+<link rel="stylesheet" href="../cine.css">
+<script src="../gramatica-sensorial.mjs"></script><!-- P3C AV-P3C-SENSORY-001: gramática sensorial — clásico en head: la anotación llega antes del primer fotograma --><!-- P3A AV-P3A-CINE-001: capa cinematográfica (continuidad entre escenas) -->
+<title>ATHENEA · Bitácora (piloto operativo)</title>
+<!-- Estudio interno: piloto de propagación del ADN. No se publica sin revisión. -->
+<meta name="athenea-alcance" content="interno">
+<!--
+  PILOTO — BITÁCORA · el río de eventos del sistema, según la lámina oficial
+  y el lenguaje congelado: cada evento BROTA del hilo del crecimiento como
+  una estrella con el color de su naturaleza (verde=verificación, oro=acto
+  de gobierno, violeta=palabra de ATHENEA, ámbar=aviso). Eventos REALES de
+  la historia del proyecto. Nunca solo letras: cosmos vivo detrás.
+-->
+<!-- P2A (orden del Director): capa de compatibilidad ATHENEA:CAPA retirada — los tokens los da athenea-theme.css, paridad demostrada por captura -->
+<link rel="stylesheet" href="../fuentes/fuentes.css">
+<link rel="stylesheet" href="../adn-nucleo.css">
+<style>
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;overflow-x:hidden}
+.pantalla{min-height:100dvh;position:relative;
+  padding:max(10px,env(safe-area-inset-top)) 22px 120px;
+  max-width:430px;margin:0 auto}
+.contenido{position:relative;z-index:1;display:flex;flex-direction:column;gap:16px}
+.rio{position:relative;margin-top:6px;display:flex;flex-direction:column;gap:30px;padding:8px 0}
+.evento .cab{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:7px}
+.evento .cuerpo{font-size:var(--texto-menor);color:var(--athenea-atenuado);line-height:var(--interlinea-larga);max-width:46ch}
+.evento .cita{font:italic var(--peso-normal) 15px/1.55 var(--fuente-editorial);color:var(--athenea-marfil);margin:6px 0 4px}
+.evento .hora{font-family:var(--fuente-dato);font-size:11px;letter-spacing:.12em;color:var(--athenea-atenuado)}
+.adn-brote--verde{--astro: var(--verde)}
+.adn-brote--violeta{--astro: color-mix(in srgb, var(--athenea-doctrina) 80%, var(--athenea-marfil))}
+.escribe{margin-top:6px}
+</style>
+
+<div class="pantalla adn-superficie">
+  <div class="adn-cielo"><canvas></canvas></div>
+  <div class="adn-aurora"></div>
+  <div class="adn-grano"></div>
+
+  <div class="contenido">
+    <header class="adn-appbar">
+      <a aria-label="Volver" href="piloto-home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 L8 12 L14.5 18.5"/></svg></a>
+      <div class="titulo adn-versalita" style="color:var(--athenea-marfil)">Bitácora</div>
+      <button aria-label="Estadísticas" disabled title="Estadísticas · se habilita en la siguiente fase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 19 V12 M12 19 V6 M19 19 V10"/></svg></button>
+    </header>
+
+    <div class="adn-versalita" style="text-align:center"><span id="fecha">03 AGO 2026</span> · Sesión actual</div>
+
+    <div class="adn-busqueda escribe adn-reservado" aria-disabled="true" title="El mensaje al director se enciende en la siguiente fase">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 20 L6 14 L16.5 3.5 a2.1 2.1 0 0 1 3 3 L9 17 Z"/></svg>
+      Escribe al director…
+    </div>
+
+    <div class="rio">
+      <div class="adn-hilo" aria-hidden="true"></div>
+
+      <article class="evento adn-brote adn-brote--verde">
+        <div class="cab"><span class="adn-versalita">Verificación en CI</span>
+          <span class="adn-chip" style="color:var(--verde)">Success</span></div>
+        <div class="cuerpo">K1-Visual · guardianes 9/9 · suites 9/9<br>
+        K2 · deriva 0 · idempotencia <span class="adn-dato">276640bada7</span></div>
+        <div class="cab" style="margin-top:10px"><button class="adn-accion adn-accion--tacita" disabled title="Se habilita en la siguiente fase">Aceptar el cierre de la microfase</button></div>
+      </article>
+
+      <article class="evento adn-brote">
+        <div class="cab"><span class="adn-versalita adn-versalita--oro">Acto de gobierno · ACT-5</span>
+          <span class="adn-chip adn-chip--oro">Firmado</span></div>
+        <p class="cita">«Fase 3.6 formalmente cerrada» — Elmer Suárez, autoridad,
+        responsable y autorizante.</p>
+        <div class="cuerpo">Checklist 8/8 · G3 en verde.</div>
+        <div class="hora">10:32</div>
+      </article>
+
+      <article class="evento adn-brote adn-brote--violeta">
+        <div class="cab"><span class="adn-versalita" style="color:color-mix(in srgb, var(--athenea-doctrina) 70%, var(--athenea-marfil))">Athenea</span>
+          <span class="hora">18:49</span></div>
+        <div class="cuerpo">Con tu orden sobre los fallos C, las cuatro causas raíz
+        quedaron reparadas y las suites de gobierno en cero. La corrida
+        <span class="adn-dato">30712567891</span> es la primera de la historia del
+        Observatorio sin una sola aserción roja en ningún trabajo.</div>
+      </article>
+
+      <article class="evento adn-brote adn-brote--ambar">
+        <div class="cab"><span class="adn-versalita">Aviso · deriva en K1-Global</span>
+          <span class="adn-chip adn-chip--ambar">Resuelto</span></div>
+        <div class="cuerpo">k1-global mostró 10 rojos en local eran 0. Causa: glob sin
+        ordenar — seis módulos cambiaban de suite según el disco. Un generador que
+        depende del entorno no es un generador: es un dado.</div>
+        <div class="hora">19:01</div>
+      </article>
+    </div>
+  </div>
+
+  <nav class="adn-nav" aria-label="Navegación principal">
+    <a href="piloto-agenda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="15" rx="2"/><path d="M3.5 10 H20.5"/><path d="M8 3.5 V7"/><path d="M16 3.5 V7"/></svg>Agenda</a>
+    <a href="piloto-regimen-operativo.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.8 H14.6 L18.6 7.8 V20.2 H7 Z"/><path d="M14.4 4 V8 H18.4"/><path d="M9.6 12 H16 M9.6 15 H16"/></svg>Dossiers</a>
+    <a class="centro on" href="piloto-home.html" aria-label="ATHENEA"><span class="aro"><svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12 L47 44 L13 44 Z"/><path d="M30 38 a7 7 0 1 1 7 -7 a4.5 4.5 0 1 0 -4.5 4.5 a2.5 2.5 0 1 1 -2.5 -2.5" stroke-width="2.4"/></svg></span>Athenea</a>
+    <a href="piloto-alertas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10 a6 6 0 0 1 12 0 c0 4 1.4 5.4 2 6.2 H4 c.6-.8 2-2.2 2-6.2 Z"/><path d="M10 19.5 a2 2 0 0 0 4 0"/></svg>Alertas</a>
+    <a href="piloto-buscar.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16 L20.5 20.5"/></svg>Buscar</a>
+  </nav>
+</div>
+
+<script type="module">
+import { cosmosFondo } from "../cosmos-fondo.mjs";
+cosmosFondo(document.querySelector(".adn-cielo canvas"));
+const M=["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"];
+const f=new Date();
+document.getElementById("fecha").textContent=String(f.getDate()).padStart(2,"0")+" "+M[f.getMonth()]+" "+f.getFullYear();
+</script>
+<script>/* AV-P2B2-SW-001: registro del service worker versionado (transporte, no diseño) */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http"))
+  addEventListener("load", () => {
+    navigator.serviceWorker.register(new URL("../../../sw.js", location.href).pathname).catch(() => {});
+  });
+</script>
+</html>

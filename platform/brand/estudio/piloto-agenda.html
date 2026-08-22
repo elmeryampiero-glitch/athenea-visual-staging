@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="es" class="athenea-cosmos">
+<meta charset="utf-8">
+<meta name="athenea-origen" content="718c23ce0f85aa7065892a6bc4c3df8814bf15cd">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="athenea.webmanifest">
+<meta name="theme-color" content="#05060e">
+<style>/* AV-P3A1-LAUNCH-001: guardia de primer pintado — obsidiana antes de que exista cualquier hoja de estilo (valor compilado de --lanzamiento-fondo, cine.css) */html{background:#05060e}</style>
+<link rel="apple-touch-icon" href="../iconos/athenea-icono-192.png">
+<link rel="icon" type="image/png" href="../iconos/athenea-icono-192.png">
+<link rel="stylesheet" href="../athenea-theme.css"><!-- P1.1 AV-P0P1-EXEC-001: constitución visual única -->
+<link rel="stylesheet" href="../cine.css">
+<script src="../gramatica-sensorial.mjs"></script><!-- P3C AV-P3C-SENSORY-001: gramática sensorial — clásico en head -->
+<title>ATHENEA · Agenda</title>
+<meta name="athenea-alcance" content="interno">
+<!--
+  AGENDA ESPEJO — AV-P3E-AGENDA-GCAL-001.
+  Anatomía de Google Calendar (Mes / Día / Lista, hoy anillado, línea del
+  ahora, ficha del evento, hoja de creación) con la piel constitucional
+  de ATHENEA. TODO dato y toda acción vienen del módulo central
+  agenda-espejo.mjs: en LAB los controles de escritura se presentan
+  RESERVADOS; en CONECTADO viven porque la capacidad es real (ley de
+  oro). PROHIBIDO dato real en el fixture.
+-->
+<link rel="stylesheet" href="../fuentes/fuentes.css">
+<link rel="stylesheet" href="../adn-nucleo.css">
+<style>
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;overflow-x:hidden}
+.pantalla{min-height:100dvh;position:relative;padding:max(10px,env(safe-area-inset-top)) 16px 120px;max-width:430px;margin:0 auto}
+.contenido{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px}
+/* ── cabecera: mes editorial + HOY + conmutador (anatomía Google) ── */
+.cab{display:flex;align-items:center;gap:10px;padding:2px 4px}
+.cab .mes{flex:1;font:var(--peso-normal) 23px/1.15 var(--fuente-editorial);color:var(--athenea-marfil)}
+.cab .mes b{color:var(--athenea-practica);font-weight:var(--peso-medio)}
+.cab .nav-mes{display:flex;gap:2px}
+.cab .nav-mes button,.cab .hoy{min-width:44px;min-height:44px;display:grid;place-items:center;
+  background:transparent;border:0;color:var(--athenea-atenuado);font-size:19px}
+.cab .hoy{min-height:44px;font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.14em;color:var(--athenea-practica);
+  border:1px solid color-mix(in srgb, var(--athenea-practica) 45%, transparent);border-radius:999px;padding:0 13px}
+.vistas{display:flex;gap:6px;padding:0 4px}
+.vistas button{font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.13em;text-transform:uppercase;
+  color:var(--athenea-atenuado);padding:0 14px;min-height:44px;border-radius:999px;border:1px solid transparent;background:transparent}
+.vistas button[aria-pressed="true"]{color:var(--athenea-practica);
+  border-color:color-mix(in srgb, var(--athenea-practica) 40%, transparent);
+  background:color-mix(in srgb, var(--athenea-practica) 7%, transparent)}
+/* ── chip de conexión HONESTO ── */
+.conexion{display:flex;align-items:center;gap:8px;padding:0 6px;font-size:11.5px;color:var(--athenea-atenuado);min-height:32px}
+.conexion .punto{width:7px;height:7px;border-radius:50%;flex:none;background:var(--athenea-atenuado)}
+.conexion.viva .punto{background:var(--verde);box-shadow:0 0 8px color-mix(in srgb, var(--verde) 60%, transparent)}
+.conexion b{color:var(--athenea-marfil);font-weight:var(--peso-medio)}
+.conexion .accion{margin-left:auto;font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.12em;
+  color:var(--athenea-practica);background:transparent;border:1px solid color-mix(in srgb, var(--athenea-practica) 40%, transparent);
+  border-radius:999px;padding:0 12px;min-height:44px}
+/* ── VISTA MES ── */
+.malla{border:1px solid rgba(244,230,190,.08);border-radius:14px;overflow:hidden;
+  background:color-mix(in srgb, var(--athenea-espacio) 55%, transparent);backdrop-filter:blur(8px)}
+.dsem{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-bottom:1px solid rgba(244,230,190,.08)}
+.dsem span{font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.12em;color:var(--athenea-atenuado);text-align:center;padding:9px 0}
+.sem{display:grid;grid-template-columns:repeat(7,minmax(0,1fr))}
+.dia{min-height:72px;padding:4px 3px;border-top:1px solid rgba(244,230,190,.05);border-left:1px solid rgba(244,230,190,.05);
+  position:relative;background:transparent;border-radius:0;color:inherit;font:inherit;text-align:center}
+.dia .n{font:var(--peso-medio) 11px/1 var(--fuente-dato);color:var(--athenea-atenuado);
+  width:22px;height:22px;display:grid;place-items:center;border-radius:50%;margin:0 auto 3px}
+.dia.otro .n{opacity:.32}
+.dia.hoy .n{color:var(--athenea-cosmos);background:var(--athenea-practica);
+  box-shadow:0 0 12px color-mix(in srgb, var(--athenea-practica) 55%, transparent)}
+.dia.feriado{background:color-mix(in srgb, var(--athenea-practica) 5%, transparent)}
+.dia.feriado .n{border:1px solid color-mix(in srgb, var(--athenea-practica) 45%, transparent)}
+.dia.judicial{background:repeating-linear-gradient(135deg,
+  color-mix(in srgb, var(--athenea-doctrina) 8%, transparent) 0 6px, transparent 6px 12px)}
+.dia.judicial .n{border:1px solid color-mix(in srgb, var(--athenea-doctrina) 55%, transparent)}
+.ev-chip{display:block;font:var(--peso-medio) 11px/1.3 var(--fuente-dato);letter-spacing:.02em;margin:2px 2px 0;padding:3px 4px;
+  border-radius:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left;
+  background:color-mix(in srgb, var(--athenea-practica) 14%, transparent);
+  border-left:2px solid var(--athenea-practica);color:var(--athenea-marfil)}
+.ev-chip.violeta{background:color-mix(in srgb, var(--athenea-doctrina) 16%, transparent);border-left-color:var(--athenea-doctrina)}
+.ev-chip.rojo{background:color-mix(in srgb, var(--rojo) 14%, transparent);border-left-color:var(--rojo)}
+.fer-chip{display:block;font:var(--peso-medio) 11px/1.25 var(--fuente-dato);margin:2px 2px 0;padding:2px 4px;border-radius:4px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--athenea-atenuado);border:1px dashed rgba(244,230,190,.22);text-align:left}
+.fer-chip.jud{color:color-mix(in srgb, var(--athenea-doctrina) 70%, var(--athenea-marfil));
+  border-color:color-mix(in srgb, var(--athenea-doctrina) 45%, transparent)}
+.mas{font:var(--peso-medio) 11px/1 var(--fuente-dato);color:var(--athenea-atenuado);margin:3px 4px 0;text-align:left}
+.leyenda{display:flex;gap:14px;padding:2px 6px 0;font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.08em;color:var(--athenea-atenuado)}
+.leyenda i{font-style:normal;display:inline-block;width:9px;height:9px;border-radius:3px;vertical-align:-1px;margin-right:5px}
+/* ── VISTA DÍA ── */
+.horario{position:relative;border:1px solid rgba(244,230,190,.08);border-radius:14px;
+  background:color-mix(in srgb, var(--athenea-espacio) 55%, transparent);padding:6px 0;overflow:hidden}
+.fila{display:grid;grid-template-columns:52px 1fr;min-height:52px;border-top:1px solid rgba(244,230,190,.05)}
+.fila:first-child{border-top:0}
+.fila .hora{font:var(--peso-medio) 11px/1 var(--fuente-dato);color:var(--athenea-atenuado);text-align:right;padding:6px 10px 0 0;letter-spacing:.06em}
+.fila .celda{position:relative;border-left:1px solid rgba(244,230,190,.07)}
+.bloque{position:absolute;left:6px;right:10px;border-radius:10px;padding:7px 9px;text-align:left;color:inherit;font:inherit;
+  background:linear-gradient(180deg, color-mix(in srgb, var(--athenea-practica) 16%, var(--athenea-espacio)),
+    color-mix(in srgb, var(--athenea-practica) 8%, var(--athenea-espacio)));
+  border:1px solid color-mix(in srgb, var(--athenea-practica) 30%, transparent);
+  border-left:3px solid var(--athenea-practica);overflow:hidden}
+.bloque h4{margin:0;font:var(--peso-medio) 12px/1.3 var(--fuente-trabajo);color:var(--athenea-marfil)}
+.bloque .h{font:var(--peso-medio) 11px/1.35 var(--fuente-dato);letter-spacing:.08em;color:var(--athenea-atenuado);margin-top:3px}
+.bloque.violeta{border-left-color:var(--athenea-doctrina);border-color:color-mix(in srgb, var(--athenea-doctrina) 30%, transparent);
+  background:linear-gradient(180deg, color-mix(in srgb, var(--athenea-doctrina) 15%, var(--athenea-espacio)),
+    color-mix(in srgb, var(--athenea-doctrina) 7%, var(--athenea-espacio)))}
+.bloque.rojo{border-left-color:var(--rojo);border-color:color-mix(in srgb, var(--rojo) 30%, transparent);
+  background:linear-gradient(180deg, color-mix(in srgb, var(--rojo) 14%, var(--athenea-espacio)),
+    color-mix(in srgb, var(--rojo) 6%, var(--athenea-espacio)))}
+.ahora{position:absolute;left:52px;right:0;height:0;border-top:1.5px solid var(--athenea-practica);
+  box-shadow:0 0 10px color-mix(in srgb, var(--athenea-practica) 70%, transparent);z-index:3;pointer-events:none}
+.ahora::before{content:"";position:absolute;left:-5px;top:-5px;width:9px;height:9px;border-radius:50%;background:var(--athenea-practica)}
+/* ── VISTA LISTA (el río, heredero del diseño anterior) ── */
+.rio{display:flex;flex-direction:column;gap:10px}
+.rio .grupo-dia{font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.14em;text-transform:uppercase;
+  color:var(--athenea-atenuado);padding:10px 6px 2px}
+.rio .grupo-dia.feriado-nac{color:var(--athenea-practica)}
+.rio .grupo-dia.feriado-jud{color:color-mix(in srgb, var(--athenea-doctrina) 75%, var(--athenea-marfil))}
+.tarjeta{display:block;width:100%;text-align:left;border:1px solid rgba(244,230,190,.09);border-radius:13px;padding:12px 14px;
+  background:color-mix(in srgb, var(--athenea-espacio) 55%, transparent);color:inherit;font:inherit;position:relative;overflow:hidden}
+.tarjeta::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--athenea-practica)}
+.tarjeta.violeta::before{background:var(--athenea-doctrina)}
+.tarjeta.rojo::before{background:var(--rojo)}
+.tarjeta h3{margin:0;font:var(--peso-medio) 13.5px/1.35 var(--fuente-trabajo);color:var(--athenea-marfil)}
+.tarjeta .meta{margin-top:4px;font:var(--peso-medio) 11px/1.4 var(--fuente-dato);letter-spacing:.06em;color:var(--athenea-atenuado)}
+.vacio{padding:30px 6px;text-align:center;color:var(--athenea-atenuado);font-size:var(--texto-menor);line-height:1.7}
+/* ── FICHA DEL EVENTO ── */
+.ficha{border:1px solid rgba(244,230,190,.10);border-radius:18px;padding:18px 18px 16px;position:relative;overflow:hidden;
+  background:linear-gradient(180deg, #10142b, #0a0d1f)}
+.ficha .filete{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--athenea-practica)}
+.ficha.violeta .filete{background:var(--athenea-doctrina)}
+.ficha.rojo .filete{background:var(--rojo)}
+.ficha h1{margin:0 0 6px;font:var(--peso-normal) 20px/1.3 var(--fuente-editorial);color:var(--athenea-marfil)}
+.ficha .linea{display:flex;gap:12px;align-items:flex-start;padding:11px 0;font-size:13px;border-top:1px solid rgba(244,230,190,.07);color:var(--athenea-marfil)}
+.ficha .linea .ico{width:20px;text-align:center;color:var(--athenea-atenuado);flex:none}
+.ficha .linea .valor{color:var(--athenea-practica)}
+.ficha .linea .sub{display:block;font-size:11px;color:var(--athenea-atenuado);margin-top:2px}
+.adjuntos{border:1px dashed rgba(244,230,190,.20);border-radius:12px;padding:8px;width:100%}
+.adjuntos .item{display:flex;align-items:center;gap:10px;padding:8px 6px;font-size:12.5px;width:100%;
+  background:transparent;border:0;color:var(--athenea-marfil);text-align:left}
+.adjuntos .item .tipo{flex:none;width:34px;height:38px;border-radius:6px;display:grid;place-items:center;
+  font:var(--peso-alto) 11px/1 var(--fuente-dato);color:var(--athenea-cosmos);background:var(--athenea-practica)}
+.adjuntos .item .baja{margin-left:auto;min-width:44px;min-height:44px;display:grid;place-items:center;
+  color:var(--athenea-practica);background:transparent;border:0;font-size:17px}
+.adjuntos .sumar{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;margin-top:4px;width:100%;min-height:44px;
+  border-radius:9px;font:var(--peso-medio) 11px/1.4 var(--fuente-dato);letter-spacing:.08em;background:transparent;
+  color:var(--athenea-practica);border:1px solid color-mix(in srgb, var(--athenea-practica) 35%, transparent)}
+.ficha .acciones{display:flex;gap:10px;margin-top:14px}
+.volverln{display:inline-flex;align-items:center;gap:8px;font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.12em;
+  color:var(--athenea-atenuado);min-height:44px;background:transparent;border:0;padding:0 4px}
+/* ── VISOR INTEGRADO (ley de un toque) ── */
+.visor{position:fixed;inset:0;z-index:9;background:rgba(2,4,10,.94);backdrop-filter:blur(6px);display:flex;flex-direction:column}
+.visor .barra{display:flex;align-items:center;gap:12px;padding:14px 16px;flex:none}
+.visor .cerrar{width:44px;height:44px;display:grid;place-items:center;border-radius:12px;color:var(--athenea-marfil);
+  border:1px solid rgba(244,230,190,.15);background:transparent;font-size:18px}
+.visor .nom{flex:1;min-width:0}
+.visor .nom b{display:block;font:var(--peso-medio) 13px/1.3 var(--fuente-trabajo);color:var(--athenea-marfil);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.visor .nom span{font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.1em;color:var(--athenea-atenuado)}
+.visor .doc{flex:1;margin:0 14px 14px;border-radius:14px;overflow:hidden;background:#f5f2ea;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.visor .doc iframe,.visor .doc img{width:100%;height:100%;border:0;object-fit:contain;background:#f5f2ea}
+.visor .pie{flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 18px 18px;
+  font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.1em;color:var(--athenea-atenuado)}
+/* ── HOJA DE CREACIÓN/EDICIÓN ── */
+.velo-hoja{position:fixed;inset:0;background:rgba(2,4,10,.55);backdrop-filter:blur(2px);z-index:7;border:0}
+.hoja{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(430px,100%);z-index:8;
+  background:linear-gradient(180deg, #10142b, #0a0d1f);border-radius:22px 22px 0 0;
+  border:1px solid rgba(244,230,190,.10);border-bottom:0;padding:14px 18px calc(20px + env(safe-area-inset-bottom));
+  box-shadow:0 -18px 60px rgba(0,0,0,.55)}
+.hoja .asa{width:44px;height:4px;border-radius:99px;background:rgba(244,230,190,.18);margin:0 auto 12px}
+.hoja input,.hoja textarea,.hoja select{width:100%;background:transparent;border:0;color:var(--athenea-marfil);font:inherit;outline-offset:2px}
+.hoja .titulo{font:var(--peso-normal) 19px/1.3 var(--fuente-editorial);padding:4px 0 12px;border-bottom:1px solid rgba(244,230,190,.10)}
+.hoja .campo{display:flex;align-items:center;gap:12px;padding:12px 0;font-size:13.5px;color:var(--athenea-marfil);
+  border-bottom:1px solid rgba(244,230,190,.07)}
+.hoja .campo .ico{width:20px;text-align:center;color:var(--athenea-atenuado);flex:none}
+.hoja .campo input{color:var(--athenea-practica);font-family:var(--fuente-dato);font-size:13px}
+.hoja .espejo{display:flex;align-items:center;gap:8px;padding:12px 0 0;font-size:11.5px;color:var(--athenea-atenuado)}
+.hoja .espejo .punto{width:6px;height:6px;border-radius:50%;background:var(--verde)}
+.hoja .guardar{margin-top:14px;width:100%;padding:15px;border-radius:999px;border:0;
+  font:var(--peso-alto) 12.5px/1 var(--fuente-dato);letter-spacing:.14em;text-transform:uppercase;color:var(--athenea-cosmos);
+  background:linear-gradient(180deg, color-mix(in srgb, var(--athenea-practica) 92%, #fff),
+    color-mix(in srgb, var(--athenea-practica) 78%, var(--athenea-cosmos)))}
+/* ── FAB crear ── */
+.fab{position:fixed;right:max(16px, calc(50% - 199px));bottom:96px;width:56px;height:56px;border-radius:18px;z-index:6;
+  display:grid;place-items:center;font-size:26px;border:0;color:var(--athenea-cosmos);
+  background:linear-gradient(180deg, color-mix(in srgb, var(--athenea-practica) 92%, #fff),
+    color-mix(in srgb, var(--athenea-practica) 80%, var(--athenea-cosmos)));
+  box-shadow:0 10px 30px color-mix(in srgb, var(--athenea-practica) 30%, transparent)}
+.aviso{position:fixed;left:50%;transform:translateX(-50%);bottom:100px;z-index:10;max-width:min(380px,92vw);
+  background:rgba(2,4,10,.92);border:1px solid rgba(244,230,190,.18);border-radius:12px;
+  color:var(--athenea-marfil);font-size:12.5px;line-height:1.5;padding:11px 14px;display:none}
+.aviso.rojo{border-color:color-mix(in srgb, var(--rojo) 50%, transparent)}
+[hidden]{display:none !important}
+/* ── VESTIDO PREMIUM (orden del Director, 2026-08-20): plata y oro sobre negro
+   elegante que inunda toda la superficie; el cosmos queda muy sutil al fondo.
+   El segundo metal pasa de violeta a PLATA solo en esta superficie (override de
+   ámbito de --athenea-doctrina). El ROJO se conserva: es señal de vencimiento
+   legal — información, no decoración. ── */
+.pantalla{
+  /* CARTA PREMIUM APROBADA (Director, 2026-08-20): champán en vez de
+     amarillo, perla en vez de blanco, vino en vez de rojo. */
+  --athenea-practica:#c9b489;   /* champán */
+  --athenea-doctrina:#c3cad8;   /* perla/plata */
+  --rojo:#a4454f;               /* vino: la urgencia con elegancia */
+  /* gris plata secundario DERIVADO de tokens constitucionales (ley de consumidores:
+     sin literal para --athenea-atenuado fuera de la capa) */
+  --athenea-atenuado:color-mix(in srgb, var(--athenea-doctrina) 80%, var(--athenea-cosmos));
+  --athenea-espacio:#0a0c12;    /* espacio más negro */
+}
+body{background:radial-gradient(130% 95% at 50% 0%, #0c0b09 0%, #050505 52%, #030304 100%)}
+/* ── DISEÑO APROBADO (Director, 2026-08-20): renglones por actividad ── */
+.lineas{display:flex;flex-direction:column;gap:3px;align-items:center;margin-top:7px}
+.ln{width:72%;height:3px;border-radius:2px;font-style:normal;
+  background:linear-gradient(90deg, color-mix(in srgb, var(--athenea-practica) 86%, var(--athenea-cosmos)),
+    color-mix(in srgb, var(--athenea-practica) 84%, #fff));
+  box-shadow:0 0 5px color-mix(in srgb, var(--athenea-practica) 45%, transparent)}
+.ln.violeta{background:linear-gradient(90deg, color-mix(in srgb, var(--athenea-doctrina) 80%, var(--athenea-cosmos)), var(--athenea-doctrina));
+  box-shadow:0 0 5px color-mix(in srgb, var(--athenea-doctrina) 40%, transparent)}
+.ln.rojo{background:linear-gradient(90deg, color-mix(in srgb, var(--rojo) 86%, var(--athenea-cosmos)),
+    color-mix(in srgb, var(--rojo) 76%, #fff));
+  box-shadow:0 0 6px color-mix(in srgb, var(--rojo) 55%, transparent)}
+.masn{display:block;margin-top:4px;font:italic 400 11px/1.2 var(--fuente-editorial);
+  color:color-mix(in srgb, var(--athenea-practica) 92%, transparent)}
+.dia .n{font:400 15px/1.2 var(--fuente-editorial)}
+.dia.hoy{background:linear-gradient(165deg,#d8c6a0,#a58c5c 80%);
+  border-color:rgba(216,198,160,.9);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25), 0 0 20px rgba(201,180,137,.4)}
+.dia.hoy .n{color:#12100c;background:transparent;box-shadow:none;font-weight:var(--peso-medio)}
+.dia.hoy .ln,.dia.hoy .ln.violeta{background:rgba(18,16,12,.55);box-shadow:none}
+.dia.hoy .ln.rojo{background:#6e2530;box-shadow:none}
+.dia.hoy .masn{color:rgba(18,16,12,.78)}
+.dia.hoy .fer-chip{color:#3a2f1c;border-color:rgba(18,16,12,.4)}
+/* el universo se pierde DENTRO del calendario: cielo más presente y paneles
+   translúcidos de obsidiana que lo dejan respirar a través de las celdas */
+.adn-cielo canvas{opacity:.85}
+.adn-cielo canvas.cine{position:absolute;inset:0;width:100%;height:100%;opacity:1}
+.malla,.horario{background:color-mix(in srgb,#07080d 46%, transparent);border-color:rgba(214,221,237,.22);
+  border-radius:22px;box-shadow:inset 0 1px 0 rgba(255,255,255,.07), 0 24px 60px rgba(0,0,0,.55)}
+.tarjeta{background:color-mix(in srgb,#07080d 55%, transparent);border-color:rgba(214,221,237,.18);
+  border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.ficha,.hoja{background:linear-gradient(180deg, rgba(13,15,22,.92), rgba(6,7,11,.94));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.ficha{border-radius:22px}
+/* días redondeados: joyas de obsidiana, no rejilla cuadrada */
+.dsem{border-bottom:0;display:grid;gap:4px;padding:8px 8px 0}
+.sem{gap:4px;padding:2px 8px}
+.malla .sem:last-of-type{padding-bottom:8px}
+.dia{border:1px solid rgba(214,221,237,.34);border-radius:13px;
+  background:linear-gradient(160deg, rgba(26,29,40,.70), rgba(5,6,10,.34) 55%, rgba(15,17,25,.55));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
+.dia.otro{background:rgba(8,9,14,.26);border-color:rgba(214,221,237,.12)}
+.dia.hoy{border-color:color-mix(in srgb, var(--athenea-practica) 70%, transparent);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06), 0 0 24px color-mix(in srgb, var(--athenea-practica) 30%, transparent)}
+.dia.feriado{border-color:color-mix(in srgb, var(--athenea-practica) 45%, transparent)}
+.dia.judicial{border-color:color-mix(in srgb, var(--athenea-doctrina) 40%, transparent)}
+.ev-chip,.fer-chip{border-radius:7px}
+.fila{border-top-color:rgba(214,221,237,.08)}
+/* el ORO se nota: joyas más encendidas */
+.cab .hoy{border-color:color-mix(in srgb, var(--athenea-practica) 70%, transparent)}
+.vistas button[aria-pressed="true"]{border-color:color-mix(in srgb, var(--athenea-practica) 65%, transparent);
+  background:color-mix(in srgb, var(--athenea-practica) 13%, transparent)}
+.conexion .accion{border-color:color-mix(in srgb, var(--athenea-practica) 65%, transparent)}
+.fab{box-shadow:0 10px 34px color-mix(in srgb, var(--athenea-practica) 50%, transparent)}
+.tarjeta::before,.ficha .filete{box-shadow:0 0 12px color-mix(in srgb, currentColor 30%, transparent)}
+/* ── PANTALLA DE ALERTA (8/12/18 — orden del Director): obsidiana y oro,
+     con campana y vibración ── */
+.alarma{position:fixed;inset:0;z-index:11;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px;text-align:center;overflow:hidden;
+  background:radial-gradient(130% 100% at 50% 0%, rgba(26,20,8,.88), rgba(3,4,7,.94) 62%);
+  backdrop-filter:blur(14px) saturate(1.15)}
+.alarma .aro{position:relative;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;
+  border:1.5px solid color-mix(in srgb, var(--athenea-practica) 80%, transparent);
+  background:radial-gradient(circle at 50% 30%, #14110a, #050609 70%);
+  box-shadow:0 0 60px color-mix(in srgb, var(--athenea-practica) 38%, transparent),
+    inset 0 0 26px color-mix(in srgb, var(--athenea-practica) 14%, transparent)}
+.alarma .aro::before{content:"";position:absolute;inset:-13px;border-radius:50%;
+  border:1px solid color-mix(in srgb, var(--athenea-practica) 30%, transparent)}
+.alarma .aro::after{content:"";position:absolute;inset:-13px;border-radius:50%;
+  border:1px solid color-mix(in srgb, var(--athenea-practica) 55%, transparent);
+  animation:alarma-onda 2.2s ease-out infinite}
+@keyframes alarma-onda{from{transform:scale(1);opacity:.8}to{transform:scale(1.55);opacity:0}}
+@media (prefers-reduced-motion: reduce){.alarma .aro::after{animation:none;opacity:0}}
+.alarma .aro img{width:64px;height:64px;border-radius:50%}
+.alarma .cuando{margin-top:20px;font:var(--peso-medio) 11px/1 var(--fuente-dato);letter-spacing:.34em;
+  color:color-mix(in srgb, var(--athenea-practica) 80%, var(--athenea-marfil));text-transform:uppercase}
+.alarma .horaG{font:var(--peso-normal) 44px/1.15 var(--fuente-editorial);
+  background:linear-gradient(180deg, #e8dcc0, var(--athenea-practica) 60%, #8f7748);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.alarma h2{margin:2px 0 0;font:var(--peso-normal) 17px/1.3 var(--fuente-editorial);color:var(--athenea-marfil)}
+.alarma .orn{display:flex;align-items:center;gap:12px;width:min(340px,80vw);margin:14px 0 12px;
+  color:var(--athenea-practica);font-size:12px}
+.alarma .orn::before,.alarma .orn::after{content:"";flex:1;height:1px;
+  background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--athenea-practica) 45%, transparent))}
+.alarma .orn::after{background:linear-gradient(270deg, transparent, color-mix(in srgb, var(--athenea-practica) 45%, transparent))}
+.alarma .lista{width:min(384px,92vw);max-height:40dvh;overflow:auto;display:flex;flex-direction:column;gap:9px;text-align:left}
+.alarma .it{position:relative;border:1px solid rgba(214,221,237,.20);border-radius:14px;padding:11px 13px 11px 16px;
+  background:linear-gradient(160deg, rgba(26,29,40,.80), rgba(6,7,11,.55));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);overflow:hidden}
+.alarma .it::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--athenea-practica);
+  box-shadow:0 0 12px color-mix(in srgb, var(--athenea-practica) 45%, transparent)}
+.alarma .it.rojo::before{background:var(--rojo);box-shadow:0 0 12px color-mix(in srgb, var(--rojo) 45%, transparent)}
+.alarma .it.violeta::before{background:var(--athenea-doctrina);box-shadow:0 0 12px color-mix(in srgb, var(--athenea-doctrina) 40%, transparent)}
+.alarma .it b{display:block;font:var(--peso-medio) 13px/1.35 var(--fuente-trabajo);color:var(--athenea-marfil)}
+.alarma .it span{display:block;margin-top:3px;font:var(--peso-medio) 11px/1.4 var(--fuente-dato);letter-spacing:.06em;color:var(--athenea-atenuado)}
+.alarma .it span i{font-style:normal;color:var(--athenea-practica)}
+.alarma .nada{color:var(--athenea-atenuado);font-size:13px;line-height:1.7;max-width:30ch}
+.alarma .acciones{display:flex;gap:12px;margin-top:18px}
+.alarma .revisado{min-height:48px;padding:0 24px;border-radius:999px;border:0;
+  font:var(--peso-alto) 12px/1 var(--fuente-dato);letter-spacing:.16em;color:var(--athenea-cosmos);
+  background:linear-gradient(180deg, color-mix(in srgb, var(--athenea-practica) 92%, #fff),
+    color-mix(in srgb, var(--athenea-practica) 76%, var(--athenea-cosmos)));
+  box-shadow:0 10px 30px color-mix(in srgb, var(--athenea-practica) 35%, transparent)}
+.alarma .verdia{min-height:48px;padding:0 20px;border-radius:999px;
+  font:var(--peso-medio) 12px/1 var(--fuente-dato);letter-spacing:.12em;color:var(--athenea-marfil);
+  background:rgba(7,8,13,.5);border:1px solid rgba(214,221,237,.35)}
+.fila .celda{border-left-color:rgba(199,207,221,.06)}
+.fer-chip{border-color:rgba(199,207,221,.24)}
+.adjuntos{border-color:rgba(199,207,221,.22)}
+.hoja .asa{background:rgba(199,207,221,.22)}
+.hoja .titulo,.hoja .campo{border-bottom-color:rgba(199,207,221,.09)}
+.visor .cerrar{border-color:rgba(199,207,221,.16)}
+.aviso{border-color:rgba(199,207,221,.20)}
+.ficha .linea{border-top-color:rgba(199,207,221,.08)}
+</style>
+<div class="pantalla adn-superficie">
+  <div class="adn-cielo"><canvas class="cine"></canvas><canvas></canvas></div>
+  <div class="adn-aurora"></div>
+  <div class="adn-grano"></div>
+  <div class="contenido">
+    <header class="adn-appbar">
+      <a aria-label="Volver" href="piloto-home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 L8 12 L14.5 18.5"/></svg></a>
+      <div class="titulo adn-versalita" style="color:var(--athenea-marfil)">Agenda</div>
+      <span></span>
+    </header>
+    <div id="app" aria-live="polite"></div>
+  </div>
+  <nav class="adn-nav" aria-label="Navegación principal">
+    <a class="on" href="piloto-agenda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="15" rx="2"/><path d="M3.5 10 H20.5"/><path d="M8 3.5 V7"/><path d="M16 3.5 V7"/></svg>Agenda</a>
+    <a href="piloto-regimen-operativo.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.8 H14.6 L18.6 7.8 V20.2 H7 Z"/><path d="M14.4 4 V8 H18.4"/><path d="M9.6 12 H16 M9.6 15 H16"/></svg>Dossiers</a>
+    <a class="centro" href="piloto-home.html" aria-label="ATHENEA"><span class="aro"><svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12 L47 44 L13 44 Z"/><path d="M30 38 a7 7 0 1 1 7 -7 a4.5 4.5 0 1 0 -4.5 4.5 a2.5 2.5 0 1 1 -2.5 -2.5" stroke-width="2.4"/></svg></span>Athenea</a>
+    <a  href="piloto-alertas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10 a6 6 0 0 1 12 0 c0 4 1.4 5.4 2 6.2 H4 c.6-.8 2-2.2 2-6.2 Z"/><path d="M10 19.5 a2 2 0 0 0 4 0"/></svg>Alertas</a>
+    <a  href="piloto-buscar.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16 L20.5 20.5"/></svg>Buscar</a>
+  </nav>
+</div>
+<script type="module">
+import { cosmosFondo } from "../cosmos-fondo.mjs";
+cosmosFondo(document.querySelector(".adn-cielo canvas:not(.cine)"));
+
+/* ── COSMOS «BRONCE DE CINE» (diseño aprobado por el Director, 2026-08-20):
+   cielo y planeta calculados PÍXEL A PÍXEL (fBm 5 octavas, sombreado de
+   esfera con luz direccional y fresnel atmosférico), una sola vez por
+   carga y en diferido para no tocar el primer pintado. ── */
+setTimeout(() => { try { cieloCine(document.querySelector(".adn-cielo canvas.cine")); } catch {} }, 80);
+function cieloCine(c) {
+  if (!c) return;
+  const cw = c.clientWidth || innerWidth, ch = c.clientHeight || innerHeight;
+  const esc = Math.min(1, 480 / cw);
+  const W = c.width = Math.max(1, Math.round(cw * esc));
+  const H = c.height = Math.max(1, Math.round(ch * esc));
+  const x = c.getContext("2d");
+  let sem = 133; const rnd = () => (sem = (sem * 16807) % 2147483647) / 2147483647;
+  const P = new Uint8Array(512);
+  for (let i = 0; i < 256; i++) P[i] = P[i + 256] = Math.floor(rnd() * 256);
+  const su = (t) => t * t * (3 - 2 * t);
+  function ruido(px, py) {
+    const X = Math.floor(px) & 255, Y = Math.floor(py) & 255, fx = px - Math.floor(px), fy = py - Math.floor(py);
+    const a = P[P[X] + Y] / 255, b = P[P[X + 1] + Y] / 255, d = P[P[X] + Y + 1] / 255, e = P[P[X + 1] + Y + 1] / 255;
+    const u = su(fx), v = su(fy);
+    return a + u * (b - a) + v * (d - a) + u * v * (a - b - d + e);
+  }
+  function fbm(px, py) {
+    let s = 0, amp = .5, f = 1;
+    for (let o = 0; o < 5; o++) { s += amp * ruido(px * f, py * f); amp *= .5; f *= 2.03; }
+    return s;
+  }
+  const img = x.createImageData(W, H), D = img.data;
+  const BASE = [6, 6, 7], NA = [172, 138, 96], NB = [110, 118, 130];  // bronce · pizarra
+  const ALB = [198, 168, 122], ATM = [212, 176, 124];                 // planeta bronce
+  const pcx = W * 1.22, pcy = H * 1.18, pr = W * .84;
+  const L = [-.62, -.72, .32], Ln = Math.hypot(L[0], L[1], L[2]);
+  L[0] /= Ln; L[1] /= Ln; L[2] /= Ln;
+  for (let py = 0; py < H; py++) {
+    const vy = py / H;
+    for (let px = 0; px < W; px++) {
+      const i = (py * W + px) * 4, vx = px / W;
+      let r = BASE[0] + vy * 3, gg = BASE[1] + vy * 3, b = BASE[2] + vy * 4;
+      const n1 = fbm(vx * 3.1, vy * 5.6), n2 = fbm(vx * 2.2 + 40, vy * 4.1 + 9);
+      const polvo = fbm(vx * 4.4 + 90, vy * 7.7 + 33);
+      let dens = Math.max(0, (n1 - .52)) * 2.1 * (1 - Math.max(0, (polvo - .5)) * 1.5);
+      dens = Math.max(0, Math.min(1, dens)) * (.55 + .45 * Math.sin(vy * 3.3 + vx * 2));
+      const dens2 = Math.max(0, (n2 - .58)) * 1.7;
+      r += NA[0] * dens * .30 + NB[0] * dens2 * .20;
+      gg += NA[1] * dens * .30 + NB[1] * dens2 * .20;
+      b += NA[2] * dens * .30 + NB[2] * dens2 * .20;
+      const dx = (px - pcx) / pr, dy = (py - pcy) / pr, q = dx * dx + dy * dy;
+      if (q < 1.055) {
+        if (q <= 1) {
+          const dz = Math.sqrt(1 - q);
+          const dif = Math.max(0, dx * L[0] + dy * L[1] + dz * L[2]);
+          const nube = fbm(dx * 2.6 + 7, dy * 9 + dz * 3.5);
+          const alb = .35 + .65 * Math.max(0, Math.min(1, (nube - .35) * 2.2));
+          const luz = Math.pow(dif, 1.35) * 1.15;
+          const at = Math.pow(1 - dz, 2.6) * (dif * .85 + .10);
+          r = ALB[0] * alb * luz + ATM[0] * at;
+          gg = ALB[1] * alb * luz + ATM[1] * at;
+          b = ALB[2] * alb * luz + ATM[2] * at;
+        } else {
+          const t = Math.max(0, 1 - (Math.sqrt(q) - 1) / .0275), gl = t * t * .5;
+          r += ATM[0] * gl; gg += ATM[1] * gl; b += ATM[2] * gl;
+        }
+      }
+      const cx2 = vx - .5, cy2 = vy - .48, vig = 1 - (cx2 * cx2 + cy2 * cy2) * .9;
+      const gr = (rnd() - .5) * 5;
+      D[i] = r * vig + gr; D[i + 1] = gg * vig + gr; D[i + 2] = b * vig + gr; D[i + 3] = 255;
+    }
+  }
+  x.putImageData(img, 0, 0);
+}
+import * as Espejo from "../agenda-espejo.mjs";
+
+/* ══ ESTADO DE LA SUPERFICIE (presentación; los datos viven en el módulo) ══ */
+const S = {
+  vista: "mes",                 // mes | dia | lista | ficha
+  cursor: new Date(),           // día/mes en foco
+  eventos: [], feriados: {},
+  pendientes: 0,                // cifra viva: guardados aún no enviados a Google
+  fichaId: null,
+  hojaAbierta: false, editandoId: null,
+};
+const app = document.getElementById("app");
+const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+const esc = (t) => String(t ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const soloDia = (d) => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const deIso = (s) => { const d = new Date(s); return isNaN(d) ? null : d; };
+const hhmm = (s) => { const d = deIso(s); return d ? d.toLocaleTimeString("es-PE",{hour:"2-digit",minute:"2-digit",hour12:false}) : ""; };
+const diaDe = (ev) => ev.todoDia ? ev.inicio.slice(0,10) : soloDia(deIso(ev.inicio));
+
+function aviso(txt, esError) {
+  let c = document.querySelector(".aviso");
+  if (!c) { c = document.createElement("div"); c.className = "aviso"; document.body.appendChild(c); }
+  c.textContent = txt; c.classList.toggle("rojo", !!esError); c.style.display = "block";
+  clearTimeout(c._t); c._t = setTimeout(() => { c.style.display = "none"; }, 5000);
+}
+
+/* ── LOCAL-FIRST (AV-AGENDA-PERSISTENCE-001) ──
+   1) el ALMACÉN pinta YA (última agenda conocida, con o sin red);
+   2) Google sincroniza en SEGUNDO PLANO;
+   3) solo se repinta si hubo deltas.
+   PROHIBIDO: vaciar la Agenda mientras Google responde, o tratar un
+   timeout como eliminación — ante error, el almacén queda intacto. */
+async function carga() {
+  try {
+    [S.eventos, S.feriados, S.pendientes] = await Promise.all(
+      [Espejo.eventos(), Espejo.feriados(), Espejo.pendientesCount().catch(() => 0)]);
+  }
+  catch (e) { aviso("Almacén del dispositivo: " + e.message, true); }
+  pinta();
+  sincroniza();
+}
+
+let sincronizando = false;
+async function sincroniza() {
+  if (sincronizando || Espejo.modo() !== "conectado") return;
+  sincronizando = true;
+  try {
+    const r = await Espejo.sincronizar();
+    const pend = await Espejo.pendientesCount().catch(() => S.pendientes);
+    if ((r && r.cambios) || pend !== S.pendientes) {
+      S.pendientes = pend;
+      [S.eventos, S.feriados] = await Promise.all([Espejo.eventos(), Espejo.feriados()]);
+      pinta();                          // solo los ciclos CON deltas repintan
+    }
+  } catch (e) {
+    if (String(e.message).includes("SESION_VENCIDA")) {
+      const volvio = Espejo.vinculada() &&
+        await Espejo.reconectar().then(() => true).catch(() => false);
+      if (volvio) { sincronizando = false; return sincroniza(); }
+      aviso("Tu sesión de Google venció — toca RECONECTAR. Tu Agenda guardada sigue completa.", true);
+      pinta();                          // el chip cambia; los eventos NO se tocan
+    }
+    /* red caída o timeout: silencio honesto — nada conocido desaparece */
+  } finally { sincronizando = false; }
+}
+
+/* ══ CABECERA + CONEXIÓN (honesta) ══ */
+function cabecera() {
+  const d = Espejo.diagnostico();
+  const enFicha = S.vista === "ficha";
+  const mes = `<b>${MESES[S.cursor.getMonth()]}</b> ${S.cursor.getFullYear()}`;
+  const dia = `${["domingo","lunes","martes","miércoles","jueves","viernes","sábado"][S.cursor.getDay()]} <b>${S.cursor.getDate()}</b> · ${MESES[S.cursor.getMonth()]}`;
+  return `
+  ${enFicha ? "" : `
+  <div class="cab">
+    <div class="mes">${S.vista === "dia" ? dia : mes}</div>
+    <div class="nav-mes">
+      <button data-acc="prev" aria-label="Anterior">‹</button>
+      <button data-acc="next" aria-label="Siguiente">›</button>
+    </div>
+    <button class="hoy" data-acc="hoy">HOY</button>
+  </div>
+  <div class="vistas" role="tablist">
+    <button data-acc="vista" data-v="mes" aria-pressed="${S.vista==='mes'}">Mes</button>
+    <button data-acc="vista" data-v="dia" aria-pressed="${S.vista==='dia'}">Día</button>
+    <button data-acc="vista" data-v="lista" aria-pressed="${S.vista==='lista'}">Lista</button>
+  </div>
+  <div class="conexion ${d.modo==='conectado' ? 'viva' : ''}">
+    <span class="punto"></span>
+    ${d.modo === "conectado"
+      ? `Espejo con <b>Google Calendar</b>${d.correo ? " · " + esc(d.correo) : ""}${d.alDia ? " · al día " + d.alDia : ""}${S.pendientes ? ` · <b>${S.pendientes}</b> por sincronizar` : ""}`
+      : Espejo.vinculada()
+        ? `Tu espejo está <b>vinculado</b> — reanudando la conexión con tu Gmail…${S.pendientes ? ` · <b>${S.pendientes}</b> guardado(s) por enviar` : ""}`
+        : `Modo laboratorio — datos LAB sellados. El espejo con tu Gmail espera tu conexión.`}
+    <button class="accion" data-acc="${d.modo==='conectado' ? 'desconectar' : 'conectar'}">
+      ${d.modo === "conectado" ? "SALIR" : Espejo.vinculada() ? "RECONECTAR" : "CONECTAR GOOGLE"}</button>
+  </div>`}`;
+}
+
+/* ══ VISTA MES ══ */
+function vistaMes() {
+  const y = S.cursor.getFullYear(), m = S.cursor.getMonth();
+  const primero = new Date(y, m, 1);
+  const arranque = (primero.getDay() + 6) % 7;      // lunes = 0
+  const enMes = new Date(y, m + 1, 0).getDate();
+  const hoy = soloDia(new Date());
+  const porDia = {};
+  for (const ev of S.eventos) (porDia[diaDe(ev)] ||= []).push(ev);
+  let celdas = "";
+  for (let i = 0; i < 42; i++) {
+    const f = new Date(y, m, i - arranque + 1);
+    const clave = soloDia(f);
+    const otro = f.getMonth() !== m;
+    const fer = !otro && S.feriados[clave];
+    const orden = { rojo: 0, oro: 1, violeta: 2 };   // vino arriba, luego champán, luego perla
+    const evs = ((!otro && porDia[clave]) || [])
+      .slice().sort((a, b) => (orden[a.estado] ?? 3) - (orden[b.estado] ?? 3));
+    const vis = evs.slice(0, fer ? 3 : 4);
+    celdas += `<button class="dia ${otro?'otro':''} ${clave===hoy?'hoy':''} ${fer ? (fer.tipo==='judicial'?'judicial':'feriado') : ''}"
+        data-acc="dia" data-f="${clave}" aria-label="${f.getDate()} de ${MESES[f.getMonth()]}${fer ? ' · ' + esc(fer.nombre) : ''}${evs.length ? ' · ' + evs.length + ' evento(s)' : ''}">
+      <span class="n">${f.getDate()}</span>
+      ${fer ? `<span class="fer-chip ${fer.tipo==='judicial'?'jud':''}">${esc(fer.nombre)}</span>` : ""}
+      ${vis.length ? `<span class="lineas">${vis.map(e => `<i class="ln ${e.estado}"></i>`).join("")}</span>` : ""}
+      ${evs.length > vis.length ? `<span class="masn">+${evs.length - vis.length}</span>` : ""}
+    </button>`;
+    if (i === 34 && new Date(y, m, 36 - arranque).getMonth() !== m) break;   // 5 semanas bastan
+  }
+  return `<div class="malla">
+    <div class="dsem">${["L","M","X","J","V","S","D"].map(d=>`<span>${d}</span>`).join("")}</div>
+    <div class="sem">${celdas}</div>
+  </div>
+  <div class="leyenda">
+    <span><i style="background:color-mix(in srgb, var(--athenea-practica) 45%, transparent)"></i>FERIADO NACIONAL</span>
+    <span><i style="background:color-mix(in srgb, var(--athenea-doctrina) 55%, transparent)"></i>SIN ACTIVIDAD JUDICIAL</span>
+  </div>`;
+}
+
+/* ══ VISTA DÍA ══ */
+function vistaDia() {
+  const clave = soloDia(S.cursor);
+  const fer = S.feriados[clave];
+  const evs = S.eventos.filter(e => diaDe(e) === clave);
+  const H0 = 7, H1 = 20, ALTO = 52;
+  let filas = "";
+  for (let h = H0; h <= H1; h++)
+    filas += `<div class="fila"><div class="hora">${String(h).padStart(2,"0")}:00</div><div class="celda"></div></div>`;
+  const bloques = evs.filter(e => !e.todoDia).map(e => {
+    const i = deIso(e.inicio), f = deIso(e.fin) || new Date(i.getTime() + 36e5);
+    const top = ((i.getHours() + i.getMinutes()/60) - H0) * ALTO + 6;
+    const alto = Math.max(30, ((f - i) / 36e5) * ALTO - 4);
+    return `<button class="bloque ${e.estado}" style="top:${top}px;height:${alto}px;left:58px"
+        data-acc="ficha" data-id="${esc(e.id)}">
+      <h4>${esc(e.titulo)}</h4><div class="h">${hhmm(e.inicio)} – ${hhmm(e.fin)}${e.lugar ? " · " + esc(e.lugar) : ""}</div>
+    </button>`;
+  }).join("");
+  const todoDia = evs.filter(e => e.todoDia).map(e =>
+    `<button class="tarjeta ${e.estado}" data-acc="ficha" data-id="${esc(e.id)}" style="margin:0 0 8px">
+       <h3>${esc(e.titulo)}</h3><div class="meta">todo el día</div></button>`).join("");
+  const ahora = new Date();
+  const lineaAhora = soloDia(ahora) === clave && ahora.getHours() >= H0 && ahora.getHours() <= H1
+    ? `<div class="ahora" style="top:${((ahora.getHours() + ahora.getMinutes()/60) - H0) * ALTO + 6}px"></div>` : "";
+  return `
+  ${fer ? `<div class="tarjeta" style="margin-bottom:8px"><h3>${esc(fer.nombre)}</h3>
+      <div class="meta">${fer.tipo === "judicial" ? "SIN ACTIVIDAD JUDICIAL — cuida tus plazos" : "FERIADO NACIONAL"}</div></div>` : ""}
+  ${todoDia}
+  <div class="horario" style="position:relative">${filas}${bloques}${lineaAhora}</div>
+  ${evs.length === 0 ? `<div class="vacio">Sin eventos este día. El cielo está despejado.</div>` : ""}`;
+}
+
+/* ══ VISTA LISTA ══ */
+function vistaLista() {
+  const hoy = soloDia(new Date());
+  const prox = S.eventos.filter(e => diaDe(e) >= hoy).sort((a,b) => a.inicio < b.inicio ? -1 : 1);
+  if (!prox.length) return `<div class="vacio">Nada por delante en el espejo.<br>El cielo está despejado.</div>`;
+  let html = "", diaPrev = "";
+  for (const e of prox.slice(0, 40)) {
+    const d = diaDe(e);
+    if (d !== diaPrev) {
+      const f = new Date(d + "T12:00:00");
+      const fer = S.feriados[d];
+      html += `<div class="grupo-dia ${fer ? (fer.tipo==='judicial'?'feriado-jud':'feriado-nac') : ''}">
+        ${["DOM","LUN","MAR","MIÉ","JUE","VIE","SÁB"][f.getDay()]} ${f.getDate()} ${MESES[f.getMonth()].slice(0,3).toUpperCase()}${fer ? " · " + esc(fer.nombre) : ""}</div>`;
+      diaPrev = d;
+    }
+    html += `<button class="tarjeta ${e.estado}" data-acc="ficha" data-id="${esc(e.id)}">
+      <h3>${esc(e.titulo)}</h3>
+      <div class="meta">${e.todoDia ? "todo el día" : hhmm(e.inicio) + " – " + hhmm(e.fin)}${e.lugar ? " · " + esc(e.lugar) : ""}${e.dossier ? " · ▣ " + esc(e.dossier) : ""}</div>
+    </button>`;
+  }
+  return `<div class="rio">${html}</div>`;
+}
+
+/* ══ FICHA DEL EVENTO (toda la información + adjuntos) ══ */
+function vistaFicha() {
+  const e = S.eventos.find(x => x.id === S.fichaId);
+  if (!e) return `<div class="vacio">Este evento ya no está en el espejo.</div>`;
+  const conectado = Espejo.modo() === "conectado";
+  /* local-first: editar/eliminar viven con el VÍNCULO (aun offline);
+     adjuntar sí exige conexión real porque sube bytes */
+  const conVinculo = conectado || Espejo.vinculada();
+  const dossierReal = e.dossier && /-LAB-/.test(e.dossier);
+  return `
+  <button class="volverln" data-acc="cerrar-ficha">‹ &nbsp;AGENDA</button>
+  <div class="ficha ${e.estado}">
+    <span class="filete"></span>
+    <h1>${esc(e.titulo)}</h1>
+    <div class="linea"><span class="ico">◔</span><span>${e.todoDia
+        ? esc(e.inicio) + " · todo el día"
+        : `${new Date(deIso(e.inicio)).toLocaleDateString("es-PE",{weekday:"long",day:"numeric",month:"long"})} · <b class="valor">${hhmm(e.inicio)} – ${hhmm(e.fin)}</b>`}
+      ${e.recordatorios?.length ? `<span class="sub">Recordatorios: ${esc(e.recordatorios.join(" · "))}</span>` : ""}</span></div>
+    ${e.lugar ? `<div class="linea"><span class="ico">◎</span><span>${esc(e.lugar)}</span></div>` : ""}
+    ${e.dossier ? `<div class="linea"><span class="ico">▣</span><span>Dossier vinculado:
+        ${dossierReal ? `<a class="valor" style="text-decoration:none" href="piloto-dossier.html?dossier=${esc(e.dossier)}">${esc(e.dossier)}</a>`
+                      : `<b class="valor">${esc(e.dossier)}</b>`}</span></div>` : ""}
+    ${e.notas ? `<div class="linea"><span class="ico">✎</span><span>${esc(e.notas)}</span></div>` : ""}
+    <div class="linea"><span class="ico">✚</span>
+      <div class="adjuntos">
+        ${e.adjuntos.length ? e.adjuntos.map(a => `
+          <div class="item">
+            <button class="item" style="padding:0;flex:1;min-height:44px" data-acc="abrir-adjunto" data-id="${esc(a.id)}" data-nom="${esc(a.titulo)}" data-tipo="${esc(a.tipo)}"
+              aria-label="Abrir ${esc(a.titulo)} dentro de ATHENEA">
+              <span class="tipo">${esc((a.titulo.split(".").pop() || "DOC").slice(0,4).toUpperCase())}</span>
+              <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(a.titulo)}</span>
+            </button>
+            <button class="baja" data-acc="descargar-adjunto" data-id="${esc(a.id)}" data-nom="${esc(a.titulo)}"
+              aria-label="Descargar ${esc(a.titulo)}">⤓</button>
+          </div>`).join("")
+        : `<div style="padding:6px;color:var(--athenea-atenuado);font-size:12px">Sin adjuntos todavía.</div>`}
+        ${conectado
+          ? `<button class="sumar" data-acc="adjuntar">＋ &nbsp;ADJUNTAR ARCHIVO — SE GUARDA EN TU DRIVE Y VIAJA CON LA CITA</button>
+             <input type="file" id="selectorArchivo" hidden>`
+          : `<button class="sumar" disabled title="Se habilita al conectar con Google">＋ &nbsp;ADJUNTAR (requiere conexión con Google)</button>`}
+      </div></div>
+    <div class="acciones">
+      ${conVinculo && e.origen !== "lab"
+        ? `<button class="adn-accion" style="flex:1" data-acc="editar">Editar</button>
+           <button class="adn-accion" style="flex:1" data-acc="eliminar">Eliminar</button>`
+        : `<button class="adn-accion" style="flex:1" disabled title="Se habilita al conectar con Google">Editar</button>`}
+      ${dossierReal ? `<a class="adn-accion adn-accion--plena" style="flex:1;padding:12px" href="piloto-dossier.html?dossier=${esc(e.dossier)}">Abrir dossier</a>` : ""}
+    </div>
+  </div>`;
+}
+
+/* ══ RENDER ══ */
+function pinta() {
+  const cuerpo = S.vista === "mes" ? vistaMes()
+    : S.vista === "dia" ? vistaDia()
+    : S.vista === "lista" ? vistaLista()
+    : vistaFicha();
+  app.innerHTML = cabecera() + cuerpo;
+  let fab = document.querySelector(".fab");
+  const conVinculo = Espejo.modo() === "conectado" || Espejo.vinculada();
+  if (S.vista !== "ficha") {
+    if (!fab) { fab = document.createElement("button"); fab.className = "fab"; fab.dataset.acc = "crear";
+      fab.textContent = "+"; document.body.appendChild(fab); }
+    fab.hidden = false;
+    fab.disabled = !conVinculo;
+    fab.title = conVinculo ? "Crear evento" : "Se habilita al conectar con Google";
+    fab.setAttribute("aria-label", fab.title);
+    fab.style.opacity = conVinculo ? "1" : ".45";
+  } else if (fab) fab.hidden = true;
+}
+
+/* ══ HOJA CREAR/EDITAR ══ */
+function abreHoja(ev) {
+  S.hojaAbierta = true; S.editandoId = ev?.id || null;
+  const base = ev || (() => {
+    const f = new Date(S.cursor); f.setHours(new Date().getHours() + 1, 0, 0, 0);
+    const g = new Date(f.getTime() + 36e5);
+    return { titulo: "", inicio: f.toISOString(), fin: g.toISOString(), lugar: "", notas: "", dossier: "" };
+  })();
+  const local = (s) => { const d = new Date(s); d.setMinutes(d.getMinutes() - d.getTimezoneOffset()); return d.toISOString().slice(0,16); };
+  const velo = document.createElement("button"); velo.className = "velo-hoja"; velo.dataset.acc = "cerrar-hoja";
+  velo.setAttribute("aria-label", "Cerrar");
+  const hoja = document.createElement("div"); hoja.className = "hoja"; hoja.role = "dialog";
+  hoja.innerHTML = `
+    <div class="asa"></div>
+    <input class="titulo" id="hTitulo" placeholder="Título del evento" value="${esc(base.titulo)}" aria-label="Título">
+    <div class="campo"><span class="ico">◔</span><input type="datetime-local" id="hInicio" value="${local(base.inicio)}" aria-label="Inicio"></div>
+    <div class="campo"><span class="ico">◔</span><input type="datetime-local" id="hFin" value="${local(base.fin)}" aria-label="Fin"></div>
+    <div class="campo"><span class="ico">◎</span><input id="hLugar" placeholder="Lugar (opcional)" value="${esc(base.lugar || "")}" aria-label="Lugar"></div>
+    <div class="campo"><span class="ico">▣</span><input id="hDossier" placeholder="Dossier vinculado (opcional)" value="${esc(base.dossier || "")}" aria-label="Dossier"></div>
+    <div class="campo"><span class="ico">✎</span><input id="hNotas" placeholder="Notas (opcional)" value="${esc(base.notas || "")}" aria-label="Notas"></div>
+    <div class="espejo"><span class="punto"></span> Se escribirá en tu Google Calendar al guardar — la verdad es la que Google confirme</div>
+    <button class="guardar" data-acc="guardar-hoja">${S.editandoId ? "Guardar cambios" : "Guardar en la agenda"}</button>`;
+  document.body.append(velo, hoja);
+}
+function cierraHoja() {
+  S.hojaAbierta = false; S.editandoId = null;
+  document.querySelectorAll(".velo-hoja,.hoja").forEach(n => n.remove());
+}
+
+/* ══ VISOR INTEGRADO (un toque abre; un toque descarga) ══ */
+async function abreVisor(id, nombre, tipo) {
+  const marco = document.createElement("div"); marco.className = "visor"; marco.role = "dialog";
+  marco.innerHTML = `
+    <div class="barra">
+      <button class="cerrar" data-acc="cerrar-visor" aria-label="Volver">‹</button>
+      <span class="nom"><b>${esc(nombre)}</b><span>DESDE TU DRIVE · SIN SALIR DE ATHENEA</span></span>
+    </div>
+    <div class="doc" id="visorDoc"><div class="vacio" style="padding-top:40vh">Abriendo…</div></div>
+    <div class="pie"><span>UN TOQUE = ABIERTO</span>
+      <button class="baja" style="min-width:44px;min-height:44px;background:transparent;border:0;color:var(--athenea-practica);font-size:17px"
+        data-acc="descargar-adjunto" data-id="${esc(id)}" data-nom="${esc(nombre)}" aria-label="Descargar">⤓ DESCARGAR</button></div>`;
+  document.body.appendChild(marco);
+  try {
+    const blob = await Espejo.contenidoAdjunto(id);
+    const url = URL.createObjectURL(blob);
+    const doc = marco.querySelector("#visorDoc");
+    if ((tipo || blob.type).startsWith("image/")) doc.innerHTML = `<img src="${url}" alt="${esc(nombre)}">`;
+    else if ((tipo || blob.type) === "application/pdf") doc.innerHTML = `<iframe src="${url}" title="${esc(nombre)}"></iframe>`;
+    else doc.innerHTML = `<iframe src="https://drive.google.com/file/d/${encodeURIComponent(id)}/preview" title="${esc(nombre)}"></iframe>`;
+    marco._url = url;
+  } catch (e) {
+    marco.querySelector("#visorDoc").innerHTML =
+      `<div class="vacio" style="padding-top:38vh">No se pudo abrir aquí (${esc(e.message)}).<br>Usa ⤓ DESCARGAR.</div>`;
+  }
+}
+function cierraVisor() {
+  const v = document.querySelector(".visor");
+  if (v) { if (v._url) URL.revokeObjectURL(v._url); v.remove(); }
+}
+async function descarga(id, nombre) {
+  try {
+    const blob = await Espejo.contenidoAdjunto(id);
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = nombre || "adjunto";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    aviso("Descargado: " + nombre);
+  } catch (e) { aviso("No se pudo descargar: " + e.message, true); }
+}
+
+/* ══ ACCIONES (delegación única; cada control declara su acción) ══ */
+document.addEventListener("click", async (evc) => {
+  const el = evc.target.closest("[data-acc]");
+  if (!el || el.disabled) return;
+  const acc = el.dataset.acc;
+  try {
+    if (acc === "vista") { S.vista = el.dataset.v; pinta(); }
+    else if (acc === "hoy") { S.cursor = new Date(); pinta(); }
+    else if (acc === "prev" || acc === "next") {
+      const paso = acc === "next" ? 1 : -1;
+      if (S.vista === "dia") S.cursor.setDate(S.cursor.getDate() + paso);
+      else S.cursor.setMonth(S.cursor.getMonth() + paso);
+      S.cursor = new Date(S.cursor); pinta();
+    }
+    else if (acc === "dia") { S.cursor = new Date(el.dataset.f + "T12:00:00"); S.vista = "dia"; pinta(); }
+    else if (acc === "ficha") { S.fichaId = el.dataset.id; S.vista = "ficha"; pinta(); window.scrollTo(0, 0); }
+    else if (acc === "cerrar-ficha") { S.vista = "lista"; pinta(); }
+    else if (acc === "conectar") {
+      /* con vínculo previo: reanudación silenciosa (sin pantallas de permiso) */
+      await (Espejo.vinculada() ? Espejo.reconectar() : Espejo.conectar());
+      /* honestidad: solo se celebra si la conexión SIGUE viva */
+      if (Espejo.modo() === "conectado") aviso("Conectado. Trayendo tu calendario…");
+      else aviso("Google no completó la conexión. Intenta de nuevo.", true);
+      await carga();
+    }
+    else if (acc === "desconectar") { Espejo.desconectar(true); await carga(); }
+    else if (acc === "crear") abreHoja(null);
+    else if (acc === "editar") abreHoja(S.eventos.find(x => x.id === S.fichaId));
+    else if (acc === "cerrar-hoja") cierraHoja();
+    else if (acc === "guardar-hoja") {
+      const v = (i) => document.getElementById(i).value;
+      const u = { titulo: v("hTitulo") || "(sin título)", todoDia: false,
+        inicio: new Date(v("hInicio")).toISOString(), fin: new Date(v("hFin")).toISOString(),
+        lugar: v("hLugar") || null, notas: v("hNotas") || null, dossier: v("hDossier") || null };
+      const r = S.editandoId ? await Espejo.editar(S.editandoId, u) : await Espejo.crear(u);
+      cierraHoja();
+      /* local-first honesto: guardado YA en el dispositivo; Google va detrás */
+      aviso(r.estadoSync === "synced" ? "Google confirmó: " + r.titulo
+        : "Guardado en tu Agenda — sincronizando con Google…");
+      await carga();
+    }
+    else if (acc === "eliminar") {
+      const e = S.eventos.find(x => x.id === S.fichaId);
+      if (e && confirm(`¿Eliminar «${e.titulo}» también de tu Google Calendar?`)) {
+        await Espejo.eliminar(e.id); S.vista = "lista";
+        aviso("Eliminado de tu Agenda — retirándolo también de Google…");
+        await carga();
+      }
+    }
+    else if (acc === "adjuntar") {
+      const sel = document.getElementById("selectorArchivo");
+      sel.onchange = async () => {
+        if (!sel.files[0]) return;
+        aviso("Subiendo a tu Drive…");
+        await Espejo.adjuntar(S.fichaId, sel.files[0]);
+        aviso("Adjuntado — viaja con la cita.");
+        await carga(); S.vista = "ficha"; pinta();
+      };
+      sel.click();
+    }
+    else if (acc === "abrir-adjunto") abreVisor(el.dataset.id, el.dataset.nom, el.dataset.tipo);
+    else if (acc === "cerrar-visor") cierraVisor();
+    else if (acc === "descargar-adjunto") descarga(el.dataset.id, el.dataset.nom);
+  } catch (e) {
+    if (String(e.message).includes("SESION_VENCIDA"))
+      { aviso("Tu sesión de Google venció. Conéctate de nuevo.", true); await carga(); }
+    else aviso(e.message, true);
+  }
+});
+
+/* ── EL ESPEJO ES PERMANENTE (orden del Director, 2026-08-20) ──
+   1. Con vínculo previo, la app RECONECTA SOLA al abrir (silencioso).
+   2. Mientras está abierta, REFRESCA sola: lo que entre por Google
+      aparece en ATHENEA sin tocar nada (cada 60 s y al volver a la app). */
+async function reanuda() {
+  if (Espejo.modo() === "conectado" || !Espejo.vinculada()) return;
+  try { await Espejo.reconectar(); await carga(); }
+  catch { pinta(); /* honesto: queda el botón RECONECTAR de un toque */ }
+}
+setInterval(() => { if (!document.hidden) sincroniza(); }, 60000);
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) return;
+  if (Espejo.modo() === "conectado") sincroniza(); else reanuda();
+});
+/* al volver la red: converger solo (enviar pendientes + traer deltas) */
+window.addEventListener("online", () => {
+  if (Espejo.modo() === "conectado") sincroniza(); else reanuda();
+});
+
+/* ── LOS MESES AVANZAN BAJO EL DEDO: deslizar cambia mes (o día) ── */
+let toque = null;
+document.addEventListener("touchstart", (e) => {
+  toque = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+}, { passive: true });
+document.addEventListener("touchend", (e) => {
+  if (!toque) return;
+  const dx = e.changedTouches[0].clientX - toque.x;
+  const dy = e.changedTouches[0].clientY - toque.y;
+  toque = null;
+  if (Math.abs(dx) < 64 || Math.abs(dy) > 48) return;
+  if (S.vista === "ficha" || document.querySelector(".hoja") || document.querySelector(".visor")) return;
+  const paso = dx < 0 ? 1 : -1;
+  if (S.vista === "dia") S.cursor.setDate(S.cursor.getDate() + paso);
+  else S.cursor.setMonth(S.cursor.getMonth() + paso);
+  S.cursor = new Date(S.cursor); pinta();
+}, { passive: true });
+
+/* ── ALERTAS 8/12/18 (orden del Director): pantalla + campana + vibración.
+   Con la app abierta suenan a la hora exacta; si estaba cerrada, la
+   alerta pendiente del día lo espera al abrir. REVISADO la marca vista
+   (máximo tres por día). ?alerta=probar la muestra a demanda. ── */
+const HORAS_ALERTA = [8, 12, 18];
+const CLAVE_ALERTA = "athenea-alerta-vista";
+let audioCtx = null;
+document.addEventListener("pointerdown", () => {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+  } catch {}
+}, { capture: true, passive: true });
+
+function campana() {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const t = audioCtx.currentTime;
+    [[880, 0], [1174.7, .18], [1567.98, .36]].forEach(([f, d]) => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type = "sine"; o.frequency.value = f;
+      g.gain.setValueAtTime(0, t + d); g.gain.linearRampToValueAtTime(.22, t + d + .02);
+      g.gain.exponentialRampToValueAtTime(.001, t + d + .9);
+      o.connect(g).connect(audioCtx.destination); o.start(t + d); o.stop(t + d + 1);
+    });
+  } catch {}
+}
+
+const eventosDeHoy = () => S.eventos
+  .filter(ev => diaDe(ev) === soloDia(new Date()))
+  .sort((a, b) => String(a.inicio).localeCompare(String(b.inicio)));
+const horaCorta = (ev) => ev.todoDia ? "todo el día"
+  : new Date(ev.inicio).toLocaleTimeString("es-PE", { hour: "2-digit", minute: "2-digit" });
+
+function muestraAlerta(h) {
+  if (document.querySelector(".alarma")) return;
+  const evs = eventosDeHoy();
+  const caja = document.createElement("div");
+  caja.className = "alarma";
+  caja.innerHTML = `
+    <div class="aro"><img src="../iconos/athenea-icono-192.png" alt=""></div>
+    <div class="cuando">Alerta de agenda</div>
+    <div class="horaG">${String(h).padStart(2, "0")}:00</div>
+    <h2>${evs.length ? (evs.length === 1 ? "1 actividad hoy" : evs.length + " actividades hoy") : "Hoy despejado"}</h2>
+    <div class="orn">✦</div>
+    ${evs.length
+      ? `<div class="lista">${evs.map(ev => `<div class="it ${ev.estado}"><b>${esc(ev.titulo)}</b><span><i>${horaCorta(ev)}</i>${ev.lugar ? " · " + esc(ev.lugar) : ""}</span></div>`).join("")}</div>`
+      : `<p class="nada">Sin audiencias ni vencimientos en tu agenda de hoy.</p>`}
+    <div class="acciones">
+      <button class="revisado" data-alerta="revisado">REVISADO</button>
+      <button class="verdia" data-alerta="dia">VER EL DÍA</button>
+    </div>`;
+  document.body.appendChild(caja);
+  campana();
+  try { navigator.vibrate && navigator.vibrate([220, 110, 220, 110, 420]); } catch {}
+  try {
+    if (Notification?.permission === "granted" && evs.length)
+      navigator.serviceWorker?.getRegistration?.().then(r => r && r.showNotification("ATHENEA · Agenda", {
+        body: evs.slice(0, 3).map(ev => horaCorta(ev) + " " + ev.titulo).join("\n")
+          + (evs.length > 3 ? `\ny ${evs.length - 3} más` : ""),
+        vibrate: [220, 110, 220], icon: "../iconos/athenea-icono-192.png", tag: "athenea-alerta",
+      }));
+  } catch {}
+  caja.addEventListener("click", (e) => {
+    const acc = e.target.closest("[data-alerta]")?.dataset.alerta;
+    if (!acc) return;
+    try { localStorage.setItem(CLAVE_ALERTA, soloDia(new Date()) + "·" + h); } catch {}
+    try { Notification?.requestPermission?.(); } catch {}
+    caja.remove();
+    if (acc === "dia") { S.cursor = new Date(); S.vista = "dia"; pinta(); }
+  });
+}
+
+function vigilaAlertas() {
+  const ahora = new Date();
+  const pasadas = HORAS_ALERTA.filter(h => ahora.getHours() >= h);
+  if (!pasadas.length) return;
+  const h = pasadas[pasadas.length - 1];   // la última del día manda; REVISADO cubre las previas
+  let vista = null; try { vista = localStorage.getItem(CLAVE_ALERTA); } catch {}
+  if (vista === soloDia(ahora) + "·" + h) return;
+  muestraAlerta(h);
+}
+setInterval(() => { if (!document.hidden) vigilaAlertas(); }, 30000);
+if (new URLSearchParams(location.search).get("alerta") === "probar")
+  setTimeout(() => muestraAlerta(new Date().getHours()), 900);
+else setTimeout(vigilaAlertas, 1600);
+
+pinta();          // primer pintado inmediato (LAB) — nada de pantallas en blanco
+carga();          // y el espejo real si hay conexión
+reanuda();        // vínculo permanente: reconexión sola al abrir
+</script>
+<script>/* AV-P2B2-SW-001: registro del service worker versionado (transporte, no diseño) */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http"))
+  addEventListener("load", () => {
+    navigator.serviceWorker.register(new URL("../../../sw.js", location.href).pathname).catch(() => {});
+  });
+</script>
+</html>

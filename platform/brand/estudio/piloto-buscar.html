@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es" class="athenea-cosmos">
+<meta charset="utf-8">
+<meta name="athenea-origen" content="718c23ce0f85aa7065892a6bc4c3df8814bf15cd">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="athenea.webmanifest">
+<meta name="theme-color" content="#05060e">
+<style>/* AV-P3A1-LAUNCH-001: guardia de primer pintado — obsidiana antes de que exista cualquier hoja de estilo (valor compilado de --lanzamiento-fondo, cine.css) */html{background:#05060e}</style>
+<link rel="apple-touch-icon" href="../iconos/athenea-icono-192.png">
+<link rel="icon" type="image/png" href="../iconos/athenea-icono-192.png">
+<link rel="stylesheet" href="../athenea-theme.css"><!-- P1.1 AV-P0P1-EXEC-001: constitución visual única -->
+<link rel="stylesheet" href="../cine.css">
+<script src="../gramatica-sensorial.mjs"></script><!-- P3C AV-P3C-SENSORY-001: gramática sensorial — clásico en head: la anotación llega antes del primer fotograma --><!-- P3A AV-P3A-CINE-001: capa cinematográfica (continuidad entre escenas) -->
+<title>ATHENEA · Buscar</title>
+<meta name="athenea-alcance" content="interno">
+<!-- P2A (orden del Director): capa de compatibilidad ATHENEA:CAPA retirada — los tokens los da athenea-theme.css, paridad demostrada por captura -->
+<link rel="stylesheet" href="../fuentes/fuentes.css">
+<link rel="stylesheet" href="../adn-nucleo.css">
+<style>
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;overflow-x:hidden}
+.pantalla{min-height:100dvh;position:relative;padding:max(10px,env(safe-area-inset-top)) 22px 120px;max-width:430px;margin:0 auto}
+.contenido{position:relative;z-index:1;display:flex;flex-direction:column;gap:16px}
+.rio{position:relative;margin-top:6px;display:flex;flex-direction:column;gap:28px;padding:8px 0}
+.ev .cab{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.ev .cuerpo{font-size:var(--texto-menor);color:var(--athenea-atenuado);line-height:var(--interlinea-larga);max-width:46ch}
+.ev h2{margin:0 0 5px;font:var(--peso-normal) 17px/1.4 var(--fuente-editorial);color:var(--athenea-marfil)}
+.vacio{text-align:center;padding:34px 0 8px}
+.adn-brote--verde{--astro: var(--verde)}
+</style>
+<div class="pantalla adn-superficie">
+  <div class="adn-cielo"><canvas></canvas></div>
+  <div class="adn-aurora"></div>
+  <div class="adn-grano"></div>
+  <div class="contenido">
+    <header class="adn-appbar">
+      <a aria-label="Volver" href="piloto-home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 L8 12 L14.5 18.5"/></svg></a>
+      <div class="titulo adn-versalita" style="color:var(--athenea-marfil)">Buscar</div>
+      <span></span>
+    </header>
+    <div class="adn-busqueda adn-reservado" role="search" aria-disabled="true" title="El buscador se enciende en la siguiente fase" style="margin-top:4px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16 L20.5 20.5"/></svg>
+      Pregúntale al universo de Athenea…
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:2px">
+      <span class="adn-chip adn-chip--oro">Dossiers</span>
+      <span class="adn-chip">3.306 notas</span>
+      <span class="adn-chip adn-chip--violeta">Precedentes</span>
+      <span class="adn-chip">Biblioteca</span>
+    </div>
+    <div class="vacio">
+      <div class="adn-versalita adn-versalita--oro" style="margin-bottom:8px">El conocimiento espera tu pregunta</div>
+      <div class="ev cuerpo" style="color:var(--athenea-atenuado);font-size:var(--texto-menor)">
+        Cada búsqueda cruza expedientes, notas, precedentes y doctrina —
+        24.731 conexiones tejidas por ATHENEA.</div>
+    </div>
+  </div>
+  <nav class="adn-nav" aria-label="Navegación principal">
+    <a  href="piloto-agenda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="15" rx="2"/><path d="M3.5 10 H20.5"/><path d="M8 3.5 V7"/><path d="M16 3.5 V7"/></svg>Agenda</a>
+    <a href="piloto-regimen-operativo.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.8 H14.6 L18.6 7.8 V20.2 H7 Z"/><path d="M14.4 4 V8 H18.4"/><path d="M9.6 12 H16 M9.6 15 H16"/></svg>Dossiers</a>
+    <a class="centro" href="piloto-home.html" aria-label="ATHENEA"><span class="aro"><svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12 L47 44 L13 44 Z"/><path d="M30 38 a7 7 0 1 1 7 -7 a4.5 4.5 0 1 0 -4.5 4.5 a2.5 2.5 0 1 1 -2.5 -2.5" stroke-width="2.4"/></svg></span>Athenea</a>
+    <a  href="piloto-alertas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10 a6 6 0 0 1 12 0 c0 4 1.4 5.4 2 6.2 H4 c.6-.8 2-2.2 2-6.2 Z"/><path d="M10 19.5 a2 2 0 0 0 4 0"/></svg>Alertas</a>
+    <a class="on" href="piloto-buscar.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16 L20.5 20.5"/></svg>Buscar</a>
+  </nav>
+</div>
+<script type="module">
+import { cosmosFondo } from "../cosmos-fondo.mjs";
+cosmosFondo(document.querySelector(".adn-cielo canvas"));
+</script>
+<script>/* AV-P2B2-SW-001: registro del service worker versionado (transporte, no diseño) */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http"))
+  addEventListener("load", () => {
+    navigator.serviceWorker.register(new URL("../../../sw.js", location.href).pathname).catch(() => {});
+  });
+</script>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es" class="athenea-cosmos">
+<meta charset="utf-8">
+<meta name="athenea-origen" content="718c23ce0f85aa7065892a6bc4c3df8814bf15cd">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="manifest" href="athenea.webmanifest">
+<meta name="theme-color" content="#05060e">
+<style>/* AV-P3A1-LAUNCH-001: guardia de primer pintado — obsidiana antes de que exista cualquier hoja de estilo (valor compilado de --lanzamiento-fondo, cine.css) */html{background:#05060e}</style>
+<link rel="apple-touch-icon" href="../iconos/athenea-icono-192.png">
+<link rel="icon" type="image/png" href="../iconos/athenea-icono-192.png">
+<link rel="stylesheet" href="../athenea-theme.css"><!-- P1.1 AV-P0P1-EXEC-001: constitución visual única -->
+<link rel="stylesheet" href="../cine.css">
+<script src="../gramatica-sensorial.mjs"></script><!-- P3C AV-P3C-SENSORY-001: gramática sensorial — clásico en head: la anotación llega antes del primer fotograma --><!-- P3A AV-P3A-CINE-001: capa cinematográfica (continuidad entre escenas) -->
+<title>ATHENEA · Dossiers (piloto operativo)</title>
+<!-- Estudio interno: piloto de propagación del ADN. No se publica sin revisión. -->
+<meta name="athenea-alcance" content="interno">
+<!--
+  PILOTO — RÉGIMEN OPERATIVO · v6: el cosmos guía.
+
+  Veredicto humano que rige esta versión: «el cosmos, el universo y las
+  estrellas, el vacío y el crecimiento y la elegancia deben guiar nuestras
+  pantallas». Nada de cajas: los asuntos FLOTAN en el vacío, colgados del
+  HILO DEL CRECIMIENTO — una columna de luz de la que brota cada caso como
+  una estrella con su color de estado. El cielo entero está vivo detrás.
+-->
+<!-- P2A (orden del Director): capa de compatibilidad ATHENEA:CAPA retirada — los tokens los da athenea-theme.css, paridad demostrada por captura -->
+<link rel="stylesheet" href="../fuentes/fuentes.css">
+<link rel="stylesheet" href="../adn-nucleo.css">
+<style>
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;overflow-x:hidden}
+.pantalla{min-height:100dvh;position:relative;
+  padding:max(10px,env(safe-area-inset-top)) 22px 120px;
+  max-width:430px;margin:0 auto}
+.contenido{position:relative;z-index:1;display:flex;flex-direction:column;gap:18px}
+.asuntos{position:relative;margin-top:8px;display:flex;flex-direction:column;gap:34px;
+  padding:10px 0 6px}
+.caso h2{margin:0 0 7px;font:var(--peso-normal) 20px/1.35 var(--fuente-editorial);color:var(--athenea-marfil)}
+.caso h2 a{color:inherit;text-decoration:none;display:block;
+  padding:9px 0;margin:-9px 0} /* P3D0: la unidad se abre — blanco táctil ≥44px sin mover el layout */
+.caso .linea{display:flex;align-items:center;gap:8px;margin-bottom:11px;
+  font-size:var(--texto-menor);color:var(--athenea-atenuado)}
+.caso .pie{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.caso .exp{font-family:var(--fuente-dato);font-size:var(--texto-etiqueta);
+  letter-spacing:.12em;color:var(--athenea-atenuado)}
+.caso .kebab{background:none;border:0;color:var(--athenea-atenuado);cursor:pointer;min-width:44px;min-height:44px; /* P0.2 */
+  font-size:15px;line-height:1;padding:4px 6px;letter-spacing:2px}
+.nueva{margin-top:22px;text-align:center}
+.nueva .adn-accion--plena{
+  font:var(--peso-medio) var(--texto-menor)/1 var(--fuente-trabajo);letter-spacing:.06em}
+</style>
+
+<div class="pantalla adn-superficie">
+  <div class="adn-cielo"><canvas></canvas></div>
+  <div class="adn-aurora"></div>
+  <div class="adn-grano"></div>
+
+  <div class="contenido">
+    <header class="adn-appbar">
+      <a aria-label="Volver" href="piloto-home.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 L8 12 L14.5 18.5"/></svg></a>
+      <div class="titulo adn-versalita" style="color:var(--athenea-marfil)">Dossier</div>
+      <button aria-label="Filtrar" disabled title="Filtrar · se habilita en la siguiente fase"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 6.5 H20 M7 12 H17 M10 17.5 H14"/></svg></button>
+    </header>
+
+    <nav class="adn-tabs" aria-label="Vistas de dossiers">
+      <span class="on">Mis Dossiers</span>
+      <span title="Se habilita en la siguiente fase">Compartidos</span>
+    </nav>
+
+    <a class="adn-busqueda" aria-label="Buscar dossier" href="piloto-buscar.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16 L20.5 20.5"/></svg>
+      Buscar dossier…
+    </a>
+
+    <div class="asuntos">
+      <div class="adn-hilo" aria-hidden="true"></div>
+
+      <article class="caso adn-brote adn-brote--rojo">
+        <!-- P3D0: la unidad se ABRE — ruta real hacia la superficie de conocimiento -->
+        <h2><a href="piloto-dossier.html?dossier=DOS-ALFA-LAB-001">CASO ALFA c. MDN — reposición Ley 24041</a></h2>
+        <div class="linea"><span class="adn-estado adn-estado--rojo"></span>
+          Apelación de sentencia (proceso laboral)
+        </div>
+        <span class="adn-chip adn-chip--rojo">Rojo · vence 2026-07-24</span>
+        <div class="pie">
+          <span class="exp">DOS-ALFA-LAB-001 · Elmer Suárez</span>
+          <button class="kebab" aria-label="Opciones" disabled title="Opciones · siguiente fase">⋮</button>
+        </div>
+      </article>
+
+      <article class="caso adn-brote adn-brote--ambar">
+        <h2><a href="piloto-dossier.html?dossier=DOS-BETA-LAB-002">CASO BETA c. UDS — CAS</a></h2>
+        <div class="linea">Completar definición del caso · 3 de 7 preguntas</div>
+        <span class="adn-chip adn-chip--ambar">Bloqueado</span>
+        <div class="pie">
+          <span class="exp">DOS-BETA-LAB-002 · Elmer Suárez</span>
+          <button class="kebab" aria-label="Opciones" disabled title="Opciones · siguiente fase">⋮</button>
+        </div>
+      </article>
+    </div>
+
+    <div class="nueva">
+      <button class="adn-accion adn-accion--plena" disabled title="Se habilita en la siguiente fase">+ Nuevo dossier</button>
+    </div>
+  </div>
+
+  <nav class="adn-nav" aria-label="Navegación principal">
+    <a href="piloto-agenda.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="15" rx="2"/><path d="M3.5 10 H20.5"/><path d="M8 3.5 V7"/><path d="M16 3.5 V7"/></svg>Agenda</a>
+    <a class="on" href="piloto-regimen-operativo.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.8 H14.6 L18.6 7.8 V20.2 H7 Z"/><path d="M14.4 4 V8 H18.4"/><path d="M9.6 12 H16 M9.6 15 H16"/></svg>Dossiers</a>
+    <a class="centro" href="piloto-cerebro.html" aria-label="ATHENEA"><span class="aro"><svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M30 12 L47 44 L13 44 Z"/><path d="M30 38 a7 7 0 1 1 7 -7 a4.5 4.5 0 1 0 -4.5 4.5 a2.5 2.5 0 1 1 -2.5 -2.5" stroke-width="2.4"/></svg></span>Athenea</a>
+    <a href="piloto-alertas.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 10 a6 6 0 0 1 12 0 c0 4 1.4 5.4 2 6.2 H4 c.6-.8 2-2.2 2-6.2 Z"/><path d="M10 19.5 a2 2 0 0 0 4 0"/></svg>Alertas</a>
+    <a href="piloto-buscar.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16 L20.5 20.5"/></svg>Buscar</a>
+  </nav>
+</div>
+
+<script type="module">
+import { cosmosFondo } from "../cosmos-fondo.mjs";
+cosmosFondo(document.querySelector(".adn-cielo canvas"));
+</script>
+<script>/* AV-P2B2-SW-001: registro del service worker versionado (transporte, no diseño) */
+if ("serviceWorker" in navigator && location.protocol.startsWith("http"))
+  addEventListener("load", () => {
+    navigator.serviceWorker.register(new URL("../../../sw.js", location.href).pathname).catch(() => {});
+  });
+</script>
+</html>
