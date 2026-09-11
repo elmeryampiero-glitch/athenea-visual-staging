@@ -1,0 +1,21 @@
+{
+ "_": "Bitácora de Change Intelligence — generada, NO EDITAR A MANO.",
+ "schema_version": 1,
+ "cambios": [
+  {
+   "cambio": "ADDED",
+   "entidad": "razonador.serie-b",
+   "source": "razonador",
+   "version_anterior": null,
+   "version_nueva": null,
+   "estado_anterior": null,
+   "estado_nuevo": "DEVELOPMENT",
+   "superficies_afectadas": [
+    "piloto-motor"
+   ],
+   "riesgo": "bajo",
+   "impacto_visual": "repintado dirigido de sus superficies",
+   "fecha": "2026-09-10T03:46:21+00:00"
+  }
+ ]
+}

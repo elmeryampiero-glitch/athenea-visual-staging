@@ -1,0 +1,1816 @@
+{
+ "_": "Generado por platform/brand/generar-grafo-vivo.py — NO EDITAR A MANO. Extracto ESTRUCTURAL del grafo de la bóveda: agregados, áreas y títulos CLASIFICADOS (cita pública verbatim; material de casos, sellado). Ninguna etiqueta de expediente viaja (LEY de privacidad).",
+ "schema_version": 1,
+ "generado": "2026-09-11T06:28:40+00:00",
+ "fuente": "wallpaper/grafo.json · clasificación heurística por claves declaradas",
+ "total": {
+  "nodos": 672,
+  "aristas": 1081,
+  "malformadas": 0
+ },
+ "por_area": {
+  "laboral": {
+   "nodos": 107,
+   "enlaces": 215
+  },
+  "constit": {
+   "nodos": 99,
+   "enlaces": 414
+  },
+  "procesal": {
+   "nodos": 135,
+   "enlaces": 403
+  },
+  "penal": {
+   "nodos": 20,
+   "enlaces": 34
+  },
+  "civil": {
+   "nodos": 6,
+   "enlaces": 6
+  },
+  "admin": {
+   "nodos": 16,
+   "enlaces": 20
+  },
+  "otras": {
+   "nodos": 289,
+   "enlaces": 749
+  }
+ },
+ "matriz": {
+  "otras·otras": 244,
+  "constit·otras": 242,
+  "otras·procesal": 221,
+  "constit·laboral": 112,
+  "laboral·procesal": 82,
+  "procesal·procesal": 54,
+  "constit·procesal": 29,
+  "laboral·otras": 21,
+  "constit·constit": 16,
+  "otras·penal": 13,
+  "penal·procesal": 10,
+  "constit·penal": 9,
+  "admin·otras": 6,
+  "admin·procesal": 5,
+  "admin·constit": 5,
+  "admin·admin": 4,
+  "civil·otras": 2,
+  "penal·penal": 2,
+  "civil·procesal": 2,
+  "civil·constit": 1,
+  "civil·civil": 1
+ },
+ "tipos": {
+  "DERIVA": 13,
+  "SIN_TIPO": 772,
+  "NONE": 273,
+  "ORIGINA": 11,
+  "CITA": 12
+ },
+ "nodos": [
+  {
+   "t": "Nota del cerebro",
+   "a": "otras",
+   "s": 1,
+   "g": 377,
+   "n": 78
+  },
+  {
+   "t": "Nota de bitácora",
+   "a": "otras",
+   "s": 1,
+   "g": 234,
+   "n": 118
+  },
+  {
+   "t": "Nota de bitácora",
+   "a": "laboral",
+   "s": 1,
+   "g": 181,
+   "n": 87
+  },
+  {
+   "t": "Precedentes citados",
+   "a": "otras",
+   "s": 0,
+   "g": 136,
+   "n": 1
+  },
+  {
+   "t": "Nota de bitácora",
+   "a": "procesal",
+   "s": 1,
+   "g": 122,
+   "n": 44
+  },
+  {
+   "t": "Nota de bitácora",
+   "a": "constit",
+   "s": 1,
+   "g": 44,
+   "n": 17
+  },
+  {
+   "t": "Ficha de expediente",
+   "a": "otras",
+   "s": 1,
+   "g": 39,
+   "n": 8
+  },
+  {
+   "t": "Texto íntegro",
+   "a": "otras",
+   "s": 1,
+   "g": 39,
+   "n": 14
+  },
+  {
+   "t": "Nota de bitácora",
+   "a": "penal",
+   "s": 1,
+   "g": 34,
+   "n": 18
+  },
+  {
+   "t": "Ficha de expediente",
+   "a": "procesal",
+   "s": 1,
+   "g": 31,
+   "n": 7
+  },
+  {
+   "t": "Normas",
+   "a": "otras",
+   "s": 0,
+   "g": 28,
+   "n": 1
+  },
+  {
+   "t": "Expediente",
+   "a": "procesal",
+   "s": 1,
+   "g": 25,
+   "n": 11
+  },
+  {
+   "t": "Argumentos",
+   "a": "otras",
+   "s": 0,
+   "g": 19,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00008-2005-PI-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 15,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 29553-2024 Loreto",
+   "a": "procesal",
+   "s": 0,
+   "g": 14,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 766-2023 Cajamarca",
+   "a": "procesal",
+   "s": 0,
+   "g": 14,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00374-2024-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 14,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 03943-2006-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 14,
+   "n": 1
+  },
+  {
+   "t": "Nota del cerebro",
+   "a": "laboral",
+   "s": 1,
+   "g": 13,
+   "n": 4
+  },
+  {
+   "t": "Precedente - STC 01084-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 13,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02047-2025-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 13,
+   "n": 1
+  },
+  {
+   "t": "Caso del estudio",
+   "a": "otras",
+   "s": 1,
+   "g": 12,
+   "n": 7
+  },
+  {
+   "t": "Nota de bitácora",
+   "a": "admin",
+   "s": 1,
+   "g": 12,
+   "n": 7
+  },
+  {
+   "t": "Precedente - Acuerdo Plenario 5-2011",
+   "a": "otras",
+   "s": 0,
+   "g": 12,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00020-2012-PI-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 12,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00157-2021-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 12,
+   "n": 1
+  },
+  {
+   "t": "Texto íntegro",
+   "a": "procesal",
+   "s": 1,
+   "g": 12,
+   "n": 6
+  },
+  {
+   "t": "Precedente - STC 03508-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 11,
+   "n": 1
+  },
+  {
+   "t": "Nota del cerebro",
+   "a": "procesal",
+   "s": 1,
+   "g": 10,
+   "n": 6
+  },
+  {
+   "t": "Precedente - STC 00896-2009-PHC-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 9,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01874-2002-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 9,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02050-2002-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 9,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Acuerdo Plenario 4-2015",
+   "a": "otras",
+   "s": 0,
+   "g": 8,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Acuerdo Plenario 5-2010",
+   "a": "otras",
+   "s": 0,
+   "g": 8,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Acuerdo Plenario 6-2006",
+   "a": "otras",
+   "s": 0,
+   "g": 8,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 1308-2016 Del",
+   "a": "procesal",
+   "s": 0,
+   "g": 8,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 292-2019 Lambayeque",
+   "a": "procesal",
+   "s": 0,
+   "g": 8,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 646-2014 Sullana",
+   "a": "procesal",
+   "s": 0,
+   "g": 8,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00628-2001-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 8,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 04775-2024-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 8,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 04922-2007-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 8,
+   "n": 1
+  },
+  {
+   "t": "Nota del cerebro",
+   "a": "admin",
+   "s": 1,
+   "g": 7,
+   "n": 4
+  },
+  {
+   "t": "Precedente - Acuerdo Plenario 4-2010",
+   "a": "otras",
+   "s": 0,
+   "g": 7,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 684-2016 Huaura",
+   "a": "procesal",
+   "s": 0,
+   "g": 7,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 03052-2009-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 7,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 13696-2017 Lima",
+   "a": "procesal",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 15471-2023 La Libertad",
+   "a": "procesal",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 19809-2017 Del",
+   "a": "procesal",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 23415-2021 Del",
+   "a": "procesal",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 382-2013 Puno",
+   "a": "procesal",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 39763-2022 Junín",
+   "a": "procesal",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 41977-2022",
+   "a": "procesal",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00091-2005-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00168-2005-PC-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00677-2016-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01058-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01873-2009-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02974-2010-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 03645-2025-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 03741-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 04437-2012-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 6,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 103-2016 Puno",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 10406-2016 Lima",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 10956-2017 Tacna",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 11090-2023",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 1169-2018 Moquegua",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 11896-2015",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 12033-2015 Del",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 12854-2016 Moquegua",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 13509-2016 Tacna",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 136-2015 Cusco",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 13734-2017 Lima",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 14614-2016 Lima",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 1523-2021 Áncash",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 15366-2016 Lima",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 16607-2016 Del",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 17160-2017 Tacna",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 18751-2017 Lima",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 20095-2017 Del",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 208-2005 Pasco",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 2324-2022 Junín",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 2528-2023 Puno",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 2790-2018 Lima",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 32846-2022 Huánuco",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 3793-2017",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 3865-2021 Del",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 5383-2016 Tacna",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 8312-2012 Cajamarca",
+   "a": "procesal",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - R.N. 1230-2019",
+   "a": "otras",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00018-2003-AI-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00575-2011-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00797-2022-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00804-2008-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00833-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00878-2022-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00962-2021-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01068-2022-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01271-2021-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01397-2001-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01417-2005-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01553-2023-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01604-2009-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01893-2024-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02069-2009-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02134-2013-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02790-2021-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02868-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02899-2016-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 03298-2021-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 03818-2009-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 03844-2010-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 04295-2007-PHC-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 04640-2019-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 05099-2015-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 05652-2007-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 5,
+   "n": 1
+  },
+  {
+   "t": "Ficha de expediente",
+   "a": "constit",
+   "s": 1,
+   "g": 4,
+   "n": 2
+  },
+  {
+   "t": "Nota de bitácora",
+   "a": "civil",
+   "s": 1,
+   "g": 4,
+   "n": 3
+  },
+  {
+   "t": "Precedente - STC 00013-2021-PI-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 3,
+   "n": 1
+  },
+  {
+   "t": "Temas",
+   "a": "otras",
+   "s": 0,
+   "g": 3,
+   "n": 1
+  },
+  {
+   "t": "Texto íntegro",
+   "a": "constit",
+   "s": 1,
+   "g": 3,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Primacía de la realidad",
+   "a": "otras",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Casacion Laboral 15471-2023 La Libertad - Ficha",
+   "a": "laboral",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Casacion Laboral 15471-2023 La Libertad - TEXTO INTEGRO",
+   "a": "laboral",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Casación 41977-2022 Hostigamiento Sexual y Despido Fraudulento",
+   "a": "laboral",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Casación Laboral 29553-2024 Loreto Desnaturalización de Contrato",
+   "a": "laboral",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Ley N° 32069 - Ley General de Contrataciones Públicas",
+   "a": "otras",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Norma - D.L. 1057 - Régimen CAS",
+   "a": "otras",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 27765 - Lavado de Activos",
+   "a": "otras",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00002-2010-PI-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Tema - Habeas Corpus TC",
+   "a": "constit",
+   "s": 0,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Texto íntegro",
+   "a": "laboral",
+   "s": 1,
+   "g": 2,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Buena fe",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Carga de la prueba",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Cosa juzgada",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Debida motivación de resoluciones",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Debido proceso",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Igualdad y no discriminación",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - In dubio pro reo - pro operario",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Irrenunciabilidad de derechos laborales",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Ne bis in idem",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Presunción de inocencia",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Principio de inmediatez",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Principio de legalidad y tipicidad",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Proporcionalidad y razonabilidad",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Argumento - Tutela jurisdiccional efectiva",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Caso del estudio",
+   "a": "admin",
+   "s": 1,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Codigo Procesal Civil - Articulo 610 - Requisitos de la solicitud…",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Codigo Procesal Civil - Articulo 615 - Medida cautelar con sentencia…",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Ley 24041 - Servidores públicos contratados para labores de naturaleza…",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Acuerdo Plenario 1-2017 CIJ-116",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Art. 446 CPC - Excepciones procesales",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Codigo Procesal Civil",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Codigo Procesal Civil - Art 657",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Codigo Procesal Constitucional - Art VII",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Codigo Procesal Constitucional Art 14 y Art 121",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Codigo Procesal Constitucional Art VII y Art 9",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Codigo Procesal Penal - Art 274",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Codigo Procesal Penal - Art 29 y 323",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Constitucion Art 2.24.d y Art 139.3",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Constitucion Politica del Peru - Art 73",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Constitución Política del Perú",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Código Civil",
+   "a": "civil",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Código Penal",
+   "a": "penal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Código Procesal Civil",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Código Procesal Penal (NCPP)",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - D.L. 1071 - Ley de Arbitraje",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - D.L. 276 - Carrera Administrativa",
+   "a": "admin",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - D.L. 681 - Fedatario juramentado",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - D.L. 728 - Ley de Productividad y Competitividad Laboral",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - DS 011-2019-JUS",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - DS 011-2019-JUS - Art 46",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Decreto Legislativo 1057 - CAS",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Decreto Legislativo 1106",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Decreto Legislativo 1249",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Decreto Legislativo 276",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Directiva 007-2023-CG-VCIC - Accion de Oficio Posterior",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - LOPJ - Art 4",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 24041",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 24041 - Contratados permanentes del Estado",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 26636 - Ley Procesal del Trabajo (anterior)",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 26872 - Conciliación Extrajudicial",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 27444 - Procedimiento Administrativo General",
+   "a": "admin",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 27584 - Proceso Contencioso Administrativo",
+   "a": "admin",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 27785 - Ley Organica del Sistema Nacional de Control",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 28806 - Inspección del Trabajo",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 29497 - Nueva Ley Procesal del Trabajo",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 29783 - Seguridad y Salud en el Trabajo",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 30057 - Servicio Civil",
+   "a": "civil",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 30225 - Contrataciones del Estado (anterior)",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 30364 - Violencia contra la mujer y grupo familiar",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 31131",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 32069 - Contrataciones del Estado",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 32069 - Contrataciones del Estado (vigente)",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Ley 32155 - Juzgados de Paz Letrados Laborales",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - NLPT Ley 29497",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - NLPT Ley 29497 - Art 23",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Norma - Reglamento D.S. 009-2025-EF",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Nota del cerebro",
+   "a": "constit",
+   "s": 1,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Pleno - II Pleno Jurisdiccional Supremo en Materia Laboral 2014",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Acuerdo Plenario 2-2005",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 11169-2014 La Libertad",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 12475-2014 Moquegua",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 1529-2017",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 15308-2019 Tacna",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 1652-2017 Ucayali",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 34268-2019 Cajamarca",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 5807-2009 Junín",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - Casación 7945-2014 Cusco",
+   "a": "procesal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00090-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00206-2005-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00728-2008-PHC-TC",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 00976-2001-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01124-2001-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 01944-2002-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02192-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02383-2013-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 02748-2021-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 03501-2006-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 04314-2012-PC-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 04587-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 05057-2013-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 05057-2013-PA-TC (Huatuco)",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 06681-2013-PA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 08125-2005-PHC-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Precedente - STC 0833-2004-AA-TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Actos no impugnables procedimiento de seleccion",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Casación laboral",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Contrataciones Publicas",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Contrataciones Públicas Ley 32069",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Control Gubernamental",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Desnaturalización de contratos CAS",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Despido y reposición laboral",
+   "a": "laboral",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Ejecucion de Sentencias del TC",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Ejecucion de garantias TCP",
+   "a": "civil",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Ejecucion provisional de sentencias Art 402.2 CPP",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Financiamiento Ilicito de Partidos Politicos",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Habeas corpus TC",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Habeas corpus contra resoluciones judiciales",
+   "a": "constit",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Lavado de Activos Ley 27765",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Lavado de activos Ley 27765",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Organizacion criminal Ley 30077",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Peligro de fuga arraigo",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Precedente Huatuco",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Principio de Legalidad Penal",
+   "a": "penal",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Prision Preventiva",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Prision preventiva CPP",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Procedimientos Administrativos Disciplinarios",
+   "a": "admin",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - Régimen CAS (D.L. 1057)",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  },
+  {
+   "t": "Tema - n8n y automatización",
+   "a": "otras",
+   "s": 0,
+   "g": 1,
+   "n": 1
+  }
+ ]
+}

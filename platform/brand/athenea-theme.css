@@ -1,0 +1,1061 @@
+/* ============================================================================
+   ATHENEA — CAPA DE TEMA VISUAL (fuente única de verdad)
+   ----------------------------------------------------------------------------
+   Norma: ATHENEA-Product/07-Brand/VISUAL_IDENTITY.md
+   Marca activa: platform/brand/marcas.json
+
+   Este archivo existe para cerrar el "riesgo de fragmentación" que la propia
+   VISUAL_IDENTITY.md declara: hasta ahora cada pantalla redeclaraba su paleta
+   en un <style> propio, y los valores ya habían divergido entre sí.
+
+   Regla de uso: ninguna pantalla nueva declara colores literales. Declara
+   tokens de esta capa. Cambiar el tema de ATHENEA = editar este archivo.
+   ============================================================================ */
+
+/* ---------------------------------------------------------------------------
+   CAPA 1 — CONSTANTES DE IDENTIDAD
+   No cambian con el modo claro/oscuro ni con la paleta activa. Son la marca.
+   VISUAL_IDENTITY.md §Sistema cromático y §El cerebro de dos hemisferios.
+   --------------------------------------------------------------------------- */
+:root {
+  /* El cosmos: fondo maestro de toda superficie de marca. No es negro: espacio. */
+  --athenea-cosmos:      #05060e;
+  --athenea-espacio:     #0d1024;
+  /* El abismo: el vacío más profundo, detrás del propio cosmos. Lo usan el
+     motor del núcleo vivo, el Fondo Vivo y los paneles como telón absoluto.
+     (P1.0 AV-P0P1-EXEC-001: canoniza el literal #02040a que vivía duplicado.) */
+  --athenea-abismo:      #02040a;
+
+  /* Los dos hemisferios. Su semántica es normativa, no decorativa:
+     oro = práctica/acción (casos, escritos, litigio)
+     violeta = doctrina/reflexión (teoría, estudio, criterio)
+     Debe conservarse en TODA visualización de conocimiento. */
+  --athenea-practica:    #f0c96a;
+  --athenea-doctrina:    #8b5cf6;
+
+  /* Neutros de lectura sobre cosmos. Jamás blanco puro deslumbrante. */
+  --athenea-marfil:      #f2ead9;
+  --athenea-atenuado:    #9a93a8;
+
+  /* Respiración del organismo: pulso lento y continuo, nunca parpadeo ni alerta. */
+  --athenea-respiracion: 6s;
+
+  /* Las dos curvas del organismo. Solo dos, porque solo hay dos gestos:
+     lo que respira acelera y frena; lo que orbita no hace ninguna de las dos.
+     No se declaran curvas que nadie use — un sistema no guarda vocabulario
+     que nadie habla. */
+  --curva-organica: ease-in-out;  /* respirar, iluminar: tiene inercia */
+  --curva-continua: linear;       /* orbitar: velocidad constante, sin gesto */
+
+  /* ---- EL RELOJ DE INTERACCIÓN — Colección V --------------------------
+     La respiración es el reloj del organismo: todo lo ambiental deriva de
+     ella con calc(). Pero la interfaz responde a un dedo, no a un pulso, y
+     ese segundo reloj no existía.
+
+     Tres pasos, base 120 y razón 2. El principio que los ordena:
+     CUANTO MÁS LEJOS DEL DEDO, MÁS LENTO.
+
+     Medido en las pantallas que se mueven: .12s aparece más que ninguna
+     otra duración, y .22s/.26s marcan el segundo escalón. La escala no se
+     inventó: se leyó. */
+  --tiempo-respuesta:  120ms;  /* lo que el dedo toca: hover, foco, pulsar */
+  --tiempo-transicion: 240ms;  /* lo que entra o sale de la pantalla */
+  --tiempo-relato:     480ms;  /* lo que cuenta algo: un acuse, un hallazgo */
+
+  /* Una sola curva de interfaz, porque solo hay un gesto: llegar y frenar.
+     Lo que aparece desacelera; nada rebota. Un organismo que piensa no da
+     saltos — Ley 6 (el movimiento nunca distrae) y Ley 19 (el minimalismo
+     prevalece sobre el ornamento). */
+  --curva-entrada: ease-out;
+
+  /* ---- CAPA TIPOGRÁFICA — Colección VI --------------------------------
+     La última escala que no existía. La capa no declaraba ni familia, ni
+     cuerpo, ni tracking, ni interlínea: 336 declaraciones de tamaño con 39
+     valores distintos, y ninguna norma contra la que contrastarlas.
+
+     Tres familias, tres verbos: operar, leer, citar. -------------------- */
+
+  /* La interfaz. system-ui primero: la tipografía del sistema operativo es
+     la que el usuario ya sabe leer sin darse cuenta. Las pantallas ponían
+     "Segoe UI" delante, que es la de un solo sistema. */
+  --fuente-interfaz: system-ui, -apple-system, "Segoe UI", Roboto,
+                     "Helvetica Neue", Arial, sans-serif;
+
+  /* La lectura larga: artículo, boletín, dossier. Georgia y no Palatino —
+     Georgia se dibujó para pantalla y sostiene el cuerpo pequeño; Palatino
+     es una letra de imprenta y a 15 px adelgaza. Las dos convivían. */
+  --fuente-lectura: Georgia, "Palatino Linotype", Palatino,
+                    "Times New Roman", serif;
+
+  /* El dato literal: número de expediente, token, ruta de archivo. Aquí la
+     anchura fija no es estilo — es lo que permite comparar dos cifras. */
+  --fuente-dato: ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+                 Consolas, monospace;
+
+  /* Siete pasos, razón media 1,20. El nombre es el rol, no el número:
+     un tamaño de tipografía sin función no significa nada. */
+  --texto-etiqueta: 11px;  /* versalitas. EL SUELO: nada baja de aquí (P0.1 AV-P0P1-EXEC-001: 10→11) */
+  --texto-menor:    12px;  /* metadatos, pie, secundario */
+  --texto-base:     14px;  /* EL CUERPO de la interfaz */
+  --texto-mayor:    17px;  /* entradilla, lectura larga */
+  --texto-titulo:   20px;  /* título de bloque */
+  --texto-cabecera: 24px;  /* cabecera de pantalla */
+  --texto-display:  30px;  /* portada, cifra grande */
+
+  /* Tres pesos. Las pantallas usaban nueve —incluidos 200, 500, 650 y 800—
+     y ninguna fuente de sistema tiene un 650: el navegador lo redondea.
+     Un peso que el navegador inventa no es una decisión de diseño. */
+  --peso-normal: 400;  /* el texto */
+  --peso-medio:  600;  /* lo que destaca — el más usado de todos */
+  --peso-fuerte: 700;  /* el título */
+
+  /* Tracking en em, no en px. Ahí estaba el desorden: 2 px sobre 10 px es
+     0,20 em y sobre 26 px es 0,077 em — la misma declaración, dos efectos
+     distintos. Por eso hacían falta diecinueve valores.
+     Medido: las diecinueve versalitas dan una mediana de 0,189 em. */
+  --tracking-versalita: 0.18em;
+
+  /* Tres interlíneas, tres situaciones: una línea, un título, un párrafo. */
+  --interlinea-nula:  1;     /* insignia, botón, cifra: no debe añadir alto */
+  --interlinea-corta: 1.3;   /* títulos */
+  --interlinea-larga: 1.6;   /* prosa y cuerpo de interfaz */
+
+  /* ---- LOS TONOS QUE FALTABAN — decisión sobre los 97 sin token ---------
+     Ver ATHENEA-Product/07-Brand/DECISION_TONOS.md
+
+     UN paso, no seis. Entre --athenea-marfil (L 0,93) y --athenea-atenuado
+     (L 0,63) la capa no tenía nada, y en ese hueco vivían seis tonos con 41
+     usos. Seis tonos para un papel es la fragmentación que esta capa existe
+     para eliminar.
+
+     CORRECCIÓN DE MI PROPIA LECTURA: primero los llamé «neutros cálidos» y
+     los declaré como un borde más marcado. Al mirar dónde se usaban —
+     `h3{color:#d9cfb6}` sobre cosmos, y el color de un icono— resultó que no
+     son separadores: son LECTURA SECUNDARIA sobre fondo oscuro. El papel es
+     otro y el token también.
+
+     Se compone, no se escribe. Contra los seis medidos: ΔE medio 3,8,
+     imperceptible en los tres más usados (31 de los 41 usos). Sobre cosmos da
+     12,16:1 — muy por encima del piso de texto. */
+  --marfil-atenuado: color-mix(in srgb, var(--athenea-marfil) 60%, var(--athenea-atenuado));
+
+  /* La rampa de DOCTRINA. El oro tenía rampa desde la Colección VIII y la
+     doctrina no: esa asimetría es la que producía doce violetas a mano con 34
+     usos. Se compone igual que la de magnitud, sobre el tono de identidad.
+     Cero tonos nuevos. */
+  --doctrina-1: color-mix(in srgb, var(--athenea-doctrina) 35%, var(--panel));
+  --doctrina-2: color-mix(in srgb, var(--athenea-doctrina) 60%, var(--panel));
+  --doctrina-3: color-mix(in srgb, var(--athenea-doctrina) 80%, var(--panel));
+  --doctrina-4: var(--athenea-doctrina);
+
+  /* ---- ICONOGRAFÍA — Colección VII ------------------------------------
+     Retícula 24, área viva de 2 a 22. Las dos unidades de aire por lado son
+     lo que impide que dos iconos contiguos se toquen.
+
+     El trazo sale de la familia de marca, no de un gusto: el favicon lleva
+     3,5 sobre una retícula de 60, que a 24 px son 1,40 px de grosor
+     aparente. Un icono de 1,5 sobre 24 da 1,50. La diferencia es 0,1 px:
+     el icono y el emblema pesan lo mismo cuando se ven juntos.
+
+     Y 1,5 sobre 24 da exactamente 1 px cuando el icono se dibuja a 16, que
+     es el tamaño más denso — ahí el trazo cae justo sobre la rejilla de
+     píxeles en lugar de repartirse entre dos. */
+  --icono-menor: 16px;   /* dentro de una línea de texto, listas densas */
+  --icono-base:  20px;   /* el tamaño por defecto */
+  --icono-mayor: 24px;   /* suelto, o cuando es el objetivo de un dedo */
+  --icono-trazo: 1.5;
+
+  /* ---- LENGUAJE DE DATOS — Coleccion VIII -----------------------------
+     Tres trabajos, tres origenes, y los tres salen de algo ya aprobado:
+     cero tonos nuevos.
+
+       magnitud  -> rampa del acento   (tematica: cambia con la paleta)
+       identidad -> los dos hemisferios (constante: NO cambia con la paleta)
+       estado    -> rojo / ambar / verde (constante)
+
+     MAGNITUD. Cuatro pasos de un solo tono, compuestos por formula sobre
+     --gold, no escritos a mano: asi la rampa es correcta en las seis paletas
+     y en los tres modos sin declarar nada por caso. Validado con el
+     comprobador de rampas ordinales: 12 de 12 combinaciones pasan las cuatro
+     pruebas (monotonia, salto minimo, extremo claro sobre la superficie y
+     tono unico).
+
+     El primer paso arranca en 50 % y no mas claro porque por debajo no llega
+     al piso de 2:1 contra el panel claro: a 36 % da 1,63:1 y el paso mas
+     tenue se pierde en la superficie. */
+  --dato-1: color-mix(in srgb, var(--gold) 50%, var(--panel));
+  --dato-2: color-mix(in srgb, var(--gold) 67%, var(--panel));
+  --dato-3: color-mix(in srgb, var(--gold) 83%, var(--panel));
+  --dato-4: var(--gold);
+
+  /* IDENTIDAD. Los dos hemisferios usan los colores de IDENTIDAD, no el
+     acento de la paleta. No es preferencia: se midio. Con el acento, en
+     Neural el par practica/doctrina da 4,0 de separacion en claro y 1,2 en
+     oscuro, y en Atlas 12,4 y 10,1 — el piso es 15. Dos series que el lector
+     no puede distinguir. Con los colores de identidad da 41,4 en cualquier
+     paleta, porque no dependen de ella.
+
+     Y ese es el fondo del asunto: la paleta viste la interfaz; no puede
+     recolorear el significado. Practica es oro en las seis. */
+  --dato-doctrina: var(--athenea-doctrina);
+
+  /* La cifra que encabeza una vista. Es el unico papel por encima de 30 px
+     que resulto ser sistematico — la Coleccion VI lo dejo abierto como
+     «composicion caso por caso» y aqui se cierra. Una por vista. */
+  --texto-cifra: 48px;
+
+  /* ---- Vocabulario del Visual Bible Vol. I ----------------------------
+     El Volumen I nombra los mismos cinco roles con otras palabras
+     (obsidiana, grafito, oro mate, violeta IA, blanco). Son alias, no
+     colores nuevos: quien trabaje con ese documento en la mano puede
+     escribir el nombre que ahí lee.
+     Ver ATHENEA-Product/07-Brand/VISUAL_BIBLE_VOL_I.md §Implementación.
+
+     Dos tuvieron salvedad y las dos quedaron resueltas por la
+     DESIGN_CONSTITUTION v1.0, el Documento Rector:
+     · --athenea-violeta-ia — el Volumen I lo llamaba "IA". La Constitución
+       decide "Violeta | Conocimiento, doctrina y conexiones", y saca a la IA
+       del reparto de colores: "IA | Se expresa mediante movimiento y
+       comportamiento". El alias se conserva por vocabulario, pero el
+       significado vigente es doctrina.
+     · --athenea-blanco — apunta al marfil atenuado, NO a #ffffff. La
+       Constitución lo confirma: "Marfil | Texto base (no blanco puro)".
+     -------------------------------------------------------------------- */
+  --athenea-obsidiana:  var(--athenea-cosmos);
+  --athenea-grafito:    var(--athenea-espacio);
+  --athenea-oro-mate:   var(--athenea-practica);
+  --athenea-violeta-ia: var(--athenea-doctrina);
+  --athenea-blanco:     var(--athenea-marfil);
+}
+
+/* ---------------------------------------------------------------------------
+   CAPA 2 — SUPERFICIE
+   Modo claro por defecto; el cosmos manda en oscuro.
+   Valores tomados de las pantallas ya en producción (home, brainview,
+   command, evolution, dossier) para que la adopción no cambie ningún píxel.
+   --------------------------------------------------------------------------- */
+:root {
+  --bg:     #f6f4ef;
+  --panel:  #ffffff;
+  --tinta:  #1c1a16;
+  --sub:    #6b6558;
+  --borde:  #e4dfd4;
+}
+
+html[data-theme="dark"] {
+  /* Sobre fondo oscuro el oro de identidad va limpio: 11,58:1. */
+  --dato-practica: var(--athenea-practica);
+
+  --bg:     #0a0b12;
+  --panel:  #12141f;
+  --tinta:  #efe9da;
+  --sub:    #8f8a99;
+  --borde:  #23263a;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --dato-practica: var(--athenea-practica);
+    --bg:     #0a0b12;
+    --panel:  #12141f;
+    --tinta:  #efe9da;
+    --sub:    #8f8a99;
+    --borde:  #23263a;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   CAPA 2b — ESPACIADO
+   Ley 9: «el espaciado es consistente». Hasta hoy la ley existía y no había
+   contra qué contrastarla: las pantallas usaban 20 valores distintos —incluidos
+   7, 9, 11 y 13 px— en 300 declaraciones.
+
+   La escala no se inventó: se derivó de ese uso. 8 px domina con 72 usos, y es
+   2×4; 4 da el grano fino; 2 es el medio paso para filetes y micro-huecos. De
+   16 en adelante la progresión se abre, porque el espacio grande no necesita
+   grano fino.
+
+   El nombre ES el valor: --espacio-12 son 12 px. Sin aritmética mental.
+
+   Los valores de hoy que no encajan redondean al paso más cercano con 2 px de
+   desvío o menos —14→12, 6→4, 10→8, 9→8, 7→8—, que es imperceptible. Esta
+   escala gobierna lo que viene; las pantallas existentes migran cuando adopten
+   la capa.
+   --------------------------------------------------------------------------- */
+:root {
+  --espacio-2:   2px;   /* filete, micro-hueco entre icono y texto */
+  --espacio-4:   4px;   /* grano fino */
+  --espacio-8:   8px;   /* EL RITMO BASE — el paso por defecto */
+  --espacio-12: 12px;   /* interior de tarjeta compacta */
+  --espacio-16: 16px;   /* interior de tarjeta */
+  --espacio-24: 24px;   /* entre bloques */
+  --espacio-32: 32px;   /* entre secciones */
+  --espacio-48: 48px;   /* entre zonas */
+  --espacio-64: 64px;   /* respiración mayor */
+  --espacio-96: 96px;   /* separación de página */
+}
+
+/* ---------------------------------------------------------------------------
+   COLECCIÓN XI · LA FORMA — radios, luz y contenedor
+   Los tres paneles que el tablero de marca prometía y el sistema no tenía.
+   Medido antes de declarar: 129 usos de border-radius en 19 valores distintos,
+   30 de box-shadow en 15. No es una escala inventada: es la que ya se usaba,
+   ordenada.
+   --------------------------------------------------------------------------- */
+:root {
+  /* LOS RADIOS. Cinco pasos cubren 91 de los 129 usos. Los 38 restantes son
+     `50%` (30 círculos) y esquinas compuestas —`2px 2px 0 0`—: geometría, no
+     escala, y se quedan como están.
+
+     Desvío declarado: 12→10 y 16→14 mueven 2 px, imperceptibles; 18→14 mueve 4
+     y son tres usos. La escala gobierna lo que viene. */
+  --radio-menor:     6px;   /* insignia, chip, filete          (2,4,6 →  10 usos) */
+  --radio-base:     10px;   /* EL RADIO POR DEFECTO            (8,9,10,12 → 45) */
+  --radio-mayor:    14px;   /* panel, tarjeta grande           (13,14,16,18 → 25) */
+  --radio-escena:   26px;   /* el marco de una vista completa  (26 → 3 usos) */
+  --radio-pastilla: 999px;  /* píldora: filtro, etiqueta       (999px → 9 usos) */
+
+  /* LA LUZ. El hallazgo de la medición, y merece decirse: de los 30 usos de
+     box-shadow del producto, CERO son elevación. Las treinta son resplandor.
+
+     No es un descuido. ATHENEA no proyecta sombra porque no hay suelo: el
+     cosmos no tiene abajo. Una superficie no se separa del fondo levantándose
+     sobre él, sino EMITIENDO. Eso es lo que ya hacían las pantallas sin que
+     nadie lo hubiera escrito, y es lo que se declara aquí.
+
+     Se compone sobre --gold, no sobre un rgba fijo: el halo sigue al acento de
+     la paleta. Los literales que sustituye eran rgba(240,180,40,·) —el oro del
+     wallpaper— y rgba(240,201,106,·) —el oro de identidad—: dos oros distintos
+     haciendo el mismo trabajo. */
+  --luz-tenue: 0 0 22px color-mix(in srgb, var(--gold) 50%, transparent);
+
+  --luz-viva:  0 0 26px color-mix(in srgb, var(--gold) 55%, transparent),
+               0 0 70px color-mix(in srgb, var(--gold) 25%, transparent),
+        inset  0 0 18px color-mix(in srgb, var(--gold) 25%, transparent);
+
+  /* Solo para lo que el usuario acaba de tocar o descubrir. Nunca en reposo:
+     una pantalla donde todo brilla al máximo no destaca nada. */
+  --luz-plena: 0 0 40px color-mix(in srgb, var(--gold) 75%, transparent),
+               0 0 90px color-mix(in srgb, var(--gold) 30%, transparent),
+        inset  0 0 22px color-mix(in srgb, var(--gold) 35%, transparent);
+
+  /* El punto de estado. currentColor y no un token: así el halo lo pone el
+     semántico del propio punto —verde, ámbar, rojo— sin declarar uno por
+     color. Sustituye los seis `0 0 8px var(--x)` medidos. */
+  --luz-estado: 0 0 8px currentColor;
+
+  /* EL CONTENEDOR. Aquí el tablero prometía una rejilla de 12 columnas.
+     No se declara, y el motivo es de medición: NADIE la usa. Los 60 grid del
+     producto son `1fr`, `1fr 1fr` y `250px 1fr 330px` — rejillas de contenido,
+     no de maqueta. Declarar doce columnas sería añadir un vocabulario que
+     ninguna pantalla habla, que es justo lo que esta capa existe para evitar.
+
+     Lo que sí es real son los anchos: doce valores distintos para tres papeles.
+
+     Los DOS CORTES del sistema —760 px y 1080 px— se documentan en la
+     Colección XI pero no viven aquí: `@media` no acepta var(). Un token que no
+     se puede usar es peor que ninguno. */
+  --ancho-lectura:  760px;  /* columna de texto largo: artículo, boletín, dossier */
+  --ancho-vista:   1200px;  /* la vista de producto (mediana medida: 1150–1280) */
+  --ancho-tarjeta:  430px;  /* la tarjeta suelta y la vista de teléfono */
+
+  /* EL BOTÓN. Dos tamaños, que son los dos que ya existían: 14/16 en el botón
+     de acción y 5/12 en el chip. El color no se declara aquí — el relleno es
+     --gold y la tinta encima es --tinta-sobre-acento, que ya existen. */
+  --boton-relleno:  14px var(--espacio-16);
+  --boton-relleno-menor: 5px var(--espacio-12);
+}
+
+/* ---------------------------------------------------------------------------
+   CAPA 3 — SEMÁNTICOS FUNCIONALES
+   VISUAL_IDENTITY.md: "ATHENEA no alarma, señala". Estos colores existen solo
+   para prioridad operativa (Command Center); prohibidos como decoración.
+   --------------------------------------------------------------------------- */
+:root {
+  /* El oro de identidad sobre panel claro da 1,58:1: invisible como relleno.
+     Se baja al 65 % sobre la tinta —mismo tono— y sube a 3,24:1, que es el
+     piso de marca. El precio, declarado: al oscurecerlo pierde croma y el
+     comprobador lo marca en 0,088 contra un piso de 0,10. Se acepta porque
+     ese piso existe para que ocho tonos sigan siendo distinguibles entre sí,
+     y aquí hay dos, separados por 30,4 — el doble del piso de separación.
+     Un relleno que no se ve es peor que uno un punto apagado. */
+  --dato-practica: color-mix(in srgb, var(--athenea-practica) 65%, var(--tinta));
+
+  /* EL ACENTO COMO FONDO DE TEXTO — y el texto que va encima.
+     Aquí estaba la única brecha de accesibilidad que el sistema no había
+     cerrado, y la causa era estructural, no un descuido: el acento claro se
+     afinó para ser TEXTO SOBRE UNA SUPERFICIE (4,5:1 contra blanco), y un
+     botón le pide lo contrario, ser SUPERFICIE PARA UN TEXTO. Son dos
+     trabajos distintos y el mismo valor no puede hacer los dos.
+
+     La decisión: SE SEPARAN LOS DOS PAPELES. --gold sigue siendo el acento
+     —trazo, halo, relleno sin texto—. --acento-fondo es el acento cuando
+     lleva letras encima, y es lo único que se corrige.
+
+     MEDIDO, en las seis paletas:
+
+       modo claro · marfil sobre el acento tal cual   4,14 – 4,17:1   FALLA
+       modo claro · marfil sobre --acento-fondo       4,60 – 4,67:1   cumple
+       modo oscuro · cosmos sobre el acento tal cual  5,00 – 12,77:1  cumple
+
+     Dos consecuencias que no son evidentes y conviene dejar escritas:
+
+     1. En oscuro NO hay que oscurecer nada: el acento ya cumple de sobra. Lo
+        que fallaba era el color del texto. Por eso --tinta-sobre-acento pasa a
+        depender del modo —marfil en claro, cosmos en oscuro— y deja de ser
+        invariante. `adoptar.py` dejará de sustituirlo automáticamente, que es
+        exactamente lo correcto: un literal escrito para un modo no puede
+        migrar a un token que cambia con el modo.
+
+     2. El 8 % de tinta es el mínimo que cierra las seis. Se buscó el menor
+        desvío posible: cuanto más se oscurece, más se aleja el botón del
+        acento de la marca. */
+  --acento-fondo: color-mix(in srgb, var(--gold) 92%, var(--tinta));
+  --tinta-sobre-acento: var(--athenea-marfil);
+
+  --rojo:   #c0392b;  /* crítico   · 4,95:1 en claro · 3,37:1 en oscuro */
+  --ambar:  #bb821c;  /* urgente   · 3,02:1 en claro · 5,52:1 en oscuro */
+  --verde:  #2e7d54;  /* saludable · 4,57:1 en claro · 3,65:1 en oscuro */
+}
+
+/* Sobre cosmos el verde sube, igual que el oro: la superficie es mucho más
+   oscura y el tono de interfaz se apaga. Este es el valor que el wallpaper ya
+   usaba con el nombre --green; ahora es el mismo token, no otro color. */
+.athenea-cosmos, html.athenea-cosmos {
+  --verde: #34d399;   /* 10,52:1 sobre cosmos */
+  --dato-practica: var(--athenea-practica);   /* 11,88:1 sobre cosmos */
+
+  /* Sobre cosmos manda lo mismo que en oscuro: el acento vale como fondo tal
+     cual, y el texto que va encima es el propio cosmos. */
+  --acento-fondo: var(--gold);
+  --tinta-sobre-acento: var(--athenea-cosmos);
+}
+
+/* ---------------------------------------------------------------------------
+   CAPA 4 — PALETA ACTIVA (los 6 temas de FASE 3)
+   Temple · Neural · Atlas · Galaxy · Phoenix · Library
+
+   ACCESIBILIDAD (Leyes 10 y 12) — el acento tiene un valor por modo.
+
+   Al auditar salió que las seis paletas fallaban WCAG AA como texto sobre
+   superficie clara: Temple 2.32:1, Galaxy 2.09:1, Library 2.24:1, Phoenix
+   3.03:1, Atlas 3.35:1, Neural 3.85:1, contra los 4.5:1 exigidos. Y las
+   pantallas usan --gold en encabezados h2 de 10,5 px: texto pequeño.
+
+   La corrección conserva tono y saturación exactos de cada paleta y mueve
+   SOLO la luminosidad. Temple sigue a 40° con 56 % de saturación; lo único
+   que cambia es que en claro va más bruñido y en oscuro más luminoso.
+
+   Un valor único no sirve: oscurecer para claro hundía el modo oscuro por
+   debajo de 4:1 en las seis. Por eso hay par claro/oscuro.
+
+   --gold-hi NO se corrige: es realce sobre --gold, no color de texto.
+   --------------------------------------------------------------------------- */
+:root,
+html[data-paleta="Temple"]  { --gold: #8c6a27; --gold-hi: #e8c06a; }
+html[data-paleta="Neural"]  { --gold: #7f4bf5; --gold-hi: #b79bf8; }
+html[data-paleta="Atlas"]   { --gold: #2860ff; --gold-hi: #8aa8ff; }
+html[data-paleta="Galaxy"]  { --gold: #267993; --gold-hi: #8fd4e8; }
+html[data-paleta="Phoenix"] { --gold: #c04a1f; --gold-hi: #f09a78; }
+html[data-paleta="Library"] { --gold: #2b7d61; --gold-hi: #7fd6b8; }
+
+/* Sobre cosmos el metal necesita más luz para conservar su valor de "luz
+   escasa" — y además es donde el contraste sobra: Temple llega a 12,41:1. */
+/* En oscuro el acento ya sirve de fondo sin retocar: cosmos encima da de
+   5,00 a 12,77:1 en las seis. Lo que cambia es el texto, no el fondo. */
+html[data-theme="dark"] { --acento-fondo: var(--gold); --tinta-sobre-acento: var(--athenea-cosmos); }
+
+html[data-theme="dark"]:not([data-paleta]),
+html[data-theme="dark"][data-paleta="Temple"]  { --gold: #f0c96a; }
+html[data-theme="dark"][data-paleta="Neural"]  { --gold: #8e61f6; }
+html[data-theme="dark"][data-paleta="Atlas"]   { --gold: #4f7dff; }
+html[data-theme="dark"][data-paleta="Galaxy"]  { --gold: #58b7d4; }
+html[data-theme="dark"][data-paleta="Phoenix"] { --gold: #e06a3f; }
+html[data-theme="dark"][data-paleta="Library"] { --gold: #3fb98f; }
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) { --acento-fondo: var(--gold); --tinta-sobre-acento: var(--athenea-cosmos); }
+  html:not([data-theme="light"]):not([data-paleta]),
+  html:not([data-theme="light"])[data-paleta="Temple"]  { --gold: #f0c96a; }
+  html:not([data-theme="light"])[data-paleta="Neural"]  { --gold: #8e61f6; }
+  html:not([data-theme="light"])[data-paleta="Atlas"]   { --gold: #4f7dff; }
+  html:not([data-theme="light"])[data-paleta="Galaxy"]  { --gold: #58b7d4; }
+  html:not([data-theme="light"])[data-paleta="Phoenix"] { --gold: #e06a3f; }
+  html:not([data-theme="light"])[data-paleta="Library"] { --gold: #3fb98f; }
+}
+
+/* ---------------------------------------------------------------------------
+   CAPA 5 — SUPERFICIE COSMOS
+   El wallpaper vivo y el cerebro de dos hemisferios no son "modo oscuro": son
+   la superficie de marca primaria, siempre cosmos. No depende del modo del
+   sistema.
+
+   Se aplica a CUALQUIER elemento, no solo a <html>: una tarjeta o una sección
+   pueden ser cosmos dentro de una página clara. Si solo valiera en la raíz,
+   un panel de cristal dentro de un bloque cosmos heredaría el --panel claro
+   y saldría blanco sobre el cosmos — que es exactamente lo que pasaba.
+   --------------------------------------------------------------------------- */
+/* El acento sobre cosmos es el acento OSCURO, en cualquier modo de página.
+   El cosmos es una superficie oscura: un bloque cosmos dentro de una página
+   clara heredaba el acento claro, y el diccionario ya declaraba lo contrario
+   —«sobre cosmos, Temple resuelve al oro de identidad #f0c96a»—. Se hace
+   cierto lo que ya estaba escrito.
+
+   Lo destapó la rampa de datos: un acento oscuro sobre un panel oscuro no
+   deja sitio para cuatro pasos, y las seis paletas fallaban las pruebas de
+   rampa en modo claro. Como marca suelta el acento claro sí cumplía (3,77:1
+   a 3,80:1 en las seis), así que no se veía hasta pedirle cuatro escalones.
+
+   Medido como texto sobre cosmos: 11,88 · 4,65 · 5,11 · 8,18 · 5,64 · 7,65.
+   Las seis por encima de 4,5:1. */
+/* POR QUÉ CADA REGLA SE ESCRIBE DOS VECES.
+   `html[data-paleta="X"] .athenea-cosmos` es un DESCENDIENTE: solo acierta si
+   el cosmos es un elemento dentro de la página. En el wallpaper no lo es — la
+   clase vive en el propio <html>, que es donde la puso el inyector. Ahí el
+   descendiente no casa, gana `html[data-paleta="X"]` a secas, y la superficie
+   oscura terminaba pintando con el acento CLARO.
+
+   Se vio en el navegador leyendo --gold sobre cosmos con la paleta puesta:
+   devolvía #8c6a27 (Temple claro) donde la línea de abajo promete #f0c96a.
+   Ocho tokens estaban en la misma situación —--bg, --panel, --tinta, --sub,
+   --borde, --gold, --gold-hi y --dato-practica—: todos los que una regla
+   html[…] declara y el bloque de cosmos vuelve a declarar.
+
+   La variante pegada `html[data-paleta="X"].athenea-cosmos` cubre ese caso sin
+   tocar el otro. Misma norma de siempre: sobre cosmos manda el cosmos. */
+html[data-paleta="Temple"] .athenea-cosmos, html[data-paleta="Temple"].athenea-cosmos, .athenea-cosmos { --gold: #f0c96a; }
+html[data-paleta="Neural"] .athenea-cosmos, html[data-paleta="Neural"].athenea-cosmos { --gold: #8e61f6; }
+html[data-paleta="Atlas"] .athenea-cosmos, html[data-paleta="Atlas"].athenea-cosmos { --gold: #4f7dff; }
+html[data-paleta="Galaxy"] .athenea-cosmos, html[data-paleta="Galaxy"].athenea-cosmos { --gold: #58b7d4; }
+html[data-paleta="Phoenix"] .athenea-cosmos, html[data-paleta="Phoenix"].athenea-cosmos { --gold: #e06a3f; }
+html[data-paleta="Library"] .athenea-cosmos, html[data-paleta="Library"].athenea-cosmos { --gold: #3fb98f; }
+
+.athenea-cosmos, html.athenea-cosmos {
+  --bg:      var(--athenea-cosmos);
+  --panel:   var(--athenea-espacio);
+  --tinta:   var(--athenea-marfil);
+  --sub:     var(--athenea-atenuado);
+  --borde:   #1b1f38;
+
+  /* AQUÍ HABÍA `--gold-hi: #ffd873`, y se retira.
+     Al pegar las reglas de cosmos al <html> quedó a la vista lo que ese valor
+     hacía: fijaba un realce DORADO para las seis paletas, de modo que un acento
+     violeta (Neural) o verde (Library) llevaba encima un brillo de oro.
+
+     Y no era un valor del sistema aprobado. #ffd873 es el `goldHi` del tema
+     `synapse` del wallpaper — uno de los diez temas del segundo sistema de
+     paletas que DECISION_TONOS.md §5 tiene pendiente de decisión. Se coló aquí
+     al escribir el bloque de cosmos.
+
+     Sin esta línea, --gold-hi lo aporta la paleta activa, que es de donde
+     siempre debió venir. Correcto se decida lo que se decida sobre el §5. */
+}
+
+/* ---------------------------------------------------------------------------
+   ALIAS DE COMPATIBILIDAD — nombres que las pantallas ya escribieron
+   --------------------------------------------------------------------------- */
+:root {
+  /* evolution.html llama --alerta a lo que la capa llama --rojo. Mismo valor
+     exacto (#c0392b): es un nombre, no un color. */
+  --alerta: var(--rojo);
+
+  /* athenea-live.html declara sus dos pilas tipográficas. Apuntan a las de la
+     Colección VI, y eso CAMBIA su serif: la suya empieza por Palatino y la
+     oficial por Georgia. No es un efecto colateral — es la decisión de la
+     Colección VI llegando a la pantalla. Georgia se dibujó para pantalla;
+     Palatino es letra de imprenta y a 15 px adelgaza. */
+  --sans:  var(--fuente-interfaz);
+  --serif: var(--fuente-lectura);
+}
+
+/* ---------------------------------------------------------------------------
+   ALIAS DE COMPATIBILIDAD
+   wallpaper/athenea-live.html nombra sus tokens --ink/--space/--ivory/--muted.
+   Se mapean aquí para que pueda adoptar esta capa sin reescribir su hoja.
+   --------------------------------------------------------------------------- */
+/* La rampa de magnitud se recompone aquí, no se hereda.
+
+   Es la misma lección de la Colección IV con el cristal: una custom property
+   se resuelve en el elemento donde se DECLARA. --dato-1 declarado en :root
+   congela el --panel de la raíz, así que dentro de un bloque cosmos seguiría
+   mezclando contra el panel claro. Se vio en el navegador antes de darla por
+   buena: --dato-4 devolvía el acento de la raíz. */
+.athenea-cosmos, html.athenea-cosmos {
+  --dato-1: color-mix(in srgb, var(--gold) 50%, var(--panel));
+  --dato-2: color-mix(in srgb, var(--gold) 67%, var(--panel));
+  --dato-3: color-mix(in srgb, var(--gold) 83%, var(--panel));
+  --dato-4: var(--gold);
+}
+
+/* Y la luz, por el mismo motivo y a la tercera vez que aparece la lección: los
+   tres halos se componen sobre --gold, y --gold vale una cosa distinta en cada
+   una de las seis paletas de cosmos, sesenta líneas más arriba. Declarados solo
+   en :root, el halo del wallpaper saldría del acento de la página en vez del
+   de la superficie que lo pinta. */
+.athenea-cosmos, html.athenea-cosmos {
+  --luz-tenue: 0 0 22px color-mix(in srgb, var(--gold) 50%, transparent);
+  --luz-viva:  0 0 26px color-mix(in srgb, var(--gold) 55%, transparent),
+               0 0 70px color-mix(in srgb, var(--gold) 25%, transparent),
+        inset  0 0 18px color-mix(in srgb, var(--gold) 25%, transparent);
+  --luz-plena: 0 0 40px color-mix(in srgb, var(--gold) 75%, transparent),
+               0 0 90px color-mix(in srgb, var(--gold) 30%, transparent),
+        inset  0 0 22px color-mix(in srgb, var(--gold) 35%, transparent);
+}
+
+.athenea-cosmos, html.athenea-cosmos {
+  --ink:   var(--athenea-cosmos);
+  --ivory: var(--athenea-marfil);
+  --muted: var(--athenea-atenuado);
+  --green: var(--verde);
+
+  /* La tarjeta sobre cosmos era rgba(10,12,26,.72): un panel translúcido, que
+     es exactamente CRISTAL (Colección IV). Aquí se compone del panel en vez de
+     escribirse a mano, y su filete es el acento a un 16 %. Cero tonos nuevos.
+     El desvío del valor anterior es imperceptible —(13,16,36) contra
+     (10,12,26)— y a cambio el color deja de ser un literal suelto. */
+  --card:      color-mix(in srgb, var(--panel), transparent 28%);
+  --card-edge: color-mix(in srgb, var(--gold), transparent 84%);
+}
+
+/* ---------------------------------------------------------------------------
+   TITANIO — Colección IV, Material Language
+
+   LA DECISIÓN: titanio NO es un color. Es un acabado.
+
+   Arrastrábamos un conflicto desde la Colección III. Los dos prompts maestros
+   listan «Titanio» en el lenguaje visual; la Constitución y el Design OS listan
+   «Grafito». Parecían competir por el mismo puesto.
+
+   No competían. Grafito es el COLOR de la superficie; titanio es CÓMO esa
+   superficie recoge la luz. El metal y su tono no son dos candidatos: son dos
+   preguntas distintas sobre la misma cosa. Igual que cristal no es un color
+   —es transparencia— y luz no es un color —es halo.
+
+   Por eso titanio no introduce ni un tono nuevo, y la Ley 2 queda intacta: el
+   brillo se compone del panel vigente, el marfil y el cosmos, los tres ya
+   aprobados. El metal no trae color: trae reflejo.
+
+   Cómo se reconoce el titanio de verdad: no espejea. Recoge la luz de forma
+   direccional y suave, con más claridad donde la luz entra y una sombra fría
+   donde se va. Un metal noble no destella — insinúa.
+   --------------------------------------------------------------------------- */
+:root {
+  /* Cuánta luz recoge el metal. 7 % es el umbral donde se percibe el material
+     sin que la superficie parezca un degradado decorativo. */
+  --athenea-titanio-brillo: 7%;
+
+  /* De dónde entra la luz. Constante en todo el sistema: si cada superficie
+     eligiera su ángulo, dejarían de leerse como el mismo metal. */
+  --athenea-titanio-angulo: 145deg;
+}
+
+/* Superficie de titanio. Se apoya en --panel, así que funciona en claro,
+   oscuro y cosmos sin declarar nada por modo. */
+.athenea-titanio {
+  background: linear-gradient(
+    var(--athenea-titanio-angulo),
+    color-mix(in srgb, var(--panel), var(--athenea-marfil) var(--athenea-titanio-brillo)) 0%,
+    var(--panel) 48%,
+    color-mix(in srgb, var(--panel), var(--athenea-cosmos) var(--athenea-titanio-brillo)) 100%
+  );
+  border: 1px solid var(--borde);
+}
+
+/* El canto del metal. Un filete recoge más luz que la cara, y es lo que
+   distingue una pieza de metal de un rectángulo pintado. */
+.athenea-titanio-canto {
+  border-top-color: color-mix(in srgb, var(--borde), var(--athenea-marfil) 18%);
+}
+
+/* Sin color-mix: superficie plana. Se pierde el acabado, nunca la legibilidad. */
+@supports not (background: color-mix(in srgb, red 50%, transparent)) {
+  .athenea-titanio { background: var(--panel); }
+}
+
+/* ---------------------------------------------------------------------------
+   CRISTAL Y LUZ
+   Design OS Vol. II Cap. 1 amplía el lenguaje visual de cinco conceptos a
+   siete: «Cristal = transparencia. Luz = descubrimiento.»
+
+   Ninguno introduce un tono nuevo — eso violaría la Ley 2. Cristal es un
+   tratamiento de transparencia sobre la superficie vigente; luz es el oro
+   claro de la paleta activa usado como halo, no como relleno.
+   --------------------------------------------------------------------------- */
+:root {
+  /* Luz: el descubrimiento. Halo, nunca fondo — «el oro es luz escasa». */
+  --athenea-luz: var(--gold-hi);
+
+  /* Opacidad del cristal. El COLOR no se precalcula aquí a propósito: ver
+     abajo. Lo que sí es un token es cuánto deja pasar. */
+  --athenea-cristal-opacidad: 72%;
+}
+
+/* Superficie de cristal: el panel vigente, translúcido.
+   La mezcla se hace AQUÍ y no en :root. Una custom property se resuelve en el
+   elemento donde se declara, así que un --athenea-cristal definido en :root
+   congelaría el --panel de la raíz y un bloque .athenea-cosmos seguiría
+   pintando cristal claro sobre el cosmos. Mezclando en el punto de uso, cada
+   cristal toma el --panel que de verdad tiene encima.
+
+   El desenfoque no es estética: sin él el texto sobre superficie translúcida
+   pierde contraste y cae la Ley 12. */
+.athenea-cristal {
+  background: color-mix(in srgb, var(--panel) var(--athenea-cristal-opacidad), transparent);
+  border: 1px solid color-mix(in srgb, var(--borde) 60%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+}
+
+/* Navegador sin color-mix: cae al panel opaco. Pierde el efecto, nunca la
+   legibilidad. */
+@supports not (background: color-mix(in srgb, red 50%, transparent)) {
+  .athenea-cristal { background: var(--panel); border-color: var(--borde); }
+}
+
+/* ---------------------------------------------------------------------------
+   COMPORTAMIENTO — los cuatro estados del organismo
+   Design OS Vol. II Cap. 1: «ATHENEA respira en reposo, acelera al analizar,
+   ilumina conexiones al descubrir conocimiento y vuelve a un estado de calma
+   al finalizar.»
+
+   Esto es lo que la DESIGN_CONSTITUTION dejó declarado sin especificar:
+   «IA | Se expresa mediante movimiento y comportamiento». Aquí está el cómo.
+
+   Se aplican con data-estado en el elemento vivo:
+     <div class="athenea-vivo" data-estado="analizando">
+   Sin data-estado, el estado es reposo.
+   --------------------------------------------------------------------------- */
+@keyframes athenea-respirar {
+  0%, 100% { opacity: .82; }
+  50%      { opacity: 1;   }
+}
+
+/* Descubrir: la conexión se ilumina y se apaga. Un halo que crece, no un
+   parpadeo. Ley 5 — cada animación comunica un estado. */
+@keyframes athenea-iluminar {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; opacity: .85; }
+  50%      { box-shadow: 0 0 22px 6px var(--athenea-luz); opacity: 1; }
+}
+
+/* 1 · REPOSO — respira. El estado por defecto. */
+.athenea-vivo {
+  animation: athenea-respirar var(--athenea-respiracion) var(--curva-organica) infinite;
+}
+
+/* 2 · ANALIZANDO — acelera. Mismo gesto, no uno nuevo: el organismo no
+   cambia de naturaleza porque piense más rápido. */
+.athenea-vivo[data-estado="analizando"] {
+  animation-duration: calc(var(--athenea-respiracion) / 4);
+}
+
+/* 3 · DESCUBRIENDO — ilumina conexiones. */
+.athenea-vivo[data-estado="descubriendo"] {
+  animation: athenea-iluminar calc(var(--athenea-respiracion) / 3) var(--curva-organica) infinite;
+}
+
+/* 4 · CALMA — vuelve. Respiración más lenta que el reposo: el organismo se
+   asienta antes de volver a su ritmo. */
+.athenea-vivo[data-estado="calma"] {
+  animation-duration: calc(var(--athenea-respiracion) * 1.5);
+}
+
+/* Ley 6 — el movimiento nunca distrae. Si el usuario pidió menos movimiento,
+   los cuatro estados se apagan: ninguno es portador de información que no
+   esté también en el texto. */
+@media (prefers-reduced-motion: reduce) {
+  .athenea-vivo,
+  .athenea-vivo[data-estado] {
+    animation: none;
+    opacity: 1;
+    box-shadow: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   EL EMBLEMA EN EL MOTION SYSTEM
+   SYMBOL_PHILOSOPHY.md principio 4 («animarse sin perder identidad») y
+   principio 8 («integrarse al Motion System»).
+
+   El emblema es círculo + triángulo + espiral. Lo que se mueve es el círculo
+   exterior —las órbitas, las relaciones—; el triángulo y la espiral no. La
+   espiral ya dice crecimiento por su forma: animarla sería redundante, y el
+   triángulo es el emblema declarado, que no debe deformarse (Ley 13).
+
+     <div class="athenea-simbolo" data-estado="analizando"> …svg… </div>
+   --------------------------------------------------------------------------- */
+@keyframes athenea-orbitar {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+.athenea-simbolo { color: var(--gold); display: inline-block; line-height: 0; }
+.athenea-simbolo svg { width: 100%; height: 100%; display: block; }
+
+/* La órbita gira sobre el centro del viewBox (30,30 de 60). */
+.athenea-simbolo .ath-orbita {
+  transform-origin: 50% 50%;
+  animation: athenea-orbitar calc(var(--athenea-respiracion) * 10) var(--curva-continua) infinite;
+}
+
+/* Analizando: acelera, igual que la respiración. */
+.athenea-simbolo[data-estado="analizando"] .ath-orbita {
+  animation-duration: calc(var(--athenea-respiracion) * 2);
+}
+
+/* Descubriendo: la espiral se enciende. La luz es el descubrimiento (§5), y
+   el núcleo es justo donde el conocimiento se acumula. */
+.athenea-simbolo[data-estado="descubriendo"] .ath-espiral {
+  animation: athenea-iluminar calc(var(--athenea-respiracion) / 3) var(--curva-organica) infinite;
+}
+
+/* Calma: vuelve, más lento aún que el reposo. */
+.athenea-simbolo[data-estado="calma"] .ath-orbita {
+  animation-duration: calc(var(--athenea-respiracion) * 15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .athenea-simbolo .ath-orbita,
+  .athenea-simbolo .ath-espiral {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   MOTION LANGUAGE — Colección V
+   ATHENEA-Product/07-Brand/COLECCION_V_MOTION_LANGUAGE.md
+
+   Qué se anima: transform y opacity. Nada más.
+
+   No es una preferencia: son las dos únicas propiedades que el navegador
+   resuelve en el compositor, sin recalcular disposición ni repintar. Y es
+   lo que las pantallas de producción ya hacen — se midieron 6 transform y
+   4 opacity, y cero propiedades de disposición.
+
+   Excepción única y declarada: box-shadow en athenea-iluminar. El halo del
+   descubrimiento no se puede expresar con transform ni con opacity, y va
+   sobre elementos pequeños.
+   --------------------------------------------------------------------------- */
+
+/* Lo que responde al dedo. Instantáneo de sentir, no de medir. */
+.athenea-interactivo {
+  transition: transform var(--tiempo-respuesta) var(--curva-entrada),
+              opacity   var(--tiempo-respuesta) var(--curva-entrada);
+}
+
+/* Lo que entra o sale de la pantalla: un panel, una tarjeta, un resultado. */
+.athenea-transita {
+  transition: transform var(--tiempo-transicion) var(--curva-entrada),
+              opacity   var(--tiempo-transicion) var(--curva-entrada);
+}
+
+/* Lo que narra: un acuse, un hallazgo que aparece. El paso más lento del
+   reloj de interacción — más allá empieza el reloj del organismo. */
+.athenea-relata {
+  transition: transform var(--tiempo-relato) var(--curva-entrada),
+              opacity   var(--tiempo-relato) var(--curva-entrada);
+}
+
+/* ---------------------------------------------------------------------------
+   TYPOGRAPHY — Colección VI
+   ATHENEA-Product/07-Brand/COLECCION_VI_TYPOGRAPHY.md
+
+   Tres clases, tres modos de leer. Ninguna se aplica sola: la capa no toca
+   <body>, porque cambiar la tipografía de una pantalla debe ser un acto
+   deliberado y no un efecto colateral de enlazar el CSS.
+   --------------------------------------------------------------------------- */
+
+/* Operar. La raíz de cualquier pantalla de producto. */
+.athenea-interfaz {
+  font-family: var(--fuente-interfaz);
+  font-size: var(--texto-base);
+  line-height: var(--interlinea-larga);
+  font-weight: var(--peso-normal);
+}
+
+/* Leer. Artículo, boletín, dossier: texto largo y seguido. El cuerpo sube a
+   17 px porque una serif necesita más tamaño que una sans para la misma
+   comodidad de lectura, y porque aquí no compite con ninguna densidad. */
+.athenea-lectura {
+  font-family: var(--fuente-lectura);
+  font-size: var(--texto-mayor);
+  line-height: var(--interlinea-larga);
+  font-weight: var(--peso-normal);
+}
+
+/* Etiquetar. El patrón más repetido de todo el producto: 28 usos de
+   versalitas. Se cierra en una clase para que deje de reescribirse.
+   El tracking va en em: a 10 px son 1,8 px, a 12 px son 2,16 — la misma
+   decisión, no dos. */
+.athenea-versalita {
+  font-family: var(--fuente-interfaz);
+  font-size: var(--texto-etiqueta);
+  font-weight: var(--peso-medio);
+  letter-spacing: var(--tracking-versalita);
+  line-height: var(--interlinea-nula);
+  text-transform: uppercase;
+}
+
+/* El dato literal: expediente, token, ruta. No es una clase de estilo — es
+   lo que permite alinear dos cifras y ver que difieren. */
+.athenea-dato {
+  font-family: var(--fuente-dato);
+  font-size: var(--texto-menor);
+}
+
+/* ---------------------------------------------------------------------------
+   ICONOS — Colección VII
+   ATHENEA-Product/07-Brand/COLECCION_VII_ICON_LANGUAGE.md
+   Biblioteca: platform/brand/iconos/ · verificar-iconos.py
+
+   El SVG lleva stroke-width="1.5" escrito dentro para que funcione suelto —
+   pegado en Figma, servido como <img>, abierto a pelo. Cuando va en linea, la
+   regla de aqui manda sobre el atributo: asi un cambio de grosor se hace en un
+   sitio y llega a los doce.
+
+   El icono NO declara color: hereda con currentColor. Ley 2, y el §4 de Symbol
+   Philosophy — nada depende del color para entenderse.
+   --------------------------------------------------------------------------- */
+.athenea-icono {
+  display: inline-block;
+  width: var(--icono-base);
+  height: var(--icono-base);
+  flex: none;
+  line-height: 0;
+}
+
+.athenea-icono svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  stroke-width: var(--icono-trazo);
+}
+
+.athenea-icono[data-tam="menor"] { width: var(--icono-menor); height: var(--icono-menor); }
+.athenea-icono[data-tam="mayor"] { width: var(--icono-mayor); height: var(--icono-mayor); }
+
+/* ---------------------------------------------------------------------------
+   LENGUAJE DE DATOS — Coleccion VIII
+   ATHENEA-Product/07-Brand/COLECCION_VIII_DASHBOARD.md
+
+   La regla que ordena todo lo demas:
+
+     EL COLOR EN UN GRAFICO DE ATHENEA NUNCA SIGNIFICA «SERIE 3».
+     Significa hemisferio, o significa estado. No hay una tercera cosa.
+
+   La Constitucion ya reparte los dos unicos papeles cromaticos —oro es
+   practica, violeta es doctrina, «debe conservarse en TODA visualizacion de
+   conocimiento»— y la Ley 2 impide inventar un tercero. Asi que la identidad
+   mas alla de dos categorias no la lleva el tono: la llevan la posicion y la
+   etiqueta.
+   --------------------------------------------------------------------------- */
+
+/* LA BARRA. Estaba escrita tres veces, identica, en tres pantallas (Ley 16).
+   Dos correcciones sobre esa version: el extremo que nace en la linea base va
+   recto —redondearlo despega la barra de su origen y falsea el cero— y el
+   relleno se detiene 2 px antes del borde del carril, que es lo que separa dos
+   tramos sin dibujar un filete alrededor. */
+.athenea-barra {
+  height: 7px;
+  border-radius: 4px;
+  background: var(--borde);
+  overflow: hidden;
+}
+
+.athenea-barra > i {
+  display: block;
+  height: 100%;
+  background: var(--dato-4);
+  border-radius: 0 4px 4px 0;   /* recto en la base, redondo en la punta */
+  transition: width var(--tiempo-transicion) var(--curva-entrada);
+}
+
+.athenea-barra[data-hemisferio="practica"] > i { background: var(--dato-practica); }
+.athenea-barra[data-hemisferio="doctrina"] > i { background: var(--dato-doctrina); }
+
+/* Cuando la barra mide un estado y no una cantidad, viste el semantico —
+   nunca los dos a la vez. Y el estado siempre llega acompanado de texto: el
+   color no es el portador (§4 de Symbol Philosophy). */
+.athenea-barra[data-estado="critico"] > i { background: var(--rojo); }
+.athenea-barra[data-estado="urgente"] > i { background: var(--ambar); }
+.athenea-barra[data-estado="sano"]    > i { background: var(--verde); }
+
+/* LA CIFRA. Una por vista. Cifras proporcionales, no tabulares: a 48 px la
+   anchura fija de tabular-nums deja huecos entre digitos. */
+.athenea-cifra {
+  font-family: var(--fuente-interfaz);
+  font-size: var(--texto-cifra);
+  font-weight: var(--peso-medio);
+  line-height: var(--interlinea-nula);
+  font-variant-numeric: proportional-nums;
+  color: var(--tinta);
+}
+
+/* LA TABLA. Las columnas de numeros sí van tabulares: es lo que permite ver
+   de un vistazo que una cifra tiene un digito mas que la de arriba. */
+.athenea-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--texto-menor);
+}
+
+.athenea-tabla th {
+  font-size: var(--texto-etiqueta);
+  font-weight: var(--peso-medio);
+  letter-spacing: var(--tracking-versalita);
+  text-transform: uppercase;
+  color: var(--sub);
+  text-align: left;
+  padding: var(--espacio-8);
+}
+
+.athenea-tabla td {
+  padding: var(--espacio-8);
+  border-top: 1px solid var(--borde);
+  vertical-align: top;
+}
+
+.athenea-tabla td.num,
+.athenea-tabla th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* La llave de color que acompana a una etiqueta. El texto NUNCA se pinta del
+   color de la serie: el tono vive en la llave, al lado. */
+.athenea-llave {
+  display: inline-block;
+  width: var(--espacio-8);
+  height: var(--espacio-8);
+  border-radius: 2px;
+  vertical-align: baseline;
+  background: var(--dato-4);
+}
+
+.athenea-llave[data-hemisferio="practica"] { background: var(--dato-practica); }
+.athenea-llave[data-hemisferio="doctrina"] { background: var(--dato-doctrina); }
+
+/* ---------------------------------------------------------------------------
+   RED DE SEGURIDAD — Ley 6
+
+   Las dos pantallas que hoy se mueven ya declaran prefers-reduced-motion, y
+   la Ley 6 se cumple. Pero se cumple por disciplina de dos archivos: cada
+   pantalla nueva vuelve a depender de que alguien lo recuerde.
+
+   Esto lo hace estructural. Quien adopte la capa queda protegido sin
+   escribir una línea.
+
+   Por qué 1ms y no `none`: una animación con `forwards` que se cancela deja
+   el elemento en su estado inicial — el anillo que debía quedar visible
+   desaparece. Con 1ms la animación termina y el estado final se conserva.
+   Se apaga el movimiento, no el resultado.
+
+   Va al final del archivo a propósito: debe poder anular todo lo anterior.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

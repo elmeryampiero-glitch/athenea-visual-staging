@@ -1,0 +1,86 @@
+{
+  "_": "MANIFIESTO DE CAPACIDADES DECLARADAS — AV-SYNC-DINAMICA-001. Aquí vive lo que la capa visual afirma y NO puede medirse automáticamente del árbol (certificaciones, cortes auditados). Cada entrada cita su fuente y su fecha de corte. Regla §17 del mandato: jamás inventar madurez — lo no medido viaja como DECLARADO, con procedencia. Un solo domicilio: las pantallas ya no llevan estos números sueltos.",
+  "schema_version": 1,
+  "declaradas": [
+    {
+      "id": "razonador.actos-certificados",
+      "modulo": "Motor constitucional",
+      "capacidad": "Actos AC-01 → AC-56 certificados por ejecución",
+      "estado": "ACTIVE",
+      "metricas": { "actos_certificados": 56, "en_acto": "AC-57 · banco adversarial de 274 verificaciones, regresión final" },
+      "fuente": "auditoría del motor constitucional · medición aprobada 2026-08-16",
+      "corte": "2026-08-16"
+    },
+    {
+      "id": "razonador.nucleo-congelado",
+      "modulo": "Motor constitucional",
+      "capacidad": "Núcleo congelado y verificado byte a byte contra su manifiesto",
+      "estado": "ACTIVE",
+      "version": "v2.3.0",
+      "metricas": { "modulos": 13 },
+      "fuente": "CORE_MANIFEST (rama athenea/ac56) · medición aprobada 2026-08-16",
+      "corte": "2026-08-16"
+    },
+    {
+      "id": "razonador.suites",
+      "modulo": "Motor constitucional",
+      "capacidad": "Suites de certificación con regresión completa obligatoria",
+      "estado": "ACTIVE",
+      "metricas": { "suites": 85, "pruebas_en_verde": 3158 },
+      "fuente": "bancos de prueba de la serie AC · medición aprobada 2026-08-16",
+      "corte": "2026-08-16"
+    },
+    {
+      "id": "razonador.motores-cognitivos",
+      "modulo": "Motor constitucional",
+      "capacidad": "Motores jurídicos certificados (hechos · problema · principios · razonamiento · argumentación · interpretación · antinomias · subsunción · jurisprudencia · prueba · valoración integral)",
+      "estado": "ACTIVE",
+      "metricas": { "motores": 11 },
+      "fuente": "serie constitucional AC · medición aprobada 2026-08-16",
+      "corte": "2026-08-16"
+    },
+    {
+      "id": "razonador.pipeline",
+      "modulo": "Motor constitucional",
+      "capacidad": "Pipeline constitucional del ingreso al producto oficial",
+      "estado": "ACTIVE",
+      "version": "v1.3",
+      "metricas": { "etapas": 23 },
+      "fuente": "pipeline constitucional vigente · medición aprobada 2026-08-16",
+      "corte": "2026-08-16"
+    },
+    {
+      "id": "razonador.escalamientos",
+      "modulo": "Motor constitucional",
+      "capacidad": "Registro de Escalamientos — domicilio único del estado vigente",
+      "estado": "ACTIVE",
+      "metricas": { "filas": 96 },
+      "fuente": "Registro de Escalamientos · medición aprobada 2026-08-16",
+      "corte": "2026-08-16"
+    },
+    {
+      "id": "app.buscar",
+      "modulo": "Aplicativos ATHENEA",
+      "capacidad": "Buscador del estudio",
+      "estado": "DEVELOPMENT",
+      "fuente": "censo de reservas honestas · AUDITORIA-INTEGRAL-2026-08-20.md",
+      "corte": "2026-08-20"
+    },
+    {
+      "id": "app.bitacora-estadisticas",
+      "modulo": "Aplicativos ATHENEA",
+      "capacidad": "Estadísticas de la bitácora",
+      "estado": "DEVELOPMENT",
+      "fuente": "censo de reservas honestas · AUDITORIA-INTEGRAL-2026-08-20.md",
+      "corte": "2026-08-20"
+    },
+    {
+      "id": "app.alertas-contenido",
+      "modulo": "Aplicativos ATHENEA",
+      "capacidad": "Pantalla de Alertas alimentada por el espejo real (hoy LAB)",
+      "estado": "DEVELOPMENT",
+      "fuente": "mejora P1 priorizada · AUDITORIA-INTEGRAL-2026-08-20.md",
+      "corte": "2026-08-20"
+    }
+  ]
+}

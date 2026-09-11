@@ -1,0 +1,71 @@
+{
+  "_": "Generado por platform/brand/generar-datos-vivos.py — NO EDITAR A MANO.",
+  "censo": {
+    "fuente": "wallpaper/athenea-live.html · historial (rutina diaria)",
+    "fecha": "2026-08-01",
+    "total": 3306,
+    "por_area": {
+      "Derecho Laboral": 240,
+      "Derecho Constitucional": 149,
+      "Derecho Procesal": 168,
+      "Derecho Penal": 81,
+      "Derecho Administrativo": 85,
+      "Derecho Civil": 61,
+      "Otras Áreas": 2518,
+      "Derecho Internacional": 4
+    },
+    "delta": {
+      "notas": 16,
+      "desde": "2026-07-31",
+      "hasta": "2026-08-01"
+    }
+  },
+  "conexiones": {
+    "fuente": "wallpaper/athenea-live.html · KPI «Conexiones totales»",
+    "total": 24738,
+    "nota": "las pantallas decían 24.731 (cifra de la rama Laboral); esta es la total declarada"
+  },
+  "grafo": {
+    "fuente": "wallpaper/grafo.json",
+    "aristas": 1081,
+    "generado": "2026-07-30"
+  },
+  "declarados_sin_fuente_en_el_arbol": [
+    "chip_Arbitral (7, registro arbitral previo)",
+    "140 precedentes / 385 reglas (Biblioteca)"
+  ],
+  "valores_inyectados": {
+    "censo_total": "3.306",
+    "censo_fecha_corta": "01 AGO",
+    "conexiones_total": "24.738",
+    "conexiones_frase": "24.738 tejidas por ATHENEA",
+    "delta_notas": "+16 notas nuevas",
+    "delta_rango": "entre el 31 de julio y el 1 de agosto",
+    "delta_corta": "+16 notas nuevas · 31 jul → 01 ago",
+    "area_lider_nombre": "Derecho Laboral",
+    "area_lider_pct": "30%",
+    "area_lider_frase": "Área líder · 240 notas · 30% de lo clasificado · 01 ago",
+    "jornada_corpus": "Corpus vivo · 3.306 notas",
+    "delta_chip": "+16 nuevas",
+    "censo_resumen": "3.306 notas (+16) · 24.738 conexiones",
+    "censo_sello": "censo del 01 ago",
+    "censo_notas_frase": "3.306 notas",
+    "delta_n": "+16",
+    "delta_nuevas_sello": "Nuevas · 01 ago",
+    "grafo_aristas": "1.081",
+    "area_Laboral": "240",
+    "chip_Laboral": "Laboral · 240",
+    "area_Procesal": "168",
+    "chip_Procesal": "Procesal · 168",
+    "area_Constitucional": "149",
+    "chip_Constitucional": "Constitucional · 149",
+    "area_Administrativo": "85",
+    "chip_Administrativo": "Administrativo · 85",
+    "area_Penal": "81",
+    "chip_Penal": "Penal · 81",
+    "area_Civil": "61",
+    "chip_Civil": "Civil · 61",
+    "area_Internacional": "4",
+    "chip_Internacional": "Internacional · 4"
+  }
+}

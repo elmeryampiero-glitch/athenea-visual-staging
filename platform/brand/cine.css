@@ -1,0 +1,291 @@
+/* CAPA CINEMATOGRÁFICA DE ATHENEA VISUAL — AV-P3A-CINE-001
+   ==========================================================
+   De páginas enlazadas a una sola experiencia continua, SIN rediseñar nada:
+   esta capa conecta las escenas ya aprobadas. ATHENEA sigue siendo una
+   aplicación multipágina soberana — cero frameworks, cero intercepción de
+   enlaces, history/back/deep-links/service-worker intactos.
+
+   Mecanismo: View Transitions entre documentos (opt-in por CSS). En un
+   navegador sin soporte esta hoja es inerte y la navegación queda EXACTA
+   a como era — ese es el fallback, por construcción, no por polyfill.
+
+   Tokens: reutiliza los tiempos y curvas de la constitución
+   (athenea-theme.css): --tiempo-respuesta 120ms · --tiempo-transicion
+   240ms · --tiempo-relato 480ms · --curva-entrada. Cero tokens nuevos,
+   cero números mágicos por página. */
+
+/* ── CAPA DE CONTROL DEL LANZAMIENTO (AV-P3A1-LAUNCH-001 · FASE 6) ──────
+   La ÚNICA fuente de verdad del arranque. El Director gobierna desde aquí
+   la presentación del lanzamiento de toda la app — jamás por pantalla.
+   Nota: la guardia inline de primer pintado de cada página lleva el valor
+   COMPILADO de --lanzamiento-fondo (#05060e), porque pinta antes de que
+   exista esta hoja; si este token cambia, esa guardia se actualiza con él. */
+:root {
+  --lanzamiento-fondo:       var(--athenea-cosmos); /* telón absoluto del arranque */
+  --lanzamiento-logo-escala: 1;                     /* tamaño del emblema en la apertura */
+  --lanzamiento-halo:        1;                     /* intensidad del halo dorado (0–1.5) */
+  --lanzamiento-duracion:    var(--tiempo-relato);  /* revelación de la apertura (480ms) */
+  --lanzamiento-modo:        sereno;                /* sereno · ceremonial · instantaneo (reserva) */
+}
+
+/* ── CAPA DE CONTROL DE LA INTERACCIÓN (AV-P3A2-INTERACTION-001) ────────
+   La ÚNICA fuente de verdad del tacto. Forense INT1: los 13 elementos
+   críticos computaban el resaltado táctil azul Material del user-agent
+   (rgba(51,181,229,.4)) porque nadie lo gobernaba. Aquí el Director
+   gobierna la respuesta táctil de TODO el producto — jamás por pantalla.
+
+   El azul de Atlas solo existiría como decisión deliberada de identidad
+   expresada en estos tokens; el azul del UA queda desterrado.
+
+   PRESETS DE REFERENCIA (valores para estos tokens):
+   · SOBRIO ............ escala .995 · brillo 1.03 · halo 0
+   · PREMIUM (activo) .. escala .99  · brillo 1.06 · halo 1
+   · CINEMATOGRÁFICO ... escala .985 · brillo 1.08 · halo 1.25 · duración var(--tiempo-transicion)
+   · INMERSIVO ......... escala .985 · brillo 1.1  · halo 1.5
+   · CONCENTRACIÓN ..... escala 1    · brillo 1    · halo 0 · foco-ancho 3px */
+:root {
+  --interaccion-tacto:            transparent;            /* resaltado táctil del UA: neutralizado */
+  --interaccion-presion-escala:   .99;                    /* microescala al pulsar (0.985–1) */
+  --interaccion-presion-brillo:   1.06;                   /* respuesta de luz al pulsar */
+  --interaccion-presion-halo:     1;                      /* intensidad relativa del halo (reserva) */
+  --interaccion-presion-duracion: var(--tiempo-respuesta);/* asentamiento de la pulsación (120ms) */
+  --interaccion-foco-color:       var(--gold);            /* anillo de foco de la casa */
+  --interaccion-foco-ancho:       2px;                    /* grosor del anillo */
+  --interaccion-foco-halo:        3px;                    /* aire entre control y anillo */
+  --interaccion-modo:             premium;                /* sobrio · premium · cinematografico · inmersivo · concentracion (reserva) */
+}
+
+/* ── CAPA DE CONTROL SENSORIAL (AV-P3C-SENSORY-001) ─────────────────────
+   La ÚNICA fuente de verdad de la GRAMÁTICA de navegación. La semántica
+   la resuelve gramatica-sensorial.mjs (mapa de planos del Director) y la
+   expresión perceptiva vive aquí: el Director gobierna intensidad,
+   duraciones, profundidad, desenfoque y luz de TODO el producto desde
+   estos tokens — jamás por pantalla. Semántica antes que efecto: sin
+   relación clara, la transición queda SOBRIA (crossfade base de P3A).
+
+   PRESETS DE REFERENCIA (valores para estos tokens):
+   · SOBRIO ........... intensidad .5 · profundo = base · luz 0 · blur 0
+   · PREMIUM (activo) . intensidad 1  · profundo 360ms  · luz .04 · blur 0
+   · CINEMATOGRÁFICO .. intensidad 1.3 · profundo 420ms · luz .06 · blur 4px
+   · INMERSIVO ........ intensidad 1.5 · profundo 420ms · luz .08 · blur 6px
+   · CONCENTRACIÓN .... intensidad .35 · todo = rápido  · luz 0 · blur 0 */
+:root {
+  --sensorial-modo:       premium;                 /* preset vivo (decisión del Director) */
+  --sensorial-intensidad: 1;                       /* amplitud perceptiva global (0–1.5) */
+  --sensorial-rapido:     var(--tiempo-respuesta); /* microcambios y despedidas (120ms) */
+  --sensorial-base:       var(--tiempo-transicion);/* navegación estándar (240ms) */
+  --sensorial-profundo:   360ms;                   /* profundización (rango de diseño 280–420) */
+  --sensorial-escala-profundidad: calc(0.015 * var(--sensorial-intensidad)); /* amplitud óptica */
+  --sensorial-desenfoque: 0px;                     /* blur transitorio MUY contenido (0 = sobrio) */
+  --sensorial-luz-llegada: calc(0.04 * var(--sensorial-intensidad)); /* asentamiento luminoso */
+  --sensorial-direccionalidad: 1;                  /* entrar ≠ volver ≠ lateral (reserva) */
+  --sensorial-asentamiento: 1;                     /* reposo garantizado tras settled (reserva) */
+}
+
+/* presupuesto sensorial adaptativo (C5): bajo presión de la Render Policy
+   el ORNAMENTO cede antes que la continuidad — la semántica no cambia */
+html[data-sensorial-tier="balanced"] {
+  --sensorial-escala-profundidad: calc(0.010 * var(--sensorial-intensidad));
+  --sensorial-desenfoque: 0px;
+  --sensorial-luz-llegada: calc(0.02 * var(--sensorial-intensidad));
+}
+html[data-sensorial-tier="safe"] {
+  --sensorial-escala-profundidad: calc(0.006 * var(--sensorial-intensidad));
+  --sensorial-desenfoque: 0px;
+  --sensorial-luz-llegada: 0;
+}
+
+/* ── continuidad tonal absoluta (P3A-0: cerebro/agenda llegaban con html
+   transparente → riesgo de flash claro entre documentos). El telón del
+   lanzamiento como fondo de TODA escena antes del primer pintado. */
+html { background: var(--lanzamiento-fondo) }
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* la navegación entre escenas del mismo origen se vuelve transición */
+  @view-transition { navigation: auto; }
+
+  /* GRAMÁTICA BASE — un solo idioma para todo el producto:
+     fundido cruzado sobrio de escena completa, más corto que la espera. */
+  ::view-transition-old(root) {
+    animation: cine-escena-sale var(--tiempo-transicion) var(--curva-entrada) both;
+  }
+  ::view-transition-new(root) {
+    animation: cine-escena-entra var(--tiempo-transicion) var(--curva-entrada) both;
+  }
+  @keyframes cine-escena-sale  { to   { opacity: 0 } }
+  @keyframes cine-escena-entra { from { opacity: 0 } }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ── ANCLA PRIMARIA: EL EMBLEMA (CINE2) ─────────────────────────────
+     .sello existe exactamente UNA vez por escena donde aparece:
+     en la portada es el emblema ceremonial; en el home, el sello de
+     marca del encabezado. Al cruzar Apertura → HOME el emblema no
+     desaparece: SE ASIENTA en su sello. El navegador interpola posición
+     y tamaño; la geometría del símbolo jamás se toca. */
+  .sello { view-transition-name: emblema-athenea }
+  ::view-transition-group(emblema-athenea) {
+    animation-duration: var(--tiempo-transicion);
+    animation-timing-function: var(--curva-organica);
+  }
+
+  /* ── ANCLA DE ORIENTACIÓN: EL NAVBAR (CINE3) ────────────────────────
+     Presente una sola vez en las 14 escenas operativas (home, cerebro,
+     agenda, alertas, buscar, bitácora, dossiers y los 7 paneles). Su
+     geometría es idéntica entre escenas: al compartir nombre, el navbar
+     queda perceptivamente QUIETO mientras la escena cruza detrás —
+     el usuario nunca pierde el suelo. */
+  .adn-nav { view-transition-name: navbar-athenea }
+  ::view-transition-old(navbar-athenea),
+  ::view-transition-new(navbar-athenea) {
+    animation-duration: var(--tiempo-respuesta);
+  }
+}
+
+/* ── GRAMÁTICA DE LA INTERACCIÓN (AV-P3A2-INTERACTION-001 · INT3) ───────
+   Neutralización CENTRAL del resaltado táctil del user-agent: la propiedad
+   hereda, así que UNA declaración en la raíz gobierna todo elemento de toda
+   escena — jamás se repite por página. El toque deja de pintar tinta ajena
+   y pasa a responder con materia (microescala) y luz (brillo), derivadas
+   de los tokens del Director. Selectores :where() = especificidad cero:
+   cualquier regla autorada de una escena (p. ej. .tarjeta-area:active,
+   transformaciones del navbar) SIEMPRE gana sobre esta base. */
+html { -webkit-tap-highlight-color: var(--interaccion-tacto, transparent) }
+
+@media (prefers-reduced-motion: no-preference) {
+  :where(a, button, [role="button"], summary) {
+    transition: transform var(--interaccion-presion-duracion) var(--curva-entrada),
+                filter    var(--interaccion-presion-duracion) var(--curva-entrada);
+  }
+  :where(a, button, [role="button"], summary):active {
+    transform: scale(var(--interaccion-presion-escala));
+    filter: brightness(var(--interaccion-presion-brillo));
+  }
+}
+
+/* con movimiento reducido la pulsación responde SOLO con luz, sin escala */
+@media (prefers-reduced-motion: reduce) {
+  :where(a, button, [role="button"], summary):active {
+    filter: brightness(var(--interaccion-presion-brillo));
+  }
+}
+
+/* ── FOCO ACCESIBLE (INT4) ──────────────────────────────────────────────
+   El anillo de foco pasa del "auto" del UA al anillo dorado de la casa,
+   SOLO cuando el foco es de navegación real (:focus-visible = teclado /
+   tecnología de apoyo). El toque no deja anillo residual — pero JAMÁS un
+   outline:none sin reemplazo: quien navega con teclado siempre ve dónde
+   está. :where() de nuevo: un foco autorado por escena (.busqueda) gana. */
+:where(a, button, [role="button"], input, select, textarea, summary):focus-visible {
+  outline: var(--interaccion-foco-ancho) solid var(--interaccion-foco-color);
+  outline-offset: var(--interaccion-foco-halo);
+}
+:where(a, button, [role="button"], input, select, textarea, summary):focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── LO RESERVADO SE VE RESERVADO (AV-P3D0.1) ───────────────────────────
+   Un control sin capacidad real jamás finge estar vivo: atenuado, sin
+   cursor de acción y anunciado. Regla ÚNICA para todo el producto (vive
+   en la capa de interacción porque alcanza a las 18 superficies) — las
+   pantallas solo marcan disabled/.adn-reservado, nunca estilos. */
+button[disabled], .adn-reservado{opacity:.45 !important;cursor:default !important}
+
+/* los glifos no roban el toque: el control entero es la unidad táctil;
+   y un control es mando, no contenido — no se selecciona como texto */
+:where(a, button, [role="button"]) svg { pointer-events: none }
+:where(a, button, [role="button"], summary) {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ── PERFILES SEMÁNTICOS (AV-P3C-SENSORY-001 · CINE-S3) ─────────────────
+   gramatica-sensorial.mjs anota data-sensorial en el <html> del documento
+   destino ANTES del primer fotograma; estas reglas especializan el
+   crossfade base de P3A según la RELACIÓN entre origen y destino. Sin
+   anotación (deep-link, navegador sin navigation API, familia no
+   resoluble): el crossfade base sigue mandando — sobriedad por defecto.
+   Todo vive bajo no-preference: con reduced-motion no existe transición.
+   El navbar y el emblema conservan sus anclas P3A: el suelo no salta. */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* LLEGA — entrada real al sistema: revelación con asentamiento luminoso */
+  html[data-sensorial="llega"]::view-transition-old(root) {
+    animation: cine-escena-sale var(--sensorial-base) var(--curva-entrada) both;
+  }
+  html[data-sensorial="llega"]::view-transition-new(root) {
+    animation: sens-llega var(--sensorial-profundo) var(--curva-entrada) both;
+  }
+  @keyframes sens-llega {
+    from { opacity: 0; filter: brightness(calc(1 + var(--sensorial-luz-llegada))) }
+    to   { opacity: 1; filter: brightness(1) }
+  }
+
+  /* PROFUNDIZA — avanzar a un nivel más hondo: el origen cede el paso,
+     el destino gana presencia. Escala óptica mínima, jamás zoom de cámara. */
+  html[data-sensorial="profundiza"]::view-transition-old(root) {
+    animation: sens-cede var(--sensorial-profundo) var(--curva-entrada) both;
+  }
+  html[data-sensorial="profundiza"]::view-transition-new(root) {
+    animation: sens-avanza var(--sensorial-profundo) var(--curva-entrada) both;
+  }
+  @keyframes sens-cede {
+    to { opacity: 0;
+         transform: scale(calc(1 + var(--sensorial-escala-profundidad)));
+         filter: blur(var(--sensorial-desenfoque)) }
+  }
+  @keyframes sens-avanza {
+    from { opacity: 0; transform: scale(calc(1 - var(--sensorial-escala-profundidad))) }
+    to   { opacity: 1; transform: scale(1) }
+  }
+
+  /* RETORNA — recuperar contexto conocido: inverso y MÁS DIRECTO que la
+     ida (base < profundo); el regreso no repite la entrada. */
+  html[data-sensorial="retorna"]::view-transition-old(root) {
+    animation: sens-repliega var(--sensorial-base) var(--curva-entrada) both;
+  }
+  html[data-sensorial="retorna"]::view-transition-new(root) {
+    animation: sens-recupera var(--sensorial-base) var(--curva-entrada) both;
+  }
+  @keyframes sens-repliega {
+    to { opacity: 0; transform: scale(calc(1 - var(--sensorial-escala-profundidad))) }
+  }
+  @keyframes sens-recupera {
+    from { opacity: 0; transform: scale(calc(1 + 0.66 * var(--sensorial-escala-profundidad))) }
+    to   { opacity: 1; transform: scale(1) }
+  }
+
+  /* LATERAL — superficies pares: mismo plano, cero profundidad falsa;
+     solo un cruce breve — el navbar anclado sostiene el suelo. */
+  html[data-sensorial="lateral"]::view-transition-old(root) {
+    animation: cine-escena-sale calc(var(--sensorial-base) * 0.75) var(--curva-entrada) both;
+  }
+  html[data-sensorial="lateral"]::view-transition-new(root) {
+    animation: cine-escena-entra calc(var(--sensorial-base) * 0.75) var(--curva-entrada) both;
+  }
+
+  /* REVELA — el conocimiento emerge: el foco se concentra en lo nuevo,
+     la periferia se aquieta sin moverse. */
+  html[data-sensorial="revela"]::view-transition-old(root) {
+    animation: cine-escena-sale var(--sensorial-base) var(--curva-entrada) both;
+  }
+  html[data-sensorial="revela"]::view-transition-new(root) {
+    animation: sens-revela var(--sensorial-profundo) var(--curva-entrada) both;
+  }
+  @keyframes sens-revela {
+    from { opacity: 0; transform: scale(calc(1 + 1.3 * var(--sensorial-escala-profundidad))) }
+    to   { opacity: 1; transform: scale(1) }
+  }
+
+  /* DESPIDE — cerrar el velo: salida breve y sin dramatismo; el contexto
+     de fondo ya está ahí, quieto. */
+  html[data-sensorial="despide"]::view-transition-old(root) {
+    animation: cine-escena-sale calc(var(--sensorial-base) * 0.66) var(--curva-entrada) both;
+  }
+  html[data-sensorial="despide"]::view-transition-new(root) {
+    animation: sens-presente calc(var(--sensorial-base) * 0.66) var(--curva-entrada) both;
+  }
+  @keyframes sens-presente { from { opacity: 1 } to { opacity: 1 } }
+}
